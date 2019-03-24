@@ -135,6 +135,9 @@ object Session {
         PreferencesUtil.putString("code", code)
     }
 
+    fun getCacheKey(value: String): String {
+        return id + "_" + value
+    }
 
     private fun loadLastSession() {
         val keys = PreferencesUtil.getStringSet("cached_cookie_keys") ?: return

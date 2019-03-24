@@ -1,10 +1,12 @@
 package com.aabulhaj.hujiapp.activities
 
+import Session
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.fragments.*
+import com.aabulhaj.hujiapp.util.PreferencesUtil
 import kotlinx.android.synthetic.main.activity_session.*
 
 
@@ -21,12 +23,15 @@ class SessionActivity : AppCompatActivity() {
 
         val fragmentManager = this.supportFragmentManager
 
-        // Show AboutMe fragment on startup.
-        val aboutMeId = R.id.action_about_me
+        // Show last chosen fragment.
+        val lastFragId = PreferencesUtil.getIntOr(
+                Session.getCacheKey("last_tab"),
+                R.id.action_about_me)
+
         fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, getFragment(aboutMeId))
+                .replace(R.id.fragmentContainer, getFragment(lastFragId))
                 .commit()
-        bottomNavView.selectedItemId = aboutMeId
+        bottomNavView.selectedItemId = lastFragId
 
         bottomNavView.setOnNavigationItemSelectedListener { item ->
             val fragment = getFragment(item.itemId)
@@ -34,6 +39,8 @@ class SessionActivity : AppCompatActivity() {
             val transaction = fragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainer, fragment)
             transaction.commit()
+
+            PreferencesUtil.putInt(Session.getCacheKey("last_tab"), item.itemId)
 
             return@setOnNavigationItemSelectedListener true
         }

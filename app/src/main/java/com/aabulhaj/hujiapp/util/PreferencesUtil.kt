@@ -13,6 +13,18 @@ object PreferencesUtil {
         return preferences.getString(key, null)
     }
 
+    fun putInt(key: String, value: Int) {
+        preferences.edit().putInt(key, value).apply()
+    }
+
+    fun getInt(key: String): Int {
+        return preferences.getInt(key, -1)
+    }
+
+    fun getIntOr(key: String, or: Int): Int {
+        return preferences.getInt(key, or)
+    }
+
     fun putStringSet(key: String, value: HashSet<String>) {
         preferences.edit().putStringSet(key, value).apply()
     }
