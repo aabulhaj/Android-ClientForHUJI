@@ -21,4 +21,11 @@
     <!-- Session -->
     <string name="captcha_network_error">Unable to load CAPTCHA, check your internet connection or HUJI site.</string>
     <string name="login_network_error">Unable to connect to HUJI, check your internet connection or HUJI site.</string>
+
+    <!-- SessionActivity -->
+    <string name="courses">Courses</string>
+    <string name="timetable">Timetable</string>
+    <string name="about_me">Me</string>
+    <string name="map">Map</string>
+    <string name="more">More</string>
 </resources>

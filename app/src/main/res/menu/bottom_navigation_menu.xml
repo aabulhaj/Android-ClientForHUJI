@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_courses"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_social_school"
+        android:title="@string/courses"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_timetable"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_action_event"
+        android:title="@string/timetable"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_about_me"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_action_info_outline"
+        android:title="@string/about_me"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_map"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_maps_map"
+        android:title="@string/map"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_more"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_navigation_more_horiz"
+        android:title="@string/more"
+        app:showAsAction="ifRoom" />
+</menu>

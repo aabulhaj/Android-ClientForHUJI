@@ -19,4 +19,11 @@
     <!-- Session -->
     <string name="captcha_network_error">لم نتمكن من تحميل الCAPTCHA, تفقد اتصال الانترنت او موقع الجامعة.</string>
     <string name="login_network_error">لم نتمكن من الاتصال بموقع الجامعة, الرجاء تفقد اتصال الانترنت او موقع الجامعة.</string>
+
+    <!-- SessionActivity -->
+    <string name="courses">المساقات</string>
+    <string name="timetable">الجدول التعليمي</string>
+    <string name="about_me">انا</string>
+    <string name="map">خارطة</string>
+    <string name="more">المزيد</string>
 </resources>
