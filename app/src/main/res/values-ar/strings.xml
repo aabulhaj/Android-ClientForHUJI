@@ -1,0 +1,22 @@
+<resources>
+    <!-- MainActivity -->
+    <string name="login_hint">تسجيل الدخول</string>
+    <string name="personal_code">الكود الشخصي</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="captcha">CAPTCHA</string>
+
+    <string name="huji_logo_desc">شعار الجامعة</string>
+
+    <string name="error">خطأ</string>
+    <string name="missing_id_error">ادخل رقم هوية</string>
+    <string name="incorrect_id_length">طول رقم الهوية غير صحيح</string>
+    <string name="missing_personal_code_error">ادخل الكود السري</string>
+    <string name="missing_captcha_error">ادخل الCAPTCHA</string>
+
+    <string name="wrong_captcha_error">تم ادخال CAPTCHA غير صحيحة</string>
+    <string name="wrong_username_or_password_error">تم ادخال رقم هوية او كود غير صحيح</string>
+
+    <!-- Session -->
+    <string name="captcha_network_error">لم نتمكن من تحميل الCAPTCHA, تفقد اتصال الانترنت او موقع الجامعة.</string>
+    <string name="login_network_error">لم نتمكن من الاتصال بموقع الجامعة, الرجاء تفقد اتصال الانترنت او موقع الجامعة.</string>
+</resources>

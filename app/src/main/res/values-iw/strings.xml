@@ -1,0 +1,22 @@
+<resources>
+    <!-- MainActivity -->
+    <string name="login_hint">כניסה</string>
+    <string name="personal_code">קוד אישי</string>
+    <string name="login">כניסה</string>
+    <string name="captcha">מילת אימות</string>
+
+    <string name="huji_logo_desc">HUJI סמל</string>
+
+    <string name="error">שגיעה</string>
+    <string name="missing_id_error">תקליד\י מספר תעודת זהות</string>
+    <string name="incorrect_id_length">אורך תעודת הזהות אינו תקין</string>
+    <string name="missing_personal_code_error">תקליד\י קוד אישי</string>
+    <string name="missing_captcha_error">תקליד\י את הCAPTCHA</string>
+
+    <string name="wrong_captcha_error">CAPTCHA שגויה</string>
+    <string name="wrong_username_or_password_error">שם משתמש או סיסמא שגויה</string>
+
+    <!-- Session -->
+    <string name="captcha_network_error">שגיאה בטעינת מילת אימות, תבדוק\י אתר האוניברסיטה או את האינטרנט שלך.</string>
+    <string name="login_network_error">לא הצלחנו להתחבר לHUJI , תבדוק\י את האינטרנט שלך.</string>
+</resources>
