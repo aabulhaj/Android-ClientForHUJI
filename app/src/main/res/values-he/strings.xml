@@ -19,6 +19,8 @@
     <!-- Session -->
     <string name="captcha_network_error">שגיאה בטעינת מילת אימות, תבדוק\י אתר האוניברסיטה או את האינטרנט שלך.</string>
     <string name="login_network_error">לא הצלחנו להתחבר לHUJI , תבדוק\י את האינטרנט שלך.</string>
+    <string name="extend_session">להאריך מושב</string>
+    <string name="website_down_for_maintenance">עקב תקלה טכנית המידע אישי סגור לפעילות עד לפתרון התקלה</string>
 
     <!-- SessionActivity -->
     <string name="courses">קורסים</string>

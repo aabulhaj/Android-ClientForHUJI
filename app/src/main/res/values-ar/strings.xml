@@ -19,6 +19,8 @@
     <!-- Session -->
     <string name="captcha_network_error">لم نتمكن من تحميل الCAPTCHA, تفقد اتصال الانترنت او موقع الجامعة.</string>
     <string name="login_network_error">لم نتمكن من الاتصال بموقع الجامعة, الرجاء تفقد اتصال الانترنت او موقع الجامعة.</string>
+    <string name="extend_session">لتمديد مدة تسجيل الدخول</string>
+    <string name="website_down_for_maintenance">موقع الجامعة معطل حاليا للتصليح</string>
 
     <!-- SessionActivity -->
     <string name="courses">المساقات</string>

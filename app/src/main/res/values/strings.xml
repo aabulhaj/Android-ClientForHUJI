@@ -21,6 +21,8 @@
     <!-- Session -->
     <string name="captcha_network_error">Unable to load CAPTCHA, check your internet connection or HUJI site.</string>
     <string name="login_network_error">Unable to connect to HUJI, check your internet connection or HUJI site.</string>
+    <string name="extend_session">Extend session</string>
+    <string name="website_down_for_maintenance">The personal information website is down for maintenance</string>
 
     <!-- SessionActivity -->
     <string name="courses">Courses</string>

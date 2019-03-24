@@ -1,13 +1,16 @@
+import android.app.Activity
 import android.content.res.Resources
 import android.graphics.BitmapFactory
-import com.aabulhaj.hujiapp.data.HUJI_BASE_URL
+import android.widget.Toast
 import com.aabulhaj.hujiapp.HujiApi
-import com.aabulhaj.hujiapp.util.PreferencesUtil
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.callbacks.CaptchaCallback
 import com.aabulhaj.hujiapp.callbacks.LoginCallback
+import com.aabulhaj.hujiapp.callbacks.StringCallback
+import com.aabulhaj.hujiapp.data.HUJI_BASE_URL
 import com.aabulhaj.hujiapp.interceptors.CookiesInterceptor
 import com.aabulhaj.hujiapp.interceptors.HeaderInterceptor
+import com.aabulhaj.hujiapp.util.PreferencesUtil
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -29,7 +32,7 @@ object Session {
     private val cookieManager: CookieManager = CookieManager()
     private var sessionId: String? = null
     private var id: String? = null
-
+    
     init {
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
 
@@ -64,6 +67,36 @@ object Session {
 
         requestBuilder.addHeader("Cookie", cookieString)
         return requestBuilder.build()
+    }
+
+    fun callRequest(request: () -> Call<ResponseBody>, activity: Activity,
+                    callback: StringCallback) {
+        request().enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+                val body = response?.body()?.string()!!
+                response.body()?.close()
+
+                if (body.contains("captcha")) {
+                    callback.onFailure(call, Exception(activity.getString(R.string.extend_session)))
+                } else if (body.contains("Internal server did not return a value :")) {
+                    val errorMsg = activity.getString(R.string.website_down_for_maintenance)
+                    activity.runOnUiThread {
+                        Toast.makeText(activity, errorMsg, Toast.LENGTH_SHORT).show()
+                    }
+                    callback.onFailure(call, Exception(errorMsg))
+                } else {
+                    callback.onResponse(call, body)
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                val errorMsg = activity.getString(R.string.login_network_error)
+                activity.runOnUiThread {
+                    Toast.makeText(activity, errorMsg, Toast.LENGTH_SHORT).show()
+                }
+                callback.onFailure(call, Exception(errorMsg))
+            }
+        })
     }
 
     fun login(callback: LoginCallback, unNormalizedId: String, code: String, captchaText: String) {
