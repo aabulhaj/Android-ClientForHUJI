@@ -28,4 +28,25 @@
     <string name="about_me">Me</string>
     <string name="map">Map</string>
     <string name="more">More</string>
+
+    <!-- MoreFragment -->
+    <string name="send_mail">Send mail..</string>
+    <string name="no_email_accounts_error">There are no email clients installed.</string>
+
+    <string name="about_app">About Application</string>
+    <string name="developers">Developers</string>
+    <string name="contact">Contact us</string>
+    <string name="huji_name_and_logo">HUJI name and logo</string>
+    <string name="licenses">Licenses</string>
+
+    <string name="useful_info">Useful Info</string>
+    <string name="academic_calendar">Academic Calendar</string>
+    <string name="contacts">Contacts</string>
+    <string name="campus_shuttle_times">Campus Shuttle Times</string>
+
+    <string name="akram">Akram Abul Haj</string>
+    <string name="licenses_summary">View licenses of open source libraries used in Client for HUJI</string>
+    <string name="academic_calendar_summary">View holiday and event dates</string>
+    <string name="contacts_summary">View important phone numbers</string>
+    <string name="campus_shuttle_times_summary">View cross campus shuttle schedule</string>
 </resources>

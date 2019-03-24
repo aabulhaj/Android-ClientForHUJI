@@ -26,4 +26,25 @@
     <string name="about_me">אני</string>
     <string name="map">מפה</string>
     <string name="more">עוד</string>
+
+    <!-- MoreFragment -->
+    <string name="send_mail">שלח מייל..</string>
+    <string name="no_email_accounts_error">אין אפליקציות מייל מותקנות</string>
+
+    <string name="about_app">אודות האפליקציה</string>
+    <string name="developers">מפתחים</string>
+    <string name="contact">צור קשר עם המפת</string>
+    <string name="huji_name_and_logo">שם ולוגו HUJI</string>
+    <string name="licenses">רישיונות</string>
+
+    <string name="useful_info">מידע שימושי</string>
+    <string name="academic_calendar">לוח אקדמי</string>
+    <string name="contacts">אנשי קשר</string>
+    <string name="campus_shuttle_times">לוח הזמנים של השאטלים</string>
+
+    <string name="akram">אקרם אבו אלחאג</string>
+    <string name="licenses_summary">לצפייה ברשיונות של הספריות שמשתמשים בהם</string>
+    <string name="academic_calendar_summary">לצפייה בתאריכים של חגים</string>
+    <string name="contacts_summary">לצפייה במספרים חשובים</string>
+    <string name="campus_shuttle_times_summary">לצפייה בלו"ז השאטל</string>
 </resources>

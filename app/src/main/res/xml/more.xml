@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/about_app">
+
+        <Preference
+            android:summary="@string/akram"
+            android:title="@string/developers" />
+
+        <Preference
+            android:key="contact_us"
+            android:summary="aabulhaj1@gmail.com"
+            android:title="@string/contact" />
+
+        <Preference
+            android:summary="© Hebrew University of Jerusalem"
+            android:title="@string/huji_name_and_logo" />
+
+        <Preference
+            android:key="licenses"
+            android:summary="@string/licenses_summary"
+            android:title="@string/licenses" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/useful_info">
+
+        <Preference
+            android:key="academic_calendar"
+            android:summary="@string/academic_calendar_summary"
+            android:title="@string/academic_calendar" />
+
+        <Preference
+            android:key="contacts"
+            android:summary="@string/contacts_summary"
+            android:title="@string/contacts" />
+
+        <Preference
+            android:key="campus_shuttle_times"
+            android:summary="@string/campus_shuttle_times_summary"
+            android:title="@string/campus_shuttle_times" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -26,4 +26,25 @@
     <string name="about_me">انا</string>
     <string name="map">خارطة</string>
     <string name="more">المزيد</string>
+
+    <!-- MoreFragment -->
+    <string name="send_mail">ارسال بريد الكتروني..</string>
+    <string name="no_email_accounts_error">لا يوجد برامج محملة لارسال رسائل الكترونية</string>
+
+    <string name="about_app">عن التطبيق</string>
+    <string name="developers">المطورين</string>
+    <string name="contact">التواصل مع المطور</string>
+    <string name="huji_name_and_logo">اسم HUJI والشعار</string>
+    <string name="licenses">الرخص</string>
+
+    <string name="useful_info">معلومات مفيدة</string>
+    <string name="academic_calendar">التقويم الاكاديمي</string>
+    <string name="contacts">جهات اتصال</string>
+    <string name="campus_shuttle_times">اوقات شاتل الجامعة</string>
+
+    <string name="akram">أكرم ابو الحاج</string>
+    <string name="licenses_summary">لرؤية رخص مكاتب البرمجيات المستعملة</string>
+    <string name="academic_calendar_summary">لرؤية تواريخ الاعياد والمناسبات</string>
+    <string name="contacts_summary">لرؤية ارقام هواتف مهمة</string>
+    <string name="campus_shuttle_times_summary">لرؤية مواعيد الباص الجامعي</string>
 </resources>
