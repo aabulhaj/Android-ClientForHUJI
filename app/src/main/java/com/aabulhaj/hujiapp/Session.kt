@@ -28,11 +28,13 @@ import java.util.concurrent.TimeUnit
 
 
 object Session {
+    var sessionExpired = false
     val hujiApiClient: HujiApi
+
     private val cookieManager: CookieManager = CookieManager()
     private var sessionId: String? = null
     private var id: String? = null
-    
+
     init {
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
 
@@ -76,7 +78,9 @@ object Session {
                 val body = response?.body()?.string()!!
                 response.body()?.close()
 
+                sessionExpired = false
                 if (body.contains("captcha")) {
+                    sessionExpired = true
                     callback.onFailure(call, Exception(activity.getString(R.string.extend_session)))
                 } else if (body.contains("Internal server did not return a value :")) {
                     val errorMsg = activity.getString(R.string.website_down_for_maintenance)

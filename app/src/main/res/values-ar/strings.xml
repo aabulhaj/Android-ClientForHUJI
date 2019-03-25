@@ -49,4 +49,8 @@
     <string name="academic_calendar_summary">لرؤية تواريخ الاعياد والمناسبات</string>
     <string name="contacts_summary">لرؤية ارقام هواتف مهمة</string>
     <string name="campus_shuttle_times_summary">لرؤية مواعيد الباص الجامعي</string>
+
+    <!-- Toolbar -->
+    <string name="cached_data">معلومات مخزنة</string>
+    <string name="tap_to_refresh">اضغط للتحديث</string>
 </resources>

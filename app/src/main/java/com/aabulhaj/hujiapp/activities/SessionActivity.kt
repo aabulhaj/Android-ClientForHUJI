@@ -3,14 +3,13 @@ package com.aabulhaj.hujiapp.activities
 import Session
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.fragments.*
 import com.aabulhaj.hujiapp.util.PreferencesUtil
 import kotlinx.android.synthetic.main.activity_session.*
 
 
-class SessionActivity : AppCompatActivity() {
+class SessionActivity : ToolbarActivity() {
     private var coursesFragment: Fragment? = null
     private var tableFragment: Fragment? = null
     private var aboutMeFragment: Fragment? = null
@@ -20,6 +19,8 @@ class SessionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_session)
+
+        supportActionBar.setTitle(R.string.app_name)
 
         val fragmentManager = this.supportFragmentManager
 
