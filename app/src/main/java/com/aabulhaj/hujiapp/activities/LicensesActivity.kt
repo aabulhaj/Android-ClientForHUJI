@@ -1,6 +1,7 @@
 package com.aabulhaj.hujiapp.activities
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.aabulhaj.hujiapp.R
 import kotlinx.android.synthetic.main.activity_licenses.*
 
@@ -11,6 +12,7 @@ class LicensesActivity : ToolbarActivity() {
         setContentView(R.layout.activity_licenses)
 
         supportActionBar.title = getString(R.string.licenses)
+        supportActionBar.setDisplayHomeAsUpEnabled(true)
 
         licensesTextView.text =
                 """
@@ -48,6 +50,11 @@ class LicensesActivity : ToolbarActivity() {
                     limitations under the License.
                 """
                         .trimIndent()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish()
+        return true
     }
 
 }
