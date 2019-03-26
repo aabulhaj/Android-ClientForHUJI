@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbarFrame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FAFAFA"
+    android:background="@color/colorAccent"
     android:fitsSystemWindows="true">
 
     <com.aabulhaj.hujiapp.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        app:subtitleTextColor="@color/white"
+        app:titleTextColor="@color/white">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -24,7 +27,7 @@
                 android:layout_marginStart="5dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:text="@string/extend_session"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/white"
                 android:visibility="gone" />
 
         </RelativeLayout>
