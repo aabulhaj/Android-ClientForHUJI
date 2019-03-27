@@ -1,11 +1,10 @@
 package com.aabulhaj.hujiapp
 
+import Session
+import com.aabulhaj.hujiapp.data.timeTableUrl
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface HujiApi {
     @GET("/dataj/resources/captcha/stu/")
@@ -21,4 +20,9 @@ interface HujiApi {
 
     @GET("/dataj/controller/auth/stu/?")
     fun loadLoginPage(): Call<ResponseBody>
+
+    @GET
+    fun getFirstSemesterTimeTable(
+            @Url url: String = Session.getSessionUrl(timeTableUrl(1))
+    ): Call<ResponseBody>
 }

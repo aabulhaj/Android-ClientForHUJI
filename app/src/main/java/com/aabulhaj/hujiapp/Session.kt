@@ -1,6 +1,6 @@
-import android.app.Activity
 import android.content.res.Resources
 import android.graphics.BitmapFactory
+import android.support.v4.app.FragmentActivity
 import android.widget.Toast
 import com.aabulhaj.hujiapp.HujiApi
 import com.aabulhaj.hujiapp.R
@@ -71,11 +71,18 @@ object Session {
         return requestBuilder.build()
     }
 
-    fun callRequest(request: () -> Call<ResponseBody>, activity: Activity,
+    fun getSessionUrl(url: String): String {
+        return String.format("/dataj/controller/$sessionId/$url")
+    }
+
+    fun callRequest(request: () -> Call<ResponseBody>, activity: FragmentActivity,
                     callback: StringCallback) {
         request().enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
-                val body = response?.body()?.string()!!
+                if (response == null) {
+                    return
+                }
+                val body = response.body()?.string()!!
                 response.body()?.close()
 
                 sessionExpired = false

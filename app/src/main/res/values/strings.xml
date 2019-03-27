@@ -55,4 +55,11 @@
     <!-- Toolbar -->
     <string name="cached_data">Cached data</string>
     <string name="tap_to_refresh">Tap to refresh</string>
+
+    <!-- TimeTableDay -->
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
 </resources>

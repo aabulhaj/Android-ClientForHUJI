@@ -53,4 +53,11 @@
     <!-- Toolbar -->
     <string name="cached_data">נתונים מאוחסנים</string>
     <string name="tap_to_refresh">לחץ לעדכן</string>
+
+    <!-- TimeTableDay -->
+    <string name="sunday">ראשון</string>
+    <string name="monday">שני</string>
+    <string name="tuesday">שלישי</string>
+    <string name="wednesday">רביעי</string>
+    <string name="thursday">חמישי</string>
 </resources>

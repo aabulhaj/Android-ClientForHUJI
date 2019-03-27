@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#1d7c70</color>
     <color name="colorAccent">#26A594</color>
 
+    <color name="timetable_event_text_color">#21739E</color>
+
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 </resources>
