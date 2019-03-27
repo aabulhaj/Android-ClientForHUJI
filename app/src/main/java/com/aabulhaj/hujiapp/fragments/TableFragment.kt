@@ -186,11 +186,9 @@ class TableFragment : Fragment() {
                     }
 
                     classesInRow.reverse()
-                    var i = 0
-                    for (timeTableClass in classesInRow) {
+                    for ((i, timeTableClass) in classesInRow.withIndex()) {
                         timeTableClass.setHourFromString(hour!!, i)
-                        timeTableDays.get(i).addTimetableClass(timeTableClass)
-                        i++
+                        timeTableDays[i].addTimetableClass(timeTableClass)
                     }
                 }
 
