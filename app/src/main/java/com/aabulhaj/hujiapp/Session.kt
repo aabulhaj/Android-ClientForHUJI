@@ -1,6 +1,8 @@
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.support.v4.app.FragmentActivity
+import android.support.v4.content.LocalBroadcastManager
 import android.widget.Toast
 import com.aabulhaj.hujiapp.HujiApi
 import com.aabulhaj.hujiapp.R
@@ -28,6 +30,9 @@ import java.util.concurrent.TimeUnit
 
 
 object Session {
+    const val ACTION_SESSION_STATE_CHANGED = "com.aabulhaj.hujiapp.ACTION_SESSION_STATE_CHANGED"
+    const val EXTRA_NEEDS_EXTENDING = "needs_extending"
+
     var sessionExpired = false
     val hujiApiClient: HujiApi
 
@@ -85,9 +90,9 @@ object Session {
                 val body = response.body()?.string()!!
                 response.body()?.close()
 
-                sessionExpired = false
                 if (body.contains("captcha")) {
                     sessionExpired = true
+                    setNeedsExtending(activity)
                     callback.onFailure(call, Exception(activity.getString(R.string.extend_session)))
                 } else if (body.contains("Internal server did not return a value :")) {
                     val errorMsg = activity.getString(R.string.website_down_for_maintenance)
@@ -181,6 +186,12 @@ object Session {
 
     fun getCacheKey(value: String): String {
         return id + "_" + value
+    }
+
+    private fun setNeedsExtending(activity: FragmentActivity) {
+        LocalBroadcastManager.getInstance(activity)
+                .sendBroadcast(Intent(ACTION_SESSION_STATE_CHANGED)
+                        .putExtra(EXTRA_NEEDS_EXTENDING, sessionExpired))
     }
 
     private fun loadLastSession() {

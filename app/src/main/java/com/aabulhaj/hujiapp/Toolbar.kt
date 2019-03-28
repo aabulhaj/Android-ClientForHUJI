@@ -2,7 +2,11 @@ package com.aabulhaj.hujiapp
 
 import Session
 import android.animation.Animator
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
 import android.view.View
@@ -19,6 +23,27 @@ class Toolbar : Toolbar, View.OnClickListener {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.attr.toolbarStyle)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
+
+    private val broadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val needsExtend = intent.getBooleanExtra(Session.EXTRA_NEEDS_EXTENDING, false)
+            setShowsExtendButton(needsExtend)
+        }
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+
+        LocalBroadcastManager.getInstance(context)
+                .registerReceiver(broadcastReceiver,
+                        IntentFilter(Session.ACTION_SESSION_STATE_CHANGED))
+        updateExtendState()
+    }
+
+    override fun onDetachedFromWindow() {
+        LocalBroadcastManager.getInstance(context).unregisterReceiver(broadcastReceiver)
+        super.onDetachedFromWindow()
+    }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
