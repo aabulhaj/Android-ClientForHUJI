@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="70dp"
+    android:paddingEnd="80dp"
+    android:paddingLeft="80dp"
+    android:paddingRight="80dp"
+    android:paddingStart="80dp"
+    android:paddingTop="70dp"
+    tools:context=".activities.ExtendSessionActivity">
+
+    <ImageView
+        android:id="@+id/captchaIm"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/captcha" />
+
+    <EditText
+        android:id="@+id/captchaAnswer"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/captchaIm"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="10"
+        android:maxLines="1" />
+
+    <Button
+        android:id="@+id/extendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/captchaAnswer"
+        android:layout_centerHorizontal="true"
+        android:enabled="false"
+        android:text="@string/extend" />
+
+</RelativeLayout>

@@ -1,3 +1,4 @@
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.BitmapFactory
@@ -39,6 +40,7 @@ object Session {
     private val cookieManager: CookieManager = CookieManager()
     private var sessionId: String? = null
     private var id: String? = null
+    private var code: String? = null
 
     init {
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
@@ -60,6 +62,10 @@ object Session {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(HujiApi::class.java)
+    }
+
+    fun cleanCookieStore() {
+        cookieManager.cookieStore.removeAll()
     }
 
     fun prepareRequest(requestBuilder: Request.Builder): Request {
@@ -92,7 +98,7 @@ object Session {
 
                 if (body.contains("captcha")) {
                     sessionExpired = true
-                    setNeedsExtending(activity)
+                    setNeedsExtending(activity, sessionExpired)
                     callback.onFailure(call, Exception(activity.getString(R.string.extend_session)))
                 } else if (body.contains("Internal server did not return a value :")) {
                     val errorMsg = activity.getString(R.string.website_down_for_maintenance)
@@ -174,13 +180,28 @@ object Session {
         PreferencesUtil.putString("huji_session_id", sessionId)
     }
 
+    fun getId(): String {
+        if (id == null) {
+            id = PreferencesUtil.getString("id")
+        }
+        return id!!
+    }
+
     fun setId(id: String) {
         this.id = id
         PreferencesUtil.putString("id", id)
     }
 
+    fun getCode(): String {
+        if (code == null) {
+            code = PreferencesUtil.getString("code")
+        }
+        return code!!
+    }
+
     fun setCode(code: String) {
         // TODO(aabulhaj): Encrypt the code before storing it.
+        this.code = code
         PreferencesUtil.putString("code", code)
     }
 
@@ -188,7 +209,8 @@ object Session {
         return id + "_" + value
     }
 
-    private fun setNeedsExtending(activity: FragmentActivity) {
+    fun setNeedsExtending(activity: Context, sessionExpired: Boolean) {
+        this.sessionExpired = sessionExpired
         LocalBroadcastManager.getInstance(activity)
                 .sendBroadcast(Intent(ACTION_SESSION_STATE_CHANGED)
                         .putExtra(EXTRA_NEEDS_EXTENDING, sessionExpired))

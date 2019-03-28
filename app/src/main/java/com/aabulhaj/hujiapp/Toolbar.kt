@@ -10,6 +10,7 @@ import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
 import android.view.View
+import com.aabulhaj.hujiapp.activities.ExtendSessionActivity
 import kotlinx.android.synthetic.main.toolbar.view.*
 
 
@@ -126,7 +127,7 @@ class Toolbar : Toolbar, View.OnClickListener {
 
     override fun onClick(view: View?) {
         if (extendButton == view) {
-            // TODO(aabulhaj): Call ExtendSessionActivity.
+            context.startActivity(Intent(context, ExtendSessionActivity::class.java))
         }
     }
 }

@@ -60,4 +60,7 @@
     <string name="tuesday">שלישי</string>
     <string name="wednesday">רביעי</string>
     <string name="thursday">חמישי</string>
+
+    <!-- ExtendSessionActivity -->
+    <string name="extend">האריך</string>
 </resources>

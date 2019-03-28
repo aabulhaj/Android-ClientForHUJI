@@ -60,4 +60,7 @@
     <string name="tuesday">الثلاثاء</string>
     <string name="wednesday">الاربعاء</string>
     <string name="thursday">الخميس</string>
+
+    <!-- ExtendSessionActivity -->
+    <string name="extend">تمديد</string>
 </resources>

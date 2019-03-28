@@ -62,4 +62,7 @@
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
     <string name="thursday">Thursday</string>
+
+    <!-- ExtendSessionActivity -->
+    <string name="extend">Extend</string>
 </resources>
