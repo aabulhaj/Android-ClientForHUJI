@@ -18,6 +18,10 @@ class Course {
         this.number = number
     }
 
+    fun getCourseNumber(): String {
+        return number!!
+    }
+
     fun isEmptyClass(): Boolean {
         return name == null && number == null
     }

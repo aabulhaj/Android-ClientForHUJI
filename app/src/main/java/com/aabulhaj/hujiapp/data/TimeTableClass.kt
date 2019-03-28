@@ -1,7 +1,11 @@
 package com.aabulhaj.hujiapp.data
 
+import android.graphics.Color
 import com.alamkanak.weekview.WeekViewEvent
 import java.util.*
+import com.aabulhaj.hujiapp.CourseToColorMapper
+
+
 
 class TimeTableClass : WeekViewEvent {
     var course: Course
@@ -75,6 +79,11 @@ class TimeTableClass : WeekViewEvent {
 
     override fun getName(): String {
         return course.name!!
+    }
+
+    override fun getColor(): Int {
+        val color = CourseToColorMapper.getColor(course)
+        return Color.argb(51, Color.red(color), Color.green(color), Color.blue(color))
     }
 
     override fun equals(other: Any?): Boolean {
