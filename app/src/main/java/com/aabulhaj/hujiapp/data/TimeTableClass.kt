@@ -106,7 +106,7 @@ class TimeTableClass : WeekViewEvent {
     }
 
     override fun getLocation(): String {
-        return classLocation!!
+        return "\n" + classLocation!!
     }
 
     fun getClassNumber(): String {
