@@ -160,7 +160,7 @@ class TableFragment : Fragment() {
 
                         val course = Course(courseName, courseNum)
 
-                        val courseTypeAndLoc = text.split("    ").map { it.trim() }
+                        val courseTypeAndLoc = text.split(" ").map { it.trim() }
 
                         val timeTableClass = TimeTableClass(course)
 
