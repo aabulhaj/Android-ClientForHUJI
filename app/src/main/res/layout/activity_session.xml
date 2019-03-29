@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNavView"
+        android:layout_below="@+id/toolbarFrame"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.BottomNavigationView
@@ -23,6 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:itemBackground="@color/white"
-        app:menu="@menu/bottom_navigation_menu"
-        app:itemTextColor="@color/colorAccent" />
+        app:itemTextColor="@color/colorAccent"
+        app:menu="@menu/bottom_navigation_menu" />
 </RelativeLayout>
