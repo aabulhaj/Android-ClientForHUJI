@@ -65,7 +65,7 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:hint="@string/captcha"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionNext|flagNoExtractUi"
             android:inputType="number"
             android:singleLine="true" />
 
