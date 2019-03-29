@@ -17,9 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/imageView"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/imageView"
             android:layout_below="@+id/imageView">
 
             <android.support.design.widget.TextInputEditText
@@ -39,7 +37,6 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:contentDescription="@string/huji_logo_desc"
@@ -82,9 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/idTextLayout"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/idTextLayout"
             android:layout_below="@+id/idTextLayout">
 
             <android.support.design.widget.TextInputEditText
