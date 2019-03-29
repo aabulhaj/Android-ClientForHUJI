@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SessionActivity" />
+        <activity
+            android:name=".activities.SessionActivity"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".activities.LicensesActivity" />
         <activity android:name=".activities.ToolbarActivity" />
         <activity
