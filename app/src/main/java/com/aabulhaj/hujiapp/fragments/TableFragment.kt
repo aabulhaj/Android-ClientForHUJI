@@ -178,8 +178,8 @@ class TableFragment : Fragment() {
                         }
 
                         timeTableClass.classLocation = ""
-                        if (courseTypeAndLoc.size >= 2) {
-                            timeTableClass.classLocation = courseTypeAndLoc[1]
+                        for (loc in 1 until courseTypeAndLoc.size) {
+                            timeTableClass.classLocation += courseTypeAndLoc[loc] + " "
                         }
 
                         classesInRow.add(timeTableClass)
