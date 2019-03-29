@@ -79,7 +79,7 @@ class ExtendSessionActivity : Activity(), View.OnClickListener, TextWatcher,
         runOnUiThread {
             if (captcha != null) {
                 captchaIm.setImageBitmap(captcha)
-                extendButton.isEnabled = captchaText?.text?.isNotEmpty() ?: false
+                captchaAnswer.text.clear()
             } else {
                 showAlertDialog(e!!.localizedMessage)
             }
