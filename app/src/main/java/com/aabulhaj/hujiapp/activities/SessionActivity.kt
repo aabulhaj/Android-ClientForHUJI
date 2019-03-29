@@ -20,7 +20,7 @@ class SessionActivity : ToolbarActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_session)
 
-        supportActionBar.setTitle(R.string.app_name)
+        supportActionBar.setDisplayShowTitleEnabled(false)
 
         val fragmentManager = this.supportFragmentManager
 
