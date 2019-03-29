@@ -63,4 +63,29 @@
 
     <!-- ExtendSessionActivity -->
     <string name="extend">تمديد</string>
+
+    <!-- ContactsActivity -->
+    <string name="safety">الامن</string>
+    <string name="emond_safra">ادموند سفرا</string>
+    <string name="mount_scopus">جبل المشارف</string>
+    <string name="ein_karem">عين كارم</string>
+    <string name="rehovot">رحوفوت</string>
+    <string name="campus_Security">امن الحرم الجامعي</string>
+    <string name="prompt_email">البريد الالكتروني</string>
+    <string name="humanities_Faculty">كلية العلوم الانسانية</string>
+    <string name="social_Science_Faculty">كلية العلوم الاجتماعية</string>
+    <string name="math_science_faculty">كلية الرياضيات والعلوم</string>
+    <string name="school_of_ba">كلية إدارة الأعمال</string>
+    <string name="school_of_social_work">كلية العمل الاجتماعي</string>
+    <string name="law_faculty">كلية القانون</string>
+    <string name="medicine_Faculty">كلية الطب</string>
+    <string name="dental_med_faculty">كلية طب الأسنان</string>
+    <string name="faculty_of_agri">كلية الزراعة والأغذية والبيئة</string>
+    <string name="education_school">كلية التعليم</string>
+    <string name="pre_academic_studies">دراسات ما قبل الأكاديمية</string>
+    <string name="student_matters">شؤون الطلية</string>
+    <string name="app_with_bagrut">طلبات لحملة البجروت الاسرائيلي</string>
+    <string name="foreign_app">الطلبات الخارجية</string>
+    <string name="huji_spokesman">المتحدث باسم HUJI</string>
+    <string name="web_master">المسؤول عن الموقع</string>
 </resources>

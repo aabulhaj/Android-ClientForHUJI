@@ -63,4 +63,29 @@
 
     <!-- ExtendSessionActivity -->
     <string name="extend">האריך</string>
+
+    <!-- ContactsActivity -->
+    <string name="safety">בטיחות</string>
+    <string name="emond_safra">קריית אדמונד י\' ספרא</string>
+    <string name="mount_scopus">הר הצופים</string>
+    <string name="ein_karem">עין-כרם</string>
+    <string name="rehovot">הפקולטה לחקלאות ברחובות</string>
+    <string name="campus_Security">ביטחון</string>
+    <string name="prompt_email">דוא"ל</string>
+    <string name="humanities_Faculty">הפקולטה למדעי הרוח</string>
+    <string name="social_Science_Faculty">הפקולטה למדעי החברה</string>
+    <string name="math_science_faculty">הפקולטה למתמטיקה ולמדעי הטבע</string>
+    <string name="school_of_ba">ביה\"ס למִנהל עסקים</string>
+    <string name="school_of_social_work">ביה\"ס לעבודה סוציאלית ולרווחה חברתית</string>
+    <string name="law_faculty">הפקולטה למשפטים והמכון לקרימינולוגיה</string>
+    <string name="medicine_Faculty">הפקולטה לרפואה</string>
+    <string name="dental_med_faculty">הפקולטה לרפואת שיניים</string>
+    <string name="faculty_of_agri">הפקולטה לחקלאות מזון וסביבה</string>
+    <string name="education_school">בית הספר לחינוך</string>
+    <string name="pre_academic_studies">מכינה קדם אקדמית</string>
+    <string name="student_matters">מידע כללי לנרשמים</string>
+    <string name="app_with_bagrut">הרשמה לתלמידים בעלי תעודת בגרות ישראלית</string>
+    <string name="foreign_app">הרשמה לתלמידים מחו\"ל</string>
+    <string name="huji_spokesman">דובר HUJI</string>
+    <string name="web_master">האתר הראשי של האוניברסיטה</string>
 </resources>

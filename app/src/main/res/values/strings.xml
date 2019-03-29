@@ -65,4 +65,29 @@
 
     <!-- ExtendSessionActivity -->
     <string name="extend">Extend</string>
+
+    <!-- ContactsActivity -->
+    <string name="safety">Safety</string>
+    <string name="emond_safra">Edmon J. Safra</string>
+    <string name="mount_scopus">Mount Scopus</string>
+    <string name="ein_karem">Ein Kerem</string>
+    <string name="rehovot">Rehovot</string>
+    <string name="campus_Security">Campus Security</string>
+    <string name="prompt_email">Email</string>
+    <string name="humanities_Faculty">Humanities Faculty</string>
+    <string name="social_Science_Faculty">Social Science Faculty</string>
+    <string name="math_science_faculty">Mathematics and Science Faculty</string>
+    <string name="school_of_ba">School of Business Administration</string>
+    <string name="school_of_social_work">School of Social Work</string>
+    <string name="law_faculty">Law Faculty</string>
+    <string name="medicine_Faculty">Medicine Faculty</string>
+    <string name="dental_med_faculty">Dental Medicine Faculty</string>
+    <string name="faculty_of_agri">Faculty of Agricultural, Food and Environment</string>
+    <string name="education_school">Education School</string>
+    <string name="pre_academic_studies">Pre-Academic Studies</string>
+    <string name="student_matters">Student Matters</string>
+    <string name="app_with_bagrut">Applicants with Israeli \'Bagrut\'</string>
+    <string name="foreign_app">Foreign Applicants</string>
+    <string name="huji_spokesman">HUJI Spokesman</string>
+    <string name="web_master">Webmaster</string>
 </resources>

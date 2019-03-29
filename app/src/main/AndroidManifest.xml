@@ -3,6 +3,7 @@
     package="com.aabulhaj.hujiapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".HUJIApplication"
@@ -29,5 +30,9 @@
         <activity
             android:name=".activities.ExtendSessionActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity
+            android:name=".activities.ContactsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
+
 </manifest>
