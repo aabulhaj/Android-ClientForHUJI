@@ -12,29 +12,23 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBarTranslucent">
         <activity
             android:name=".activities.MainActivity"
-            android:configChanges="orientation|screenSize" >
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.SessionActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.LicensesActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.SessionActivity" />
+        <activity android:name=".activities.LicensesActivity" />
         <activity android:name=".activities.ToolbarActivity" />
         <activity
             android:name=".activities.ExtendSessionActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
-        <activity
-            android:name=".activities.ContactsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.ContactsActivity" />
     </application>
 
 </manifest>
