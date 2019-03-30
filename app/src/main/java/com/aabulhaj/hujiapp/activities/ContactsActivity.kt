@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.view.MenuItem
 import android.widget.Toast
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.adapters.ContactsAdapter
@@ -160,5 +161,10 @@ class ContactsActivity : ToolbarActivity() {
         emails[getString(R.string.foreign_app)] = "risinfo@savion.huji.ac.il"
         emails[getString(R.string.huji_spokesman)] = "tamartr@savion.huji.ac.il"
         emails[getString(R.string.web_master)] = "webmaster@savion.huji.ac.il"
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish()
+        return true
     }
 }
