@@ -90,4 +90,10 @@
     <string name="foreign_app">Foreign Applicants</string>
     <string name="huji_spokesman">HUJI Spokesman</string>
     <string name="web_master">Webmaster</string>
+
+    <!-- CampusShuttleTimesActivity -->
+    <string name="from_high_Tech">From high tech village</string>
+    <string name="from_main_gate">From main gate</string>
+    <string name="from_bus_tunnel">From bus tunnels</string>
+    <string name="from_student_village">From student village</string>
 </resources>

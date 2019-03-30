@@ -25,6 +25,14 @@ object PreferencesUtil {
         return preferences.getInt(key, or)
     }
 
+    fun putBoolean(key: String, value: Boolean) {
+        preferences.edit().putBoolean(key, value).apply()
+    }
+
+    fun getBoolean(key: String, or: Boolean = false): Boolean {
+        return preferences.getBoolean(key, or)
+    }
+
     fun putStringSet(key: String, value: HashSet<String>) {
         preferences.edit().putStringSet(key, value).apply()
     }

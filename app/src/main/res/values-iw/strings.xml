@@ -88,4 +88,10 @@
     <string name="foreign_app">הרשמה לתלמידים מחו\"ל</string>
     <string name="huji_spokesman">דובר HUJI</string>
     <string name="web_master">האתר הראשי של האוניברסיטה</string>
+
+    <!-- CampusShuttleTimesActivity -->
+    <string name="from_high_Tech">מכפר הייטק</string>
+    <string name="from_main_gate">מהמנהלה</string>
+    <string name="from_bus_tunnel">מהמנהרה דרך ביה\"ח הדסה</string>
+    <string name="from_student_village">מכפר הסטודנטים</string>
 </resources>

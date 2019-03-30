@@ -6,6 +6,7 @@ import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.widget.Toast
 import com.aabulhaj.hujiapp.R
+import com.aabulhaj.hujiapp.activities.CampusShuttleTimesActivity
 import com.aabulhaj.hujiapp.activities.ContactsActivity
 import com.aabulhaj.hujiapp.activities.LicensesActivity
 
@@ -21,7 +22,7 @@ class MoreFragment : PreferenceFragmentCompat() {
         keyToMethodMap["licenses"] = start(LicensesActivity::class.java)
 //        keyToMethodMap["academic_calendar"] = start(CalendarActivity::class.java)
         keyToMethodMap["contacts"] = start(ContactsActivity::class.java)
-//        keyToMethodMap["campus_shuttle_times"] = start(ShuttleActivity::class.java)
+        keyToMethodMap["campus_shuttle_times"] = start(CampusShuttleTimesActivity::class.java)
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

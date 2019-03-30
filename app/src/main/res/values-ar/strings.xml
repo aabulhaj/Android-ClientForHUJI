@@ -88,4 +88,10 @@
     <string name="foreign_app">الطلبات الخارجية</string>
     <string name="huji_spokesman">المتحدث باسم HUJI</string>
     <string name="web_master">المسؤول عن الموقع</string>
+
+    <!-- CampusShuttleTimesActivity -->
+    <string name="from_high_Tech">من قرية الhigh tech</string>
+    <string name="from_main_gate">من البوابة الرئيسية</string>
+    <string name="from_bus_tunnel">من نفق الباصات</string>
+    <string name="from_student_village">من قرية الطلاب</string>
 </resources>
