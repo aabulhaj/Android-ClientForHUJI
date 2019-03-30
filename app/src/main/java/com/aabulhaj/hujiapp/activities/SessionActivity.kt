@@ -1,8 +1,13 @@
 package com.aabulhaj.hujiapp.activities
 
 import Session
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.LocalBroadcastManager
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.fragments.*
 import com.aabulhaj.hujiapp.util.PreferencesUtil
@@ -16,11 +21,25 @@ class SessionActivity : ToolbarActivity() {
     private var mapFragment: Fragment? = null
     private var moreFragment: Fragment? = null
 
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (Session.INTENT_APP_LOGGED_OUT == intent.action) {
+                val i = Intent(context, MainActivity::class.java)
+                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                context.startActivity(i)
+                finish()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_session)
 
         supportActionBar.setDisplayShowTitleEnabled(false)
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver,
+                IntentFilter(Session.INTENT_APP_LOGGED_OUT))
 
         val fragmentManager = this.supportFragmentManager
 
@@ -75,5 +94,10 @@ class SessionActivity : ToolbarActivity() {
             }
         }
         return null
+    }
+
+    override fun onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
+        super.onDestroy()
     }
 }

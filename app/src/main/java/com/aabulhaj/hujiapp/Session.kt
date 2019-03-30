@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.support.v4.app.FragmentActivity
 import android.support.v4.content.LocalBroadcastManager
 import android.widget.Toast
+import com.aabulhaj.hujiapp.HUJIApplication
 import com.aabulhaj.hujiapp.HujiApi
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.callbacks.CaptchaCallback
@@ -31,6 +32,7 @@ import java.util.concurrent.TimeUnit
 
 
 object Session {
+    const val INTENT_APP_LOGGED_OUT = "com.akramabulhaj.hujiapp.ACTION.APP_LOGGED_OUT"
     const val ACTION_SESSION_STATE_CHANGED = "com.aabulhaj.hujiapp.ACTION_SESSION_STATE_CHANGED"
     const val EXTRA_NEEDS_EXTENDING = "needs_extending"
 
@@ -162,6 +164,24 @@ object Session {
                 callback.onCaptchaReceived(null, Exception(errorMessage))
             }
         })
+    }
+
+    fun logout(context: Context) {
+        destroySavedSession()
+        LocalBroadcastManager.getInstance(context).sendBroadcast(Intent(INTENT_APP_LOGGED_OUT))
+    }
+
+    private fun destroySavedSession() {
+        val keys = PreferencesUtil.getStringSet("cached_cookie_keys") ?: return
+        val editor = HUJIApplication.preferences.edit()
+
+        for (key in keys) {
+            editor.remove(key)
+        }
+
+        editor.remove("cached_cookie_keys")
+        editor.remove("huji_session_id")
+        editor.apply()
     }
 
     fun isSessionValid(): Boolean {
