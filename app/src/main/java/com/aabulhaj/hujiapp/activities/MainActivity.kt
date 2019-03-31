@@ -32,6 +32,16 @@ class MainActivity : AppCompatActivity(), CaptchaCallback, LoginCallback {
         // A call to HUJI site is necessary to fetch the cookies needed for the login request.
         loadSession()
 
+        val id = Session.getId()
+        val code = Session.getCode()
+
+        idText.setText(id)
+        personalCodeText.setText(code)
+
+        if (id != "" && code != "") {
+            captchaText.requestFocus()
+        }
+
         captchaText.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_NEXT) {
                 login()

@@ -202,7 +202,7 @@ object Session {
 
     fun getId(): String {
         if (id == null) {
-            id = PreferencesUtil.getString("id")
+            id = PreferencesUtil.getString("id", "")
         }
         return id!!
     }
@@ -214,7 +214,7 @@ object Session {
 
     fun getCode(): String {
         if (code == null) {
-            code = PreferencesUtil.getString("code")
+            code = PreferencesUtil.getString("code", "")
         }
         return code!!
     }

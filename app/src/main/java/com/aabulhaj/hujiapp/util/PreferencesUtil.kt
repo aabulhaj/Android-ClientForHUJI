@@ -9,8 +9,8 @@ object PreferencesUtil {
         preferences.edit().putString(key, value).apply()
     }
 
-    fun getString(key: String): String? {
-        return preferences.getString(key, null)
+    fun getString(key: String, or: String? = null): String? {
+        return preferences.getString(key, or)
     }
 
     fun putInt(key: String, value: Int) {
