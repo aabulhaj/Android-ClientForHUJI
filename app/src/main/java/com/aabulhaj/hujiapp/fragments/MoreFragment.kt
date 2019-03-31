@@ -1,10 +1,15 @@
 package com.aabulhaj.hujiapp.fragments
 
+import Session
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
+import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.activities.CampusShuttleTimesActivity
 import com.aabulhaj.hujiapp.activities.ContactsActivity
@@ -16,6 +21,7 @@ class MoreFragment : PreferenceFragmentCompat() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         addPreferencesFromResource(R.xml.more)
 
         keyToMethodMap["contact_us"] = this::contactUs
@@ -23,6 +29,21 @@ class MoreFragment : PreferenceFragmentCompat() {
 //        keyToMethodMap["academic_calendar"] = start(CalendarActivity::class.java)
         keyToMethodMap["contacts"] = start(ContactsActivity::class.java)
         keyToMethodMap["campus_shuttle_times"] = start(CampusShuttleTimesActivity::class.java)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.more_fragment_menu, menu)
+        MenuTint.tint(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.logout) {
+            if (context != null) {
+                Session.logout(context!!)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

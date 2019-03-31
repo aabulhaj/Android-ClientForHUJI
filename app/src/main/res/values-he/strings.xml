@@ -94,4 +94,7 @@
     <string name="from_main_gate">מהמנהלה</string>
     <string name="from_bus_tunnel">מהמנהרה דרך ביה\"ח הדסה</string>
     <string name="from_student_village">מכפר הסטודנטים</string>
+
+    <!-- MoreFragmentMenu -->
+    <string name="logout">יציאה</string>
 </resources>

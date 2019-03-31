@@ -96,4 +96,7 @@
     <string name="from_main_gate">From main gate</string>
     <string name="from_bus_tunnel">From bus tunnels</string>
     <string name="from_student_village">From student village</string>
+
+    <!-- MoreFragmentMenu -->
+    <string name="logout">Logout</string>
 </resources>

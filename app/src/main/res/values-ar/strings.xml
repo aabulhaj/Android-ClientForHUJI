@@ -94,4 +94,7 @@
     <string name="from_main_gate">من البوابة الرئيسية</string>
     <string name="from_bus_tunnel">من نفق الباصات</string>
     <string name="from_student_village">من قرية الطلاب</string>
+
+    <!-- MoreFragmentMenu -->
+    <string name="logout">تسجيل خروج</string>
 </resources>
