@@ -26,7 +26,7 @@ import java.util.*
 import java.util.regex.Pattern
 
 
-class TableFragment : Fragment() {
+class TableFragment : Fragment(), RefreshableFragment {
     private var adapter: TimetableAdapter? = null
 
 
@@ -215,5 +215,14 @@ class TableFragment : Fragment() {
         return if (m.find()) {
             m.group(1)
         } else null
+    }
+
+
+    override fun refresh() {
+
+    }
+
+    override fun getFragment(): Fragment {
+        return this
     }
 }

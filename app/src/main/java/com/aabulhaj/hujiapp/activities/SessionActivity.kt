@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.content.LocalBroadcastManager
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.fragments.*
@@ -15,11 +14,11 @@ import kotlinx.android.synthetic.main.activity_session.*
 
 
 class SessionActivity : ToolbarActivity() {
-    private var coursesFragmentsHolder: Fragment? = null
-    private var tableFragment: Fragment? = null
-    private var aboutMeFragment: Fragment? = null
-    private var mapFragment: Fragment? = null
-    private var moreFragment: Fragment? = null
+    private var coursesFragmentsHolder: RefreshableFragment? = null
+    private var tableFragment: RefreshableFragment? = null
+    private var aboutMeFragment: RefreshableFragment? = null
+    private var mapFragment: RefreshableFragment? = null
+    private var moreFragment: RefreshableFragment? = null
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -48,6 +47,7 @@ class SessionActivity : ToolbarActivity() {
 
         replaceWithFragment(lastFragId)
         bottomNavView.selectedItemId = lastFragId
+        getFragment(lastFragId)?.refresh()
 
         bottomNavView.setOnNavigationItemSelectedListener { item ->
             replaceWithFragment(item.itemId)
@@ -58,7 +58,7 @@ class SessionActivity : ToolbarActivity() {
         }
 
         bottomNavView.setOnNavigationItemReselectedListener { item ->
-
+            getFragment(item.itemId)?.refresh()
         }
     }
 
@@ -66,13 +66,13 @@ class SessionActivity : ToolbarActivity() {
         val fragment = getFragment(itemId)
 
         val transaction = this.supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, fragment)
+        transaction.replace(R.id.fragmentContainer, fragment?.getFragment())
         transaction.commit()
 
         getAppBarLayout()?.elevation = if (itemId == R.id.action_courses) 0f else 8f
     }
 
-    private fun getFragment(itemId: Int): Fragment? {
+    private fun getFragment(itemId: Int): RefreshableFragment? {
         when (itemId) {
             R.id.action_courses -> {
                 if (coursesFragmentsHolder == null) coursesFragmentsHolder = CoursesFragmentsHolder()

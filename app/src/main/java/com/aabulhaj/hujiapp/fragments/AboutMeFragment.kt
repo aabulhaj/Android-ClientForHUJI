@@ -1,13 +1,10 @@
 package com.aabulhaj.hujiapp.fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.aabulhaj.hujiapp.R
 
 /**
@@ -18,7 +15,7 @@ import com.aabulhaj.hujiapp.R
  * Use the [AboutMeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AboutMeFragment : Fragment() {
+class AboutMeFragment : Fragment(), RefreshableFragment {
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -61,5 +58,12 @@ class AboutMeFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun refresh() {
+    }
+
+    override fun getFragment(): Fragment {
+        return this
     }
 }// Required empty public constructor

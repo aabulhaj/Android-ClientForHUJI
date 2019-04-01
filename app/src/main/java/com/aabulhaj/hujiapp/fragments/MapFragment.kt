@@ -18,7 +18,7 @@ import com.aabulhaj.hujiapp.R
  * Use the [MapFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MapFragment : Fragment() {
+class MapFragment : Fragment(), RefreshableFragment {
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -61,5 +61,13 @@ class MapFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun refresh() {
+
+    }
+
+    override fun getFragment(): Fragment {
+        return this
     }
 }// Required empty public constructor

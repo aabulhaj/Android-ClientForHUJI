@@ -3,6 +3,7 @@ package com.aabulhaj.hujiapp.fragments
 import Session
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.view.Menu
@@ -16,7 +17,7 @@ import com.aabulhaj.hujiapp.activities.ContactsActivity
 import com.aabulhaj.hujiapp.activities.LicensesActivity
 
 
-class MoreFragment : PreferenceFragmentCompat() {
+class MoreFragment : PreferenceFragmentCompat(), RefreshableFragment {
     private val keyToMethodMap = HashMap<String, () -> Unit>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,4 +72,11 @@ class MoreFragment : PreferenceFragmentCompat() {
     }
 
     private fun <T> start(target: Class<T>) = fun() = startActivity(Intent(context, target))
+
+
+    override fun refresh() {}
+
+    override fun getFragment(): Fragment {
+        return this
+    }
 }
