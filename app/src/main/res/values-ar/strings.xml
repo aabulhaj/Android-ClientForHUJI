@@ -133,4 +133,8 @@
     <string name="if_passing_grade">اذا كان معدل النجاح</string>
     <string name="loading_data">تحميل البيانات...</string>
     <string name="students_passed">%1$d (%2$.02f%%) من الطلاب نجحوا في المساق, و %3$d (%4$.02f%%) من الطلاب رسبوا</string>
+
+    <!-- GPACalculatorActivity -->
+    <string name="enter_grade">ادخل علامة</string>
+    <string name="grade_average">المعدل: %1$.2f</string>
 </resources>

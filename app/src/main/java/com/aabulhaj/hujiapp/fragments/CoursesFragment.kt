@@ -19,6 +19,7 @@ import com.aabulhaj.hujiapp.CourseTypeEnum
 import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.activities.ChartActivity
+import com.aabulhaj.hujiapp.activities.GPACalculatorActivity
 import com.aabulhaj.hujiapp.adapters.CourseAdapter
 import com.aabulhaj.hujiapp.callbacks.StringCallback
 import com.aabulhaj.hujiapp.data.*
@@ -119,8 +120,32 @@ class CoursesFragment : RefreshListFragment() {
             builder.setNegativeButton(android.R.string.cancel) { dialog, _ -> dialog.cancel() }
 
             builder.show()
+        } else if (item?.itemId == R.id.gpaCalcButton) {
+            if (coursesAdapter?.count != 0) {
+                val intent = Intent(activity, GPACalculatorActivity::class.java)
+                intent.putExtra("courses", copyArray(coursesAdapter!!.getBackingArray()))
+                startActivity(intent)
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun copyArray(arrayList: ArrayList<Grade>): ArrayList<Grade> {
+        val copiedArray = ArrayList<Grade>()
+
+        for (grade in arrayList) {
+            val copiedGrade = Grade()
+
+            copiedGrade.course = grade.course
+            copiedGrade.extraGradesURL = grade.extraGradesURL
+            copiedGrade.statisticsURL = grade.statisticsURL
+            copiedGrade.grade = grade.grade
+            copiedGrade.gradeType = grade.gradeType
+
+            copiedArray.add(copiedGrade)
+        }
+
+        return copiedArray
     }
 
     private fun showYears() {

@@ -135,6 +135,10 @@
     <string name="loading_data">Loading data...</string>
     <string name="students_passed">%1$d (%2$.02f%%) students passed the course and %3$d (%4$.02f%%) students failed</string>
 
+    <!-- GPACalculatorActivity -->
+    <string name="enter_grade">Enter Grade</string>
+    <string name="grade_average">Grade average: %1$.2f</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
