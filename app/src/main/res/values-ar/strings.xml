@@ -120,4 +120,11 @@
     <string name="credit_points">نقاط تعليمية: </string>
     <string name="type">نوع: </string>
     <string name="syllabus">منهاج الدراسي</string>
+    <string name="statistics">إحصائيات</string>
+    <string name="extra_marks">علامات اضافية</string>
+
+    <!-- ChartActivity -->
+    <string name="if_passing_grade">اذا كان معدل النجاح</string>
+    <string name="loading_data">تحميل البيانات...</string>
+    <string name="students_passed">%1$d (%2$.02f%%) من الطلاب نجحوا في المساق, و %3$d (%4$.02f%%) من الطلاب رسبوا</string>
 </resources>

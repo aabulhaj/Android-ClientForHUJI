@@ -1,6 +1,8 @@
 package com.aabulhaj.hujiapp.data
 
-class Course {
+import java.io.Serializable
+
+class Course : Serializable {
     var number: String? = null
     var name: String? = null
     var creditPoints: String? = null

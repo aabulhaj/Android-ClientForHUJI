@@ -120,4 +120,11 @@
     <string name="credit_points">נקודות זכות: </string>
     <string name="type">סוג בחינה: </string>
     <string name="syllabus">סילבוס</string>
+    <string name="statistics">סטטיסטיקות</string>
+    <string name="extra_marks">ציונים נוספים</string>
+
+    <!-- ChartActivity -->
+    <string name="if_passing_grade">אם ציון עובר הוא</string>
+    <string name="loading_data">טעינת נתונים...</string>
+    <string name="students_passed">%1$d (%2$.02f%%) סטודנטים עברו הקורס ו %3$d (%4$.02f%%) בו נכשלו</string>
 </resources>

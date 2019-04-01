@@ -8,9 +8,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.widget.ListView
 import com.aabulhaj.hujiapp.CourseTypeEnum
 import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
+import com.aabulhaj.hujiapp.activities.ChartActivity
 import com.aabulhaj.hujiapp.adapters.CourseAdapter
 import com.aabulhaj.hujiapp.callbacks.StringCallback
 import com.aabulhaj.hujiapp.data.*
@@ -234,6 +236,44 @@ class CoursesFragment : RefreshListFragment() {
             context.startActivity(intent)
         }
 
+    }
+
+    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
+        super.onListItemClick(l, v, position, id)
+
+        val grade = coursesAdapter!!.getItem(position)
+
+        val options = ArrayList<String>()
+        if (grade.statisticsURL != null) {
+            options.add(getString(R.string.statistics))
+        }
+        if (grade.extraGradesURL != null) {
+            options.add(getString(R.string.extra_marks))
+        }
+
+        showStatisticsAndExtraGradesDialog(grade, options.toTypedArray())
+    }
+
+    private fun showStatisticsAndExtraGradesDialog(grade: Grade, options: Array<String>) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(null)
+        builder.setItems(options) { _, which ->
+            if (which == 0) {
+                startStatisticsActivity(grade)
+            } else if (which == 1) {
+//                startExtraGradesActivity(grade)
+            }
+        }
+        builder.show()
+    }
+
+    private fun startStatisticsActivity(grade: Grade) {
+        val details: Intent
+        if (grade.statisticsURL != null) {
+            details = Intent(activity, ChartActivity::class.java)
+            details.putExtra("grade", grade)
+            activity?.startActivity(details)
+        }
     }
 
     private fun stopListRefreshing() {

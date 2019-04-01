@@ -1,9 +1,10 @@
 package com.aabulhaj.hujiapp
 
 import android.content.Context
+import java.io.Serializable
 
 
-enum class CourseTypeEnum {
+enum class CourseTypeEnum : Serializable {
     FINAL,
     MIDTERM,
     PARTONE,

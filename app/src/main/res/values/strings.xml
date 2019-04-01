@@ -122,6 +122,13 @@
     <string name="credit_points">Credit Points: </string>
     <string name="type">Type: </string>
     <string name="syllabus">Syllabus</string>
+    <string name="statistics">Statistics</string>
+    <string name="extra_marks">Extra marks</string>
+
+    <!-- ChartActivity -->
+    <string name="if_passing_grade">If the passing grade is</string>
+    <string name="loading_data">Loading data...</string>
+    <string name="students_passed">%1$d (%2$.02f%%) students passed the course and %3$d (%4$.02f%%) students failed</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -25,3 +25,7 @@ fun getCourseSyllabusURL(courseNumber: String, year: String): String {
     return String.format(Locale.getDefault(), "http://shnaton.huji.ac.il/index.php/NewSyl/%s/1/%s/",
             courseNumber, year)
 }
+
+fun getStatisticsUrl(statisticsUrl: String): String {
+    return Session.getSessionUrl("/stu/$statisticsUrl")
+}
