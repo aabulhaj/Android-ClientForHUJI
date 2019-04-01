@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.ListView
+import com.aabulhaj.hujiapp.Cache
 import com.aabulhaj.hujiapp.CourseTypeEnum
 import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
@@ -17,12 +18,18 @@ import com.aabulhaj.hujiapp.adapters.CourseAdapter
 import com.aabulhaj.hujiapp.callbacks.StringCallback
 import com.aabulhaj.hujiapp.data.*
 import com.aabulhaj.hujiapp.util.PreferencesUtil
+import com.google.gson.reflect.TypeToken
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Call
 
 
 class CoursesFragment : RefreshListFragment() {
+    companion object {
+        const val CACHE_FILENAME = "courses"
+        const val YEARS_CACHE_FILENAME = "years"
+    }
+
     private var currentYear: String? = null
     private var yearButton: MenuItem? = null
     private var coursesAdapter: CourseAdapter? = null
@@ -43,6 +50,7 @@ class CoursesFragment : RefreshListFragment() {
 
         if (coursesAdapter == null) {
             coursesAdapter = CourseAdapter(context!!)
+            loadCache()
             onRefresh()
             listAdapter = coursesAdapter
         }
@@ -75,6 +83,7 @@ class CoursesFragment : RefreshListFragment() {
         builder.setItems(allYears.toTypedArray()) { _, which ->
             currentYear = allYears[which]
             yearButton?.title = currentYear
+            loadCache()
             PreferencesUtil.putString(Session.getCacheKey("current_year"), currentYear!!)
             onRefresh()
         }
@@ -88,31 +97,34 @@ class CoursesFragment : RefreshListFragment() {
             override fun onResponse(call: Call<ResponseBody>?, responseBody: String) {
                 val doc = Jsoup.parse(responseBody)
 
-                if (allYears.isEmpty()) {
-                    // Set current year.
-                    val years = doc.getElementsByAttributeValue("name",
-                            "yearsafa").first().getElementsByTag("option")
+                // Set current year.
+                val years = doc.getElementsByAttributeValue("name",
+                        "yearsafa").first().getElementsByTag("option")
 
-                    for (i in 0 until years.size) {
-                        allYears.add(years[i].text())
-                    }
+                allYears.clear()
+                for (i in 0 until years.size) {
+                    allYears.add(years[i].text())
+                }
 
-                    if (years.isEmpty()) {
-                        stopListRefreshing()
-                        return
-                    }
+                if (years.isEmpty()) {
+                    stopListRefreshing()
+                    return
+                }
 
-                    for (year in years) {
-                        if (year.getElementsByAttribute("selected").isNotEmpty()) {
-                            activity?.runOnUiThread {
-                                yearButton?.title = allYears[years.indexOf(year)]
-                                currentYear = allYears[years.indexOf(year)]
-                                PreferencesUtil.putString(Session.getCacheKey("current_year"),
-                                        currentYear ?: "")
-                            }
+                for (year in years) {
+                    if (year.getElementsByAttribute("selected").isNotEmpty()) {
+                        activity?.runOnUiThread {
+                            yearButton?.title = allYears[years.indexOf(year)]
+                            currentYear = allYears[years.indexOf(year)]
+                            PreferencesUtil.putString(Session.getCacheKey("current_year"),
+                                    currentYear ?: "")
                         }
                     }
                 }
+
+                Cache.cacheObject(context, allYears,
+                        object : TypeToken<ArrayList<String>>() {}.type,
+                        YEARS_CACHE_FILENAME)
 
                 // Get courses.
                 var sum = 0f
@@ -203,6 +215,8 @@ class CoursesFragment : RefreshListFragment() {
                     }
                     coursesAdapter?.notifyDataSetChanged()
                 }
+                Cache.cacheObject(context, grades, object : TypeToken<ArrayList<Grade>>() {}.type,
+                        CACHE_FILENAME + currentYear)
                 stopListRefreshing()
             }
 
@@ -302,6 +316,26 @@ class CoursesFragment : RefreshListFragment() {
     private fun stopListRefreshing() {
         activity?.runOnUiThread {
             this.stopRefreshing()
+        }
+    }
+
+    private fun loadCache() {
+        val data = Cache.loadCachedObject(context, object : TypeToken<ArrayList<Grade>>() {}.type,
+                CACHE_FILENAME + currentYear) ?: return
+
+        val yData = Cache.loadCachedObject(context, object : TypeToken<ArrayList<String>>() {}.type,
+                YEARS_CACHE_FILENAME) ?: return
+
+        val grades = data as ArrayList<Grade>
+        val yearsData = yData as ArrayList<String>
+
+        activity?.runOnUiThread {
+            coursesAdapter?.clear()
+            coursesAdapter?.addAll(grades)
+            coursesAdapter?.notifyDataSetChanged()
+
+            allYears.clear()
+            allYears.addAll(yearsData)
         }
     }
 }
