@@ -1,6 +1,7 @@
 package com.aabulhaj.hujiapp.adapters
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,6 +67,10 @@ class CourseAdapter(context: Context) : AdvancedArrayAdapter<Grade>(context) {
 
         view.courseNumberTextView.text = grade.course?.number
         view.courseNameTextView.text = grade.course?.name
+
+        if (!getContext().resources.getBoolean(R.bool.is_rtl)) {
+            view.courseNameTextView.gravity = Gravity.LEFT
+        }
 
         if (grade.course?.creditPoints == null || grade.course?.creditPoints == "-1") {
             view.points.text = String.format(Locale.getDefault(), "%d.%d%d", 0, 0, 0)

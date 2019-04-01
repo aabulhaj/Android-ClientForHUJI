@@ -1,4 +1,5 @@
 <resources>
+    <bool name="is_rtl">false</bool>
     <string name="app_name" translatable="false">HUJI</string>
 
     <!-- MainActivity -->

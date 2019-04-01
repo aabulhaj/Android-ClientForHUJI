@@ -1,4 +1,6 @@
 <resources>
+    <bool name="is_rtl">true</bool>
+
     <!-- MainActivity -->
     <string name="login_hint">כניסה</string>
     <string name="personal_code">קוד אישי</string>
