@@ -139,6 +139,10 @@
     <string name="enter_grade">Enter Grade</string>
     <string name="grade_average">Grade average: %1$.2f</string>
 
+    <!-- TableFragment -->
+    <string name="first_semester">First semester</string>
+    <string name="second_semester">Second semester</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

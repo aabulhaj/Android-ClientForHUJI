@@ -41,7 +41,7 @@ class SessionActivity : ToolbarActivity() {
                 IntentFilter(Session.INTENT_APP_LOGGED_OUT))
 
         // Show last chosen fragment.
-        val lastFragId = PreferencesUtil.getIntOr(
+        val lastFragId = PreferencesUtil.getInt(
                 Session.getCacheKey("last_tab"),
                 R.id.action_about_me)
 

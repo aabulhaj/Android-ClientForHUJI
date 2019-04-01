@@ -137,4 +137,8 @@
     <!-- GPACalculatorActivity -->
     <string name="enter_grade">ادخل علامة</string>
     <string name="grade_average">المعدل: %1$.2f</string>
+
+    <!-- TableFragment -->
+    <string name="first_semester">الفصل الاول</string>
+    <string name="second_semester">الفصل الثاني</string>
 </resources>

@@ -1,19 +1,20 @@
 package com.aabulhaj.hujiapp.fragments
 
 import Session
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.format.DateFormat
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.adapters.TimetableAdapter
 import com.aabulhaj.hujiapp.callbacks.StringCallback
 import com.aabulhaj.hujiapp.data.Course
 import com.aabulhaj.hujiapp.data.TimeTableClass
 import com.aabulhaj.hujiapp.data.TimeTableDay
+import com.aabulhaj.hujiapp.data.timeTableUrl
+import com.aabulhaj.hujiapp.util.PreferencesUtil
 import com.alamkanak.weekview.DateTimeInterpreter
 import com.alamkanak.weekview.WeekView
 import kotlinx.android.synthetic.main.fragment_table.*
@@ -24,11 +25,59 @@ import retrofit2.Call
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
+import android.content.DialogInterface
+
+
 
 
 class TableFragment : Fragment(), RefreshableFragment {
     private var adapter: TimetableAdapter? = null
+    private var currentSemester = 1
+    private var semesterMenuButton: MenuItem? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        currentSemester = PreferencesUtil.getInt(Session.getCacheKey("table_semester"), 1)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.time_table_menu, menu)
+        semesterMenuButton = menu?.findItem(R.id.semesterChangeButton)
+
+        if (currentSemester == 1) {
+            semesterMenuButton?.title = getString(R.string.first_semester)
+        } else {
+            semesterMenuButton?.title = getString(R.string.second_semester)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.semesterChangeButton) {
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle(null)
+            builder.setItems(arrayOf(getString(R.string.first_semester),
+                    getString(R.string.second_semester)),
+                    DialogInterface.OnClickListener { _, which ->
+                if (which == currentSemester - 1) {
+                    return@OnClickListener
+                } else if (which == 0) {
+                    item.setTitle(R.string.first_semester)
+                    currentSemester = 1
+                } else if (which == 1) {
+                    item.setTitle(R.string.second_semester)
+                    currentSemester = 2
+                }
+                item.isEnabled = false
+                onSemesterChange()
+                PreferencesUtil.putInt(Session.getCacheKey("table_semester"), currentSemester)
+            })
+            builder.show()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -45,6 +94,7 @@ class TableFragment : Fragment(), RefreshableFragment {
                 weekView.goToDate(c)
             }
             adapter = TimetableAdapter()
+            onSemesterChange()
         }
 
         if (weekView.monthChangeListener == null) {
@@ -83,8 +133,6 @@ class TableFragment : Fragment(), RefreshableFragment {
 
         weekView.numberOfVisibleDays = Math.round(dpWidth / 180)
 
-        getTimeTable()
-
         return view
     }
 
@@ -106,7 +154,7 @@ class TableFragment : Fragment(), RefreshableFragment {
         weekView.setMaxTime(22)
     }
 
-    private fun getTimeTable() {
+    private fun onSemesterChange() {
         val timeTableDays = ArrayList<TimeTableDay>()
         timeTableDays.add(TimeTableDay(0))
         timeTableDays.add(TimeTableDay(1))
@@ -114,7 +162,8 @@ class TableFragment : Fragment(), RefreshableFragment {
         timeTableDays.add(TimeTableDay(3))
         timeTableDays.add(TimeTableDay(4))
 
-        Session.callRequest(fun() = Session.hujiApiClient.getFirstSemesterTimeTable(),
+        Session.callRequest(fun() = Session.hujiApiClient.getTimeTable(
+                Session.getSessionUrl(timeTableUrl(currentSemester))),
                 activity!!, object : StringCallback {
             override fun onResponse(call: Call<ResponseBody>?, responseBody: String) {
                 val doc = Jsoup.parse(responseBody)
@@ -199,6 +248,7 @@ class TableFragment : Fragment(), RefreshableFragment {
 
                 activity?.runOnUiThread {
                     weekView.notifyDatasetChanged()
+                    semesterMenuButton?.setEnabled(true)
                 }
             }
 

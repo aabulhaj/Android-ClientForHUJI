@@ -1,7 +1,5 @@
 package com.aabulhaj.hujiapp
 
-import Session
-import com.aabulhaj.hujiapp.data.timeTableUrl
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -22,9 +20,7 @@ interface HujiApi {
     fun loadLoginPage(): Call<ResponseBody>
 
     @GET
-    fun getFirstSemesterTimeTable(
-            @Url url: String = Session.getSessionUrl(timeTableUrl(1))
-    ): Call<ResponseBody>
+    fun getTimeTable(@Url url: String): Call<ResponseBody>
 
     @GET
     fun getCoursesList(@Url url: String): Call<ResponseBody>

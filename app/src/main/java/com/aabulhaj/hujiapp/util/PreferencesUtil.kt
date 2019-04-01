@@ -17,11 +17,7 @@ object PreferencesUtil {
         preferences.edit().putInt(key, value).apply()
     }
 
-    fun getInt(key: String): Int {
-        return preferences.getInt(key, -1)
-    }
-
-    fun getIntOr(key: String, or: Int): Int {
+    fun getInt(key: String, or: Int = -1): Int {
         return preferences.getInt(key, or)
     }
 
