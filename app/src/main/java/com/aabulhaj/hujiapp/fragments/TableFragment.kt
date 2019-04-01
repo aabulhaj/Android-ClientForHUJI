@@ -2,11 +2,13 @@ package com.aabulhaj.hujiapp.fragments
 
 import Session
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.format.DateFormat
 import android.view.*
+import com.aabulhaj.hujiapp.Cache
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.adapters.TimetableAdapter
 import com.aabulhaj.hujiapp.callbacks.StringCallback
@@ -17,6 +19,7 @@ import com.aabulhaj.hujiapp.data.timeTableUrl
 import com.aabulhaj.hujiapp.util.PreferencesUtil
 import com.alamkanak.weekview.DateTimeInterpreter
 import com.alamkanak.weekview.WeekView
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_table.*
 import kotlinx.android.synthetic.main.fragment_table.view.*
 import okhttp3.ResponseBody
@@ -25,19 +28,21 @@ import retrofit2.Call
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
-import android.content.DialogInterface
-
-
 
 
 class TableFragment : Fragment(), RefreshableFragment {
+    companion object {
+        const val SEM_PREF = "table_semester"
+        const val CACHE_FILENAME = "timetable"
+    }
+
     private var adapter: TimetableAdapter? = null
     private var currentSemester = 1
     private var semesterMenuButton: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentSemester = PreferencesUtil.getInt(Session.getCacheKey("table_semester"), 1)
+        currentSemester = PreferencesUtil.getInt(Session.getCacheKey(SEM_PREF), 1)
         setHasOptionsMenu(true)
     }
 
@@ -60,19 +65,20 @@ class TableFragment : Fragment(), RefreshableFragment {
             builder.setItems(arrayOf(getString(R.string.first_semester),
                     getString(R.string.second_semester)),
                     DialogInterface.OnClickListener { _, which ->
-                if (which == currentSemester - 1) {
-                    return@OnClickListener
-                } else if (which == 0) {
-                    item.setTitle(R.string.first_semester)
-                    currentSemester = 1
-                } else if (which == 1) {
-                    item.setTitle(R.string.second_semester)
-                    currentSemester = 2
-                }
-                item.isEnabled = false
-                onSemesterChange()
-                PreferencesUtil.putInt(Session.getCacheKey("table_semester"), currentSemester)
-            })
+                        if (which == currentSemester - 1) {
+                            return@OnClickListener
+                        } else if (which == 0) {
+                            item.setTitle(R.string.first_semester)
+                            currentSemester = 1
+                        } else if (which == 1) {
+                            item.setTitle(R.string.second_semester)
+                            currentSemester = 2
+                        }
+                        loadCache(weekView)
+                        item.isEnabled = false
+                        onSemesterChange()
+                        PreferencesUtil.putInt(Session.getCacheKey(SEM_PREF), currentSemester)
+                    })
             builder.show()
             return true
         }
@@ -94,6 +100,7 @@ class TableFragment : Fragment(), RefreshableFragment {
                 weekView.goToDate(c)
             }
             adapter = TimetableAdapter()
+            loadCache(weekView)
             onSemesterChange()
         }
 
@@ -250,6 +257,10 @@ class TableFragment : Fragment(), RefreshableFragment {
                     weekView.notifyDatasetChanged()
                     semesterMenuButton?.setEnabled(true)
                 }
+
+                Cache.cacheObject(context, timeTableDays,
+                        object : TypeToken<ArrayList<TimeTableDay>>() {}.type,
+                        CACHE_FILENAME + currentSemester.toString())
             }
 
             override fun onFailure(call: Call<ResponseBody>?, e: Exception) {}
@@ -267,6 +278,19 @@ class TableFragment : Fragment(), RefreshableFragment {
         } else null
     }
 
+    private fun loadCache(weekView: WeekView) {
+        val data = Cache.loadCachedObject(context,
+                object : TypeToken<ArrayList<TimeTableDay>>() {}.type,
+                CACHE_FILENAME + currentSemester.toString()) ?: return
+
+
+        val days = data as ArrayList<TimeTableDay>
+
+        activity?.runOnUiThread {
+            adapter?.setTimetableDays(days)
+            weekView.notifyDatasetChanged()
+        }
+    }
 
     override fun refresh() {
 
