@@ -88,6 +88,10 @@ object Session {
         return String.format("/dataj/controller/$sessionId/$url")
     }
 
+    fun getHujiSessionUrl(path: String): String {
+        return "https://www.huji.ac.il/dataj/controller/$sessionId/$path"
+    }
+
     fun callRequest(request: () -> Call<ResponseBody>, activity: FragmentActivity,
                     callback: StringCallback) {
         request().enqueue(object : Callback<ResponseBody> {

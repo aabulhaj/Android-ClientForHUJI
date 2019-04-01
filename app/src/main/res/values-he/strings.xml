@@ -97,4 +97,26 @@
 
     <!-- MoreFragmentMenu -->
     <string name="logout">יציאה</string>
+
+    <!-- CoursesFramgnetsHolder -->
+    <string name="grades">ציונים</string>
+    <string name="exams">בחינות</string>
+    <string name="note_book">מחברות</string>
+
+    <!-- CoursesFragment -->
+    <string name="shnaton">שנתון</string>
+    <string name="gpaCalc">ממחשבון הGPA</string>
+
+    <!-- CourseTypeEnum -->
+    <string name="mid_term">אמצע</string>
+    <string name="final_exam">סופי</string>
+    <string name="calculated">מחושב</string>
+    <string name="partial">חלקי</string>
+    <string name="part">חלק %1$d</string>
+    <string name="unknown">לא ידוע</string>
+    <string name="expected">צפוי</string>
+
+    <!-- CourseAdapter -->
+    <string name="credit_points">נקודות זכות: </string>
+    <string name="type">סוג בחינה: </string>
 </resources>

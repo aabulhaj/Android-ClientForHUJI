@@ -6,6 +6,21 @@
 
     <color name="timetable_event_text_color">#21739E</color>
 
+    <color name="list_view_label">#bebebe</color>
+    <color name="list_view_detail">#000000</color>
+
+    <color name="google_blue">#4285F4</color>
+    <color name="google_green">#34A853</color>
+    <color name="google_yellow">#FBBC05</color>
+    <color name="google_red">#EA4335</color>
+
+    <array name="google_colors">
+        <item>@color/google_green</item>
+        <item>@color/google_red</item>
+        <item>@color/google_blue</item>
+        <item>@color/google_yellow</item>
+    </array>
+
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 </resources>

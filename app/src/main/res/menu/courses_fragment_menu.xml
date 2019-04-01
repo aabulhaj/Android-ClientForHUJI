@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/yearButton"
+        android:title="2019"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/shnatonButton"
+        android:icon="@drawable/ic_shnaton"
+        android:title="@string/shnaton"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/gpaCalcButton"
+        android:icon="@drawable/ic_calculator"
+        android:title="@string/gpaCalc"
+        app:showAsAction="ifRoom" />
+</menu>

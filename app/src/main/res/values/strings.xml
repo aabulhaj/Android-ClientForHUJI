@@ -99,4 +99,30 @@
 
     <!-- MoreFragmentMenu -->
     <string name="logout">Logout</string>
+
+    <!-- CoursesFramgnetsHolder -->
+    <string name="grades">Grades</string>
+    <string name="exams">Exams</string>
+    <string name="note_book">NoteBooks</string>
+
+    <!-- CoursesFragment -->
+    <string name="shnaton">Shnaton</string>
+    <string name="gpaCalc">GPA Calculator</string>
+
+    <!-- CourseTypeEnum -->
+    <string name="mid_term">Midterm</string>
+    <string name="final_exam">Final</string>
+    <string name="calculated">Calculated</string>
+    <string name="partial">Partial</string>
+    <string name="part">Part %1$d</string>
+    <string name="unknown">Unknown</string>
+    <string name="expected">Expected</string>
+
+    <!-- CourseAdapter -->
+    <string name="credit_points">Credit Points: </string>
+    <string name="type">Type: </string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

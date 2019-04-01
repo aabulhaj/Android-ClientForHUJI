@@ -8,7 +8,9 @@ class Course {
 
     // Indicates "like above" in the timetable.
     var aboveClass: Boolean = false
-    
+
+    constructor()
+
     constructor(aboveClass: Boolean) {
         this.aboveClass = aboveClass
     }

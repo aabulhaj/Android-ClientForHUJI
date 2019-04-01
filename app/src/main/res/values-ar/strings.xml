@@ -97,4 +97,26 @@
 
     <!-- MoreFragmentMenu -->
     <string name="logout">تسجيل خروج</string>
+
+    <!-- CoursesFramgnetsHolder -->
+    <string name="grades">علامات</string>
+    <string name="exams">الامتحانات</string>
+    <string name="note_book">دفاتر امتحانات</string>
+
+    <!-- CoursesFragment -->
+    <string name="shnaton">مرجع المساقات</string>
+    <string name="gpaCalc">حاسبة GPA</string>
+
+    <!-- CourseTypeEnum -->
+    <string name="mid_term">نصف سنوي</string>
+    <string name="final_exam">نهائي</string>
+    <string name="calculated">محسوب</string>
+    <string name="partial">جزئي</string>
+    <string name="part">%1$d جزء</string>
+    <string name="unknown">غير معروف</string>
+    <string name="expected">متوقع</string>
+
+    <!-- CourseAdapter -->
+    <string name="credit_points">نقاط تعليمية: </string>
+    <string name="type">نوع: </string>
 </resources>

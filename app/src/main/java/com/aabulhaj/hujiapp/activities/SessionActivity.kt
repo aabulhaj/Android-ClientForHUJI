@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_session.*
 
 
 class SessionActivity : ToolbarActivity() {
-    private var coursesFragment: Fragment? = null
+    private var coursesFragmentsHolder: Fragment? = null
     private var tableFragment: Fragment? = null
     private var aboutMeFragment: Fragment? = null
     private var mapFragment: Fragment? = null
@@ -41,24 +41,16 @@ class SessionActivity : ToolbarActivity() {
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver,
                 IntentFilter(Session.INTENT_APP_LOGGED_OUT))
 
-        val fragmentManager = this.supportFragmentManager
-
         // Show last chosen fragment.
         val lastFragId = PreferencesUtil.getIntOr(
                 Session.getCacheKey("last_tab"),
                 R.id.action_about_me)
 
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, getFragment(lastFragId))
-                .commit()
+        replaceWithFragment(lastFragId)
         bottomNavView.selectedItemId = lastFragId
 
         bottomNavView.setOnNavigationItemSelectedListener { item ->
-            val fragment = getFragment(item.itemId)
-
-            val transaction = fragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentContainer, fragment)
-            transaction.commit()
+            replaceWithFragment(item.itemId)
 
             PreferencesUtil.putInt(Session.getCacheKey("last_tab"), item.itemId)
 
@@ -70,11 +62,21 @@ class SessionActivity : ToolbarActivity() {
         }
     }
 
+    private fun replaceWithFragment(itemId: Int) {
+        val fragment = getFragment(itemId)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, fragment)
+        transaction.commit()
+
+        getAppBarLayout()?.elevation = if (itemId == R.id.action_courses) 0f else 8f
+    }
+
     private fun getFragment(itemId: Int): Fragment? {
         when (itemId) {
             R.id.action_courses -> {
-                if (coursesFragment == null) coursesFragment = CoursesFragment()
-                return coursesFragment
+                if (coursesFragmentsHolder == null) coursesFragmentsHolder = CoursesFragmentsHolder()
+                return coursesFragmentsHolder
             }
             R.id.action_timetable -> {
                 if (tableFragment == null) tableFragment = TableFragment()

@@ -25,4 +25,7 @@ interface HujiApi {
     fun getFirstSemesterTimeTable(
             @Url url: String = Session.getSessionUrl(timeTableUrl(1))
     ): Call<ResponseBody>
+
+    @GET
+    fun getCoursesList(@Url url: String): Call<ResponseBody>
 }
