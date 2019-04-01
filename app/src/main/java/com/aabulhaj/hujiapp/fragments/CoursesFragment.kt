@@ -7,8 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
+import android.util.TypedValue
 import android.view.*
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.TextView
 import com.aabulhaj.hujiapp.Cache
 import com.aabulhaj.hujiapp.CourseTypeEnum
 import com.aabulhaj.hujiapp.MenuTint
@@ -73,6 +78,47 @@ class CoursesFragment : RefreshListFragment() {
             if (allYears.isNotEmpty()) {
                 showYears()
             }
+        } else if (item?.itemId == R.id.shnatonButton) {
+            val builder = AlertDialog.Builder(activity)
+            builder.setTitle(R.string.enter_course_number)
+            builder.setMessage(R.string.tip_shnaton)
+
+            val padding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16f,
+                    resources.displayMetrics).toInt()
+
+            val layout = LinearLayout(activity)
+            layout.orientation = LinearLayout.VERTICAL
+            layout.setPadding(padding, padding, padding, padding)
+
+            val enterNumberTextView = TextView(context)
+            enterNumberTextView.text = getString(R.string.enter_course_number)
+
+            val courseNumberInput = EditText(context)
+            courseNumberInput.inputType = InputType.TYPE_CLASS_NUMBER
+
+            val enterYearTextView = TextView(context)
+            enterYearTextView.text = getString(R.string.enter_year)
+
+            val yearInput = EditText(context)
+            yearInput.inputType = InputType.TYPE_CLASS_NUMBER
+            yearInput.setText(currentYear)
+
+            layout.addView(enterNumberTextView)
+            layout.addView(courseNumberInput)
+            layout.addView(enterYearTextView)
+            layout.addView(yearInput)
+
+            builder.setView(layout)
+
+            builder.setPositiveButton(android.R.string.ok) { _, _ ->
+                val courseNumber = courseNumberInput.text.toString()
+                val year = yearInput.text.toString()
+
+                startChromeTab(getCourseShnatonURL(courseNumber, year), context!!)
+            }
+            builder.setNegativeButton(android.R.string.cancel) { dialog, _ -> dialog.cancel() }
+
+            builder.show()
         }
         return super.onOptionsItemSelected(item)
     }

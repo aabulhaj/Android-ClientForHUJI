@@ -110,6 +110,9 @@
     <string name="shnaton">Shnaton</string>
     <string name="gpaCalc">GPA Calculator</string>
     <string name="where_to_get_course">Select year</string>
+    <string name="enter_course_number">Enter course number</string>
+    <string name="tip_shnaton">Tip: Tap and hold on a course to access its Shnaton</string>
+    <string name="enter_year">Enter year</string>
 
     <!-- CourseTypeEnum -->
     <string name="mid_term">Midterm</string>

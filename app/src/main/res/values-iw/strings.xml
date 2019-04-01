@@ -109,6 +109,9 @@
     <string name="shnaton">שנתון</string>
     <string name="gpaCalc">ממחשבון הGPA</string>
     <string name="where_to_get_course">בחר שנה</string>
+    <string name="enter_course_number">אנא הכנס מספר קורס</string>
+    <string name="tip_shnaton">עצה: תלחץ\י על הכפתור ותחזיק\י כדי להיכנס לשנתון</string>
+    <string name="enter_year">הכנס שנה</string>
 
     <!-- CourseTypeEnum -->
     <string name="mid_term">אמצע</string>

@@ -109,6 +109,9 @@
     <string name="shnaton">مرجع المساقات</string>
     <string name="gpaCalc">حاسبة GPA</string>
     <string name="where_to_get_course">اختر سنة</string>
+    <string name="enter_course_number">ادخال رقم المساق</string>
+    <string name="tip_shnaton">ملاحظة: بامكانك الضغط مطولا على مساق للدخول الى الShnaton الخاص به</string>
+    <string name="enter_year">ادخل السنة</string>
 
     <!-- CourseTypeEnum -->
     <string name="mid_term">نصف سنوي</string>
