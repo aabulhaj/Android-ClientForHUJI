@@ -255,6 +255,9 @@ class CoursesFragment : RefreshListFragment() {
     }
 
     private fun showStatisticsAndExtraGradesDialog(grade: Grade, options: Array<String>) {
+        if (options.isEmpty()) {
+            return
+        }
         val builder = AlertDialog.Builder(context)
         builder.setTitle(null)
         builder.setItems(options) { _, which ->
