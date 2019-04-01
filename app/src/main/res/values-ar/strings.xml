@@ -119,4 +119,5 @@
     <!-- CourseAdapter -->
     <string name="credit_points">نقاط تعليمية: </string>
     <string name="type">نوع: </string>
+    <string name="syllabus">منهاج الدراسي</string>
 </resources>

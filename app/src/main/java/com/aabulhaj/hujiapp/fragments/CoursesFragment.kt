@@ -1,6 +1,11 @@
 package com.aabulhaj.hujiapp.fragments
 
 import Session
+import android.app.AlertDialog
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import com.aabulhaj.hujiapp.CourseTypeEnum
@@ -8,9 +13,7 @@ import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.adapters.CourseAdapter
 import com.aabulhaj.hujiapp.callbacks.StringCallback
-import com.aabulhaj.hujiapp.data.Course
-import com.aabulhaj.hujiapp.data.Grade
-import com.aabulhaj.hujiapp.data.coursesUrl
+import com.aabulhaj.hujiapp.data.*
 import com.aabulhaj.hujiapp.util.PreferencesUtil
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
@@ -185,6 +188,52 @@ class CoursesFragment : RefreshListFragment() {
                 stopListRefreshing()
             }
         })
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        listView.setSelector(android.R.color.transparent)
+        listView.setOnItemLongClickListener { adapterView, _, i, _ ->
+            val grade = adapterView.getItemAtPosition(i) as Grade
+            shnatonOrSyllabusDialog(grade)
+            return@setOnItemLongClickListener true
+        }
+    }
+
+    private fun shnatonOrSyllabusDialog(grade: Grade) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(null)
+        builder.setItems(arrayOf(resources.getString(R.string.shnaton),
+                resources.getString(R.string.syllabus))) { _, which ->
+            val url: String
+            if (which == 0) {
+                url = getCourseShnatonURL(grade.course!!.number!!, currentYear!!)
+            } else {
+                url = getCourseSyllabusURL(grade.course!!.number!!, currentYear!!)
+            }
+            startChromeTab(url, context!!)
+        }
+        builder.show()
+    }
+
+    private fun startChromeTab(url: String, context: Context) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        val extras = Bundle()
+        extras.putBinder("android.support.customtabs.extra.SESSION", null)
+        val color = context.resources.getColor(R.color.colorPrimary, context.theme)
+
+        extras.putInt("android.support.customtabs.extra.TOOLBAR_COLOR", color)
+        intent.putExtras(extras)
+
+        intent.setPackage("com.android.chrome")
+        try {
+            context.startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            intent.setPackage(null)
+            context.startActivity(intent)
+        }
+
     }
 
     private fun stopListRefreshing() {

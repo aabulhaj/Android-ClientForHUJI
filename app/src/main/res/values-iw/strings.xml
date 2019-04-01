@@ -119,4 +119,5 @@
     <!-- CourseAdapter -->
     <string name="credit_points">נקודות זכות: </string>
     <string name="type">סוג בחינה: </string>
+    <string name="syllabus">סילבוס</string>
 </resources>
