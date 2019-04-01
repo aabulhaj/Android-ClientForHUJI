@@ -30,6 +30,10 @@ class CoursesFragment : RefreshListFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (currentYear == null) {
+            currentYear = PreferencesUtil.getString(Session.getCacheKey("current_year"), "2019")
+        }
         setHasOptionsMenu(true)
     }
 
@@ -39,10 +43,9 @@ class CoursesFragment : RefreshListFragment() {
 
         if (coursesAdapter == null) {
             coursesAdapter = CourseAdapter(context!!)
+            onRefresh()
             listAdapter = coursesAdapter
         }
-
-        onRefresh()
 
         return view
     }
@@ -51,10 +54,6 @@ class CoursesFragment : RefreshListFragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.courses_fragment_menu, menu)
 
-        if (currentYear == null) {
-            currentYear = PreferencesUtil.getString(Session.getCacheKey("current_year"), "2019")
-        }
-
         yearButton = menu.findItem(R.id.yearButton)
         yearButton?.title = currentYear
 
@@ -62,35 +61,55 @@ class CoursesFragment : RefreshListFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.yearButton) {
+            if (allYears.isNotEmpty()) {
+                showYears()
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun showYears() {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.where_to_get_course))
+        builder.setItems(allYears.toTypedArray()) { _, which ->
+            currentYear = allYears[which]
+            yearButton?.title = currentYear
+            PreferencesUtil.putString(Session.getCacheKey("current_year"), currentYear!!)
+            onRefresh()
+        }
+        builder.show()
+    }
+
     override fun onRefresh() {
+        setRefreshing(true)
         Session.callRequest(fun() = Session.hujiApiClient.getCoursesList(coursesUrl(currentYear)),
                 activity!!, object : StringCallback {
             override fun onResponse(call: Call<ResponseBody>?, responseBody: String) {
                 val doc = Jsoup.parse(responseBody)
 
-                // Set current year.
-                val years = doc.getElementsByAttributeValue("name",
-                        "yearsafa").first().getElementsByTag("option")
+                if (allYears.isEmpty()) {
+                    // Set current year.
+                    val years = doc.getElementsByAttributeValue("name",
+                            "yearsafa").first().getElementsByTag("option")
 
-                for (i in 0 until years.size) {
-                    allYears.add(years[i].text())
-                }
+                    for (i in 0 until years.size) {
+                        allYears.add(years[i].text())
+                    }
 
-                if (years.isEmpty()) {
-                    stopListRefreshing()
-                    return
-                }
+                    if (years.isEmpty()) {
+                        stopListRefreshing()
+                        return
+                    }
 
-                for (year in years) {
-                    if (year.getElementsByAttribute("selected").isNotEmpty()) {
-                        activity?.runOnUiThread {
-                            yearButton?.title = allYears[years.indexOf(year)]
-                            currentYear = allYears[years.indexOf(year)]
-                            PreferencesUtil.putString(Session.getCacheKey("current_year"),
-                                    currentYear ?: "")
+                    for (year in years) {
+                        if (year.getElementsByAttribute("selected").isNotEmpty()) {
+                            activity?.runOnUiThread {
+                                yearButton?.title = allYears[years.indexOf(year)]
+                                currentYear = allYears[years.indexOf(year)]
+                                PreferencesUtil.putString(Session.getCacheKey("current_year"),
+                                        currentYear ?: "")
+                            }
                         }
                     }
                 }
@@ -177,6 +196,7 @@ class CoursesFragment : RefreshListFragment() {
                 }
 
                 activity?.runOnUiThread {
+                    yearButton?.title = currentYear
                     coursesAdapter?.clear()
                     if (grades.isNotEmpty()) {
                         coursesAdapter?.addAll(grades)

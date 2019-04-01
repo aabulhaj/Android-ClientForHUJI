@@ -109,6 +109,7 @@
     <!-- CoursesFragment -->
     <string name="shnaton">Shnaton</string>
     <string name="gpaCalc">GPA Calculator</string>
+    <string name="where_to_get_course">Select year</string>
 
     <!-- CourseTypeEnum -->
     <string name="mid_term">Midterm</string>

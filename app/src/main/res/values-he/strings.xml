@@ -108,6 +108,7 @@
     <!-- CoursesFragment -->
     <string name="shnaton">שנתון</string>
     <string name="gpaCalc">ממחשבון הGPA</string>
+    <string name="where_to_get_course">בחר שנה</string>
 
     <!-- CourseTypeEnum -->
     <string name="mid_term">אמצע</string>

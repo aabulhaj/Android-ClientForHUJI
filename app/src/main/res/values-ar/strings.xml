@@ -108,6 +108,7 @@
     <!-- CoursesFragment -->
     <string name="shnaton">مرجع المساقات</string>
     <string name="gpaCalc">حاسبة GPA</string>
+    <string name="where_to_get_course">اختر سنة</string>
 
     <!-- CourseTypeEnum -->
     <string name="mid_term">نصف سنوي</string>
