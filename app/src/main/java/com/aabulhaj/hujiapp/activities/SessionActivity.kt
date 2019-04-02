@@ -1,6 +1,8 @@
 package com.aabulhaj.hujiapp.activities
 
 import Session
+import android.animation.ObjectAnimator
+import android.animation.StateListAnimator
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -48,6 +50,15 @@ class SessionActivity : ToolbarActivity() {
         replaceWithFragment(lastFragId)
         bottomNavView.selectedItemId = lastFragId
         getFragment(lastFragId)?.refresh()
+
+        // The AppBarLayout uses a StateListAnimator that defines the elevation depending on it's
+        // state, so setting elevation directly now will have no effect, thus the following code
+        // is needed.
+        val elevation = if (lastFragId == R.id.action_courses) 0f else 8f
+        val stateListAnimator = StateListAnimator()
+        stateListAnimator.addState(IntArray(0),
+                ObjectAnimator.ofFloat(getAppBarLayout(), "elevation", elevation))
+        getAppBarLayout()?.stateListAnimator = stateListAnimator
 
         bottomNavView.setOnNavigationItemSelectedListener { item ->
             replaceWithFragment(item.itemId)
