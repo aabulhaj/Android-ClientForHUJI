@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+
+    <TextView
+        android:id="@+id/extraGradeCourseNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:text="80000"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/extraGradeCouseName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@+id/grade_layout"
+        android:layout_toEndOf="@+id/extraGradeCourseNum"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
+        android:text="Very long course name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_detail" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="4dp"
+        android:text="@string/moed"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_label" />
+
+    <TextView
+        android:id="@+id/extraGradeMoed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/textView8"
+        android:text="B"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_detail" />
+
+    <FrameLayout
+        android:id="@+id/grade_layout"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp">
+
+        <TextView
+            android:id="@+id/extraGradeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="-1"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <com.aabulhaj.hujiapp.views.GradeProgressBar
+            android:id="@+id/extraGradesProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/extraGradeMoed"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/extraGradeMoed"
+        android:text="@string/type"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_label" />
+
+    <TextView
+        android:id="@+id/extraGradeCourseTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/textView5"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:text="Final"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_detail" />
+
+</RelativeLayout>

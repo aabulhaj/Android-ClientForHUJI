@@ -141,4 +141,10 @@
     <!-- TableFragment -->
     <string name="first_semester">סמסטר ראשון</string>
     <string name="second_semester">סמסטר שני</string>
+
+    <!-- ExtraGradesActivity -->
+    <string name="moed">מועד: </string>
+    <string name="moed_a">א</string>
+    <string name="moed_b">ב</string>
+    <string name="moed_c">ג</string>
 </resources>

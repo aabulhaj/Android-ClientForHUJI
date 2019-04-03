@@ -19,6 +19,7 @@ import com.aabulhaj.hujiapp.CourseTypeEnum
 import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.activities.ChartActivity
+import com.aabulhaj.hujiapp.activities.ExtraGradesActivity
 import com.aabulhaj.hujiapp.activities.GPACalculatorActivity
 import com.aabulhaj.hujiapp.adapters.CourseAdapter
 import com.aabulhaj.hujiapp.callbacks.StringCallback
@@ -369,7 +370,7 @@ class CoursesFragment : RefreshListFragment() {
             if (which == 0) {
                 startStatisticsActivity(grade)
             } else if (which == 1) {
-//                startExtraGradesActivity(grade)
+                startExtraGradesActivity(grade)
             }
         }
         builder.show()
@@ -379,6 +380,15 @@ class CoursesFragment : RefreshListFragment() {
         val details: Intent
         if (grade.statisticsURL != null) {
             details = Intent(activity, ChartActivity::class.java)
+            details.putExtra("grade", grade)
+            activity?.startActivity(details)
+        }
+    }
+
+    private fun startExtraGradesActivity(grade: Grade) {
+        val details: Intent
+        if (grade.extraGradesURL != null) {
+            details = Intent(activity, ExtraGradesActivity::class.java)
             details.putExtra("grade", grade)
             activity?.startActivity(details)
         }

@@ -141,4 +141,10 @@
     <!-- TableFragment -->
     <string name="first_semester">الفصل الاول</string>
     <string name="second_semester">الفصل الثاني</string>
+
+    <!-- ExtraGradesActivity -->
+    <string name="moed">موعد: </string>
+    <string name="moed_a">أ</string>
+    <string name="moed_b">ب</string>
+    <string name="moed_c">ج</string>
 </resources>

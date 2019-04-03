@@ -27,4 +27,7 @@ interface HujiApi {
 
     @GET
     fun getStatistics(@Url url: String): Call<ResponseBody>
+
+    @GET
+    fun getResponseBody(@Url url: String): Call<ResponseBody>
 }
