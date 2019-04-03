@@ -34,13 +34,14 @@ class ExtendSessionActivity : Activity(), View.OnClickListener, TextWatcher,
 
         Session.cleanCookieStore()
 
-        Session.getCaptcha(this)
+        Session.getCaptcha(this, this)
     }
 
     override fun onClick(view: View?) {
         if (captchaAnswer.text != null) {
             extendButton.isEnabled = false
-            Session.login(this, Session.getId(), Session.getCode(), captchaAnswer.text.toString())
+            Session.login(this, Session.getId(), Session.getCode(),
+                    captchaAnswer.text.toString(), this)
         }
     }
 
@@ -69,7 +70,7 @@ class ExtendSessionActivity : Activity(), View.OnClickListener, TextWatcher,
                 if (body!!.contains("captcha")) {
                     extendButton.isEnabled = false
                     showAlertDialog(resources.getString(R.string.wrong_captcha_error))
-                    Session.getCaptcha(this)
+                    Session.getCaptcha(this, this)
                 }
             }
         }

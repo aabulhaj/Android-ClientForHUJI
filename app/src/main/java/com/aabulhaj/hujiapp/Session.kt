@@ -1,6 +1,5 @@
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.support.v4.app.FragmentActivity
 import android.support.v4.content.LocalBroadcastManager
@@ -127,7 +126,8 @@ object Session {
         })
     }
 
-    fun login(callback: LoginCallback, unNormalizedId: String, code: String, captchaText: String) {
+    fun login(callback: LoginCallback, unNormalizedId: String, code: String,
+              captchaText: String, context: Context) {
         val id = unNormalizedId.substring(0, 8)
 
         hujiApiClient.login(id, code, captchaText).enqueue(object : Callback<ResponseBody> {
@@ -144,13 +144,13 @@ object Session {
             }
 
             override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                val errorMessage = Resources.getSystem().getString(R.string.login_network_error)
+                val errorMessage = context.resources.getString(R.string.login_network_error)
                 callback.onUserAuthenticated(false, Exception(errorMessage), null, null)
             }
         })
     }
 
-    fun getCaptcha(callback: CaptchaCallback) {
+    fun getCaptcha(callback: CaptchaCallback, context: Context) {
         hujiApiClient.getCaptcha().enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
                 val bitmap = BitmapFactory.decodeStream(response?.body()?.byteStream())
@@ -159,12 +159,13 @@ object Session {
                 if (bitmap != null) {
                     callback.onCaptchaReceived(bitmap, null)
                 } else {
-                    getCaptcha(callback)
+                    getCaptcha(callback, context)
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                val errorMessage = Resources.getSystem().getString(R.string.captcha_network_error)
+                // TODO(aabulhaj): Separate Android code from Kotlin code.
+                val errorMessage = context.resources.getString(R.string.captcha_network_error)
                 callback.onCaptchaReceived(null, Exception(errorMessage))
             }
         })

@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), CaptchaCallback, LoginCallback {
         Session.hujiApiClient.loadLoginPage().enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
                 response?.body()?.close()
-                Session.getCaptcha(this@MainActivity)
+                Session.getCaptcha(this@MainActivity, this@MainActivity)
             }
 
             override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
@@ -80,7 +80,8 @@ class MainActivity : AppCompatActivity(), CaptchaCallback, LoginCallback {
         Session.login(this,
                 idText.text.toString(),
                 personalCodeText.text.toString(),
-                captchaText.text.toString())
+                captchaText.text.toString(),
+                this)
     }
 
     override fun onUserAuthenticated(authenticated: Boolean, e: Exception?,
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity(), CaptchaCallback, LoginCallback {
 
     private fun checkWrongCredentials(body: String) {
         // Load a new captcha.
-        Session.getCaptcha(this)
+        Session.getCaptcha(this, this)
 
         val start = "<font color=red>"
         val end = "</font>"
