@@ -64,9 +64,9 @@ class CampusShuttleTimesActivity : ToolbarActivity() {
         shuttleAdapter.addItem("7:50 AM")
         shuttleAdapter.addItem("9:55 AM")
         shuttleAdapter.addItem("11:55 AM")
-        shuttleAdapter.addItem("1:55 AM")
-        shuttleAdapter.addItem("3:55 AM")
-        shuttleAdapter.addItem("5:55 AM")
+        shuttleAdapter.addItem("1:55 PM")
+        shuttleAdapter.addItem("3:55 PM")
+        shuttleAdapter.addItem("5:55 PM")
         shuttleAdapter.notifyDataSetChanged()
     }
 
@@ -83,10 +83,10 @@ class CampusShuttleTimesActivity : ToolbarActivity() {
         shuttleAdapter.addItem("7:10 AM")
         shuttleAdapter.addItem("9:20 AM")
         shuttleAdapter.addItem("11:20 AM")
-        shuttleAdapter.addItem("1:20 AM")
-        shuttleAdapter.addItem("3:20 AM")
-        shuttleAdapter.addItem("5:20 AM")
-        shuttleAdapter.addItem("6:35 AM")
+        shuttleAdapter.addItem("1:20 PM")
+        shuttleAdapter.addItem("3:20 PM")
+        shuttleAdapter.addItem("5:20 PM")
+        shuttleAdapter.addItem("6:35 PM")
         shuttleAdapter.notifyDataSetChanged()
     }
 
