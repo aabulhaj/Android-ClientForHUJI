@@ -29,3 +29,7 @@ fun getCourseSyllabusURL(courseNumber: String, year: String): String {
 fun getStatisticsUrl(statisticsUrl: String): String {
     return Session.getSessionUrl("/stu/$statisticsUrl")
 }
+
+fun getExamURL(): String {
+    return Session.getSessionUrl("/stu/STU-STULUACHBCHINOT?yearno=2019")
+}

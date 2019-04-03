@@ -147,4 +147,9 @@
     <string name="moed_a">א</string>
     <string name="moed_b">ב</string>
     <string name="moed_c">ג</string>
+
+    <!-- ExamsFragment -->
+    <string name="add_to_calendar">הוסיף ללוח השנה</string>
+    <string name="room_or_special">האם ברצונך לשמור עם חדר הבחינה המיוחד?</string>
+    <string name="no_exams">אין בחינות</string>
 </resources>

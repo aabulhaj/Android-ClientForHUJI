@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="2dp">
+
+    <TextView
+        android:id="@+id/examCourseNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:text="80000"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/examCourseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/examCourseNumber"
+        android:layout_alignTop="@+id/examCourseNumber"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/examCourseNumber"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
+        android:text="Very long course name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_detail" />
+
+    <TextView
+        android:id="@+id/courseNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/examCourseNumber"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="4dp"
+        android:text="@string/moed"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_label" />
+
+    <TextView
+        android:id="@+id/examMoed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/courseNumber"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/courseNumber"
+        android:text="A"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_detail" />
+
+    <TextView
+        android:id="@+id/examTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/examMoed"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/examMoed"
+        android:text="@string/type"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_label" />
+
+    <TextView
+        android:id="@+id/examDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/examTypeLabel"
+        android:layout_alignEnd="@+id/examCourseName"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/examType"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:maxLines="1"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:text="11/11/11"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_detail" />
+
+    <TextView
+        android:id="@+id/examRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/courseNumber"
+        android:layout_alignStart="@+id/courseNumber"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:text="Room"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_detail" />
+
+    <TextView
+        android:id="@+id/examSpecialRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/examRoom"
+        android:layout_alignEnd="@+id/examCourseName"
+        android:layout_alignParentEnd="true"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:text="Special Room"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_detail" />
+
+    <TextView
+        android:id="@+id/examType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/examTypeLabel"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/examTypeLabel"
+        android:text="Final"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/list_view_detail" />
+
+</RelativeLayout>
