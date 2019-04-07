@@ -14,8 +14,11 @@ import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.callbacks.CaptchaCallback
 import com.aabulhaj.hujiapp.callbacks.LoginCallback
 import kotlinx.android.synthetic.main.activity_extend_session.*
-import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.HttpUrl
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ExtendSessionActivity : Activity(), View.OnClickListener, TextWatcher,
@@ -32,9 +35,26 @@ class ExtendSessionActivity : Activity(), View.OnClickListener, TextWatcher,
         extendButton.isEnabled = false
         extendButton.setOnClickListener(this)
 
-        Session.cleanCookieStore()
+        Session.initClient()
+        Session.destroySavedSession()
 
-        Session.getCaptcha(this, this)
+        // A call to HUJI site is necessary to fetch the cookies needed for the login request.
+        loadSession()
+    }
+
+    private fun loadSession() {
+        Session.hujiApiClient.loadLoginPage().enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+                response?.body()?.close()
+                Session.getCaptcha(this@ExtendSessionActivity, this@ExtendSessionActivity)
+            }
+
+            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                runOnUiThread {
+                    showAlertDialog(getString(R.string.login_network_error))
+                }
+            }
+        })
     }
 
     override fun onClick(view: View?) {

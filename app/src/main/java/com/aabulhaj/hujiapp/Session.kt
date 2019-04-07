@@ -48,7 +48,7 @@ object Session {
         loadLastSession()
     }
 
-    private fun initClient() {
+    fun initClient() {
         cookieManager = CookieManager()
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
 
@@ -67,10 +67,6 @@ object Session {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(HujiApi::class.java)
-    }
-
-    fun cleanCookieStore() {
-        cookieManager.cookieStore.removeAll()
     }
 
     fun prepareRequest(requestBuilder: Request.Builder): Request {
@@ -184,7 +180,7 @@ object Session {
         LocalBroadcastManager.getInstance(context).sendBroadcast(Intent(INTENT_APP_LOGGED_OUT))
     }
 
-    private fun destroySavedSession() {
+    fun destroySavedSession() {
         val keys = PreferencesUtil.getStringSet("cached_cookie_keys") ?: return
         val editor = HUJIApplication.preferences.edit()
 
