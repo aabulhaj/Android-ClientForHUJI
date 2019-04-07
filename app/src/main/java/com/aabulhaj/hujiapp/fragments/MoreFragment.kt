@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
+import com.aabulhaj.hujiapp.activities.CalendarActivity
 import com.aabulhaj.hujiapp.activities.CampusShuttleTimesActivity
 import com.aabulhaj.hujiapp.activities.ContactsActivity
 import com.aabulhaj.hujiapp.activities.LicensesActivity
@@ -27,7 +28,7 @@ class MoreFragment : PreferenceFragmentCompat(), RefreshableFragment {
 
         keyToMethodMap["contact_us"] = this::contactUs
         keyToMethodMap["licenses"] = start(LicensesActivity::class.java)
-//        keyToMethodMap["academic_calendar"] = start(CalendarActivity::class.java)
+        keyToMethodMap["academic_calendar"] = start(CalendarActivity::class.java)
         keyToMethodMap["contacts"] = start(ContactsActivity::class.java)
         keyToMethodMap["campus_shuttle_times"] = start(CampusShuttleTimesActivity::class.java)
     }

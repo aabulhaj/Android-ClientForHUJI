@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "start_date": "2016-10-01T00:00:00.000+0200",
+  "end_date": "2019-11-30T22:00:00.000+0200",
+  "events": [
+    {
+      "en_title": "Opening of academic year",
+      "he_title": "פתיחת שנת הלימודים",
+      "is_range": false,
+      "date": "2018-10-14T00:00:00.000+0200",
+      "normal_class_hours": true
+    },
+    {
+      "en_title": "Hanukah vacation",
+      "he_title": "חנוכה",
+      "is_range": false,
+      "date": "2018-12-09T00:00:00.000+0200",
+      "normal_class_hours": false
+    },
+    {
+      "en_title": "Christmas",
+      "he_title": "חג המולד",
+      "is_range": false,
+      "date": "2018-12-25T00:00:00.000+0200",
+      "normal_class_hours": false
+    },
+    {
+      "en_title": "End of first semester",
+      "he_title": "סיום סמסטר א'",
+      "is_range": false,
+      "date": "2019-01-18T18:00:00.000+0200",
+      "normal_class_hours": true
+    },
+    {
+      "en_title": "Opening of second semester",
+      "he_title": "פתיחת סמסטר ב'",
+      "is_range": false,
+      "date": "2019-03-10T18:00:00.000+0200",
+      "normal_class_hours": true
+    },
+    {
+      "en_title": "Purim vacation",
+      "he_title": "פורים ושושן פורים",
+      "is_range": true,
+      "start_date": "2019-03-21T00:00:00.000+0200",
+      "end_date": "2019-03-22T18:00:00.000+0200",
+      "normal_class_hours": false
+    },
+    {
+      "en_title": "Pesach vacation",
+      "he_title": "חופשת פסח",
+      "is_range": true,
+      "start_date": "2019-04-16T00:00:00.000+0200",
+      "end_date": "2019-04-28T18:00:00.000+0200",
+      "normal_class_hours": false
+    },
+    {
+      "en_title": "Eve of Memorial Day",
+      "he_title": "ערב יום הזיכרון",
+      "is_range": false,
+      "date": "2019-05-07T16:00:00.000+0200",
+      "normal_class_hours": false
+    },
+    {
+      "en_title": "Memorial Day and Independence Day",
+      "he_title": "יום הזיכרון ויום העצמאות",
+      "is_range": true,
+      "start_date": "2019-05-08T00:00:00.000+0200",
+      "end_date": "2019-05-09T18:00:00.000+0200",
+      "normal_class_hours": false
+    },
+    {
+      "en_title": "Students' Day",
+      "he_title": "יום הסטודנט",
+      "is_range": false,
+      "date": "2019-06-03T14:00:00.000+0200",
+      "normal_class_hours": false
+    },
+    {
+      "en_title": "Shavuot vacation",
+      "he_title": "חג השבועות",
+      "is_range": false,
+      "date": "2019-06-09T00:00:00.000+0200",
+      "normal_class_hours": false
+    },
+    {
+      "en_title": "End of second semester",
+      "he_title": "סיום סמסטר ב'",
+      "is_range": false,
+      "date": "2019-06-28T14:00:00.000+0200",
+      "normal_class_hours": true
+    },
+    {
+      "en_title": "Eid Al Adha",
+      "he_title": "עיד אל אדחא",
+      "is_range": false,
+      "date": "2019-08-12T00:00:00.000+0200",
+      "normal_class_hours": false
+    },
+    {
+      "en_title": "Opening of academic year",
+      "he_title": "פתיחת שנת הלימודים",
+      "is_range": false,
+      "date": "2019-10-19T00:00:00.000+0200",
+      "normal_class_hours": true
+    }
+  ]
+}

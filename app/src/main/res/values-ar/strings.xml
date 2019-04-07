@@ -148,6 +148,10 @@
     <string name="moed_b">ب</string>
     <string name="moed_c">ج</string>
 
+    <!-- CalendarActivity -->
+    <string name="all_day">يوم كامل</string>
+    <string name="ends">ينتهي</string>
+
     <!-- ExamsFragment -->
     <string name="add_to_calendar">اضافة الى التقويم</string>
     <string name="room_or_special">هل تريد الحفظ مع غرفة الامتحان الخاصة؟</string>

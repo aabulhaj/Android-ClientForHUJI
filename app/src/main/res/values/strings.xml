@@ -154,6 +154,9 @@
     <string name="room_or_special">Would you like to save with the special room?</string>
     <string name="no_exams">No exams</string>
 
+    <!-- CalendarActivity -->
+    <string name="all_day">all-day</string>
+    <string name="ends">Ends</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
