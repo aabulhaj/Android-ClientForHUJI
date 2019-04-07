@@ -36,17 +36,21 @@ object Session {
     const val EXTRA_NEEDS_EXTENDING = "needs_extending"
 
     var sessionExpired = false
-    val hujiApiClient: HujiApi
+    lateinit var hujiApiClient: HujiApi
 
-    private val cookieManager: CookieManager = CookieManager()
+    private lateinit var cookieManager: CookieManager
     private var sessionId: String? = null
     private var id: String? = null
     private var code: String? = null
 
     init {
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
-
+        initClient()
         loadLastSession()
+    }
+
+    private fun initClient() {
+        cookieManager = CookieManager()
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
 
         val okhttpClient = OkHttpClient.Builder()
                 .connectTimeout(120, TimeUnit.SECONDS)
@@ -72,6 +76,9 @@ object Session {
     fun prepareRequest(requestBuilder: Request.Builder): Request {
         var cookieString = ""
         for (cookie in cookieManager.cookieStore.cookies) {
+            if (cookie.name.startsWith("\$Path")) {
+                continue
+            }
             cookieString += cookie.name + "=" + cookie.value + "; "
         }
 
@@ -172,6 +179,7 @@ object Session {
     }
 
     fun logout(context: Context) {
+        initClient()
         destroySavedSession()
         LocalBroadcastManager.getInstance(context).sendBroadcast(Intent(INTENT_APP_LOGGED_OUT))
     }
