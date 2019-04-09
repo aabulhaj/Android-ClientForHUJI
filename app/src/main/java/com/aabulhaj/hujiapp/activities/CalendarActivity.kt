@@ -18,13 +18,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-private const val CAL_KEY = "Cal"
+private const val DATE_KEY = "Cal"
 
 class CalendarActivity : AppCompatActivity() {
     private var adapter: AcademicCalendarAdapter? = null
     private val events = ArrayList<Event>()
 
-    private lateinit var currCalendar: Calendar
+    private lateinit var currDate: Date
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,16 +42,16 @@ class CalendarActivity : AppCompatActivity() {
         calendarView.setLocale(TimeZone.getDefault(), Locale.US)
         calendarView.setFirstDayOfWeek(Calendar.SUNDAY)
 
-        currCalendar = Calendar.getInstance()
-        val savedCal = savedInstanceState?.getSerializable(CAL_KEY)
-        if (savedCal != null) {
-            currCalendar = savedCal as Calendar
+        currDate = Date()
+        val savedDate = savedInstanceState?.getSerializable(DATE_KEY)
+        if (savedDate != null) {
+            currDate = savedDate as Date
         }
 
-        val month = SimpleDateFormat("MMMM", Locale.getDefault()).format(currCalendar.time)
-        val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(currCalendar.time)
+        val month = SimpleDateFormat("MMMM", Locale.getDefault()).format(currDate.time)
+        val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(currDate.time)
 
-        calendarView.setCurrentDate(currCalendar.time)
+        calendarView.setCurrentDate(currDate)
 
         supportActionBar?.title = "$month $year"
 
@@ -77,7 +77,7 @@ class CalendarActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putSerializable(CAL_KEY, currCalendar)
+        outState?.putSerializable(DATE_KEY, currDate)
     }
 
     private fun parseEvents() {
@@ -173,6 +173,8 @@ class CalendarActivity : AppCompatActivity() {
 
                 val aco = events[0].data as AcademicCalendarObject
                 calendarEventsListView.setSelection(adapter!!.getItemPosition(aco))
+
+                currDate = dateClicked
             }
 
             override fun onMonthScroll(firstDayOfNewMonth: Date) {
@@ -181,8 +183,6 @@ class CalendarActivity : AppCompatActivity() {
                 val monthName = SimpleDateFormat("MMMM", Locale.getDefault()).format(cal.time)
                 val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(cal.time)
                 supportActionBar?.title = "$monthName $year"
-
-                currCalendar = cal
             }
         })
     }
