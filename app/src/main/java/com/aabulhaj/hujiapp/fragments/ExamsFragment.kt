@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.aabulhaj.hujiapp.Cache
 import com.aabulhaj.hujiapp.CourseTypeEnum
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.adapters.ExamAdapter
@@ -13,10 +14,13 @@ import com.aabulhaj.hujiapp.callbacks.StringCallback
 import com.aabulhaj.hujiapp.data.Course
 import com.aabulhaj.hujiapp.data.Exam
 import com.aabulhaj.hujiapp.data.getExamURL
+import com.google.gson.reflect.TypeToken
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Call
 
+
+private const val CACHE_FILENAME = "exams"
 
 class ExamsFragment : RefreshListFragment() {
     private var examsAdapter: ExamAdapter? = null
@@ -33,6 +37,7 @@ class ExamsFragment : RefreshListFragment() {
         if (examsAdapter == null) {
             examsAdapter = ExamAdapter(context!!)
             listAdapter = examsAdapter
+            loadCache()
             onRefresh()
         }
         return v
@@ -150,6 +155,8 @@ class ExamsFragment : RefreshListFragment() {
                         }
                         examsAdapter?.notifyDataSetChanged()
                     }
+                    Cache.cacheObject(context, exams, object : TypeToken<ArrayList<Exam>>() {}.type,
+                            CACHE_FILENAME)
                 }
                 stopListRefreshing()
             }
@@ -158,5 +165,18 @@ class ExamsFragment : RefreshListFragment() {
                 stopListRefreshing()
             }
         })
+    }
+
+    private fun loadCache() {
+        val data = Cache.loadCachedObject(context, object : TypeToken<ArrayList<Exam>>() {}.type,
+                CACHE_FILENAME) ?: return
+
+        val exams = data as ArrayList<Exam>
+
+        activity?.runOnUiThread {
+            examsAdapter?.clear()
+            examsAdapter?.addAll(exams)
+            examsAdapter?.notifyDataSetChanged()
+        }
     }
 }
