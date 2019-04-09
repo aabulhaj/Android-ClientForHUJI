@@ -19,7 +19,8 @@ object Cache {
             return
         }
         try {
-            writeString(context, name, GsonBuilder().create().toJson(`object`, token))
+            writeString(context, Session.getCacheKey(name),
+                    GsonBuilder().create().toJson(`object`, token))
         } catch (e: Exception) {
         }
 
@@ -27,7 +28,8 @@ object Cache {
 
     fun loadCachedObject(context: Context?, token: Type, fileName: String): Any? {
         if (context == null) return null
-        return GsonBuilder().create().fromJson(readString(context, fileName), token)
+        return GsonBuilder().create().fromJson(readString(context, Session.getCacheKey(fileName)),
+                token)
     }
 
     private fun readString(context: Context, fileName: String): String {
