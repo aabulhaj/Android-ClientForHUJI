@@ -169,7 +169,7 @@ class TableFragment : Fragment(), RefreshableFragment {
         timeTableDays.add(TimeTableDay(3))
         timeTableDays.add(TimeTableDay(4))
 
-        Session.callRequest(fun() = Session.hujiApiClient.getTimeTable(
+        Session.callRequest(fun() = Session.hujiApiClient.getResponseBody(
                 Session.getSessionUrl(timeTableUrl(currentSemester))),
                 activity!!, object : StringCallback {
             override fun onResponse(call: Call<ResponseBody>?, responseBody: String) {

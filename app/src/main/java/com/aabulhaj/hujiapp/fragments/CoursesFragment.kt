@@ -164,7 +164,7 @@ class CoursesFragment : RefreshListFragment() {
 
     override fun onRefresh() {
         setRefreshing(true)
-        Session.callRequest(fun() = Session.hujiApiClient.getCoursesList(coursesUrl(currentYear)),
+        Session.callRequest(fun() = Session.hujiApiClient.getResponseBody(coursesUrl(currentYear)),
                 activity!!, object : StringCallback {
             override fun onResponse(call: Call<ResponseBody>?, responseBody: String) {
                 val doc = Jsoup.parse(responseBody)

@@ -66,7 +66,7 @@ class ChartActivity : ToolbarActivity() {
         val grade = intent.getSerializableExtra("grade") as Grade
         title = grade.course?.name
 
-        Session.callRequest(fun() = Session.hujiApiClient.getStatistics(
+        Session.callRequest(fun() = Session.hujiApiClient.getResponseBody(
                 getStatisticsUrl(grade.statisticsURL!!)),
                 this, object : StringCallback {
             override fun onResponse(call: Call<ResponseBody>?, responseBody: String) {

@@ -20,14 +20,5 @@ interface HujiApi {
     fun loadLoginPage(): Call<ResponseBody>
 
     @GET
-    fun getTimeTable(@Url url: String): Call<ResponseBody>
-
-    @GET
-    fun getCoursesList(@Url url: String): Call<ResponseBody>
-
-    @GET
-    fun getStatistics(@Url url: String): Call<ResponseBody>
-
-    @GET
     fun getResponseBody(@Url url: String): Call<ResponseBody>
 }
