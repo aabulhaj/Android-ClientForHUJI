@@ -1,6 +1,5 @@
 package com.aabulhaj.hujiapp.data
 
-import android.content.Context
 import com.aabulhaj.hujiapp.CourseTypeEnum
 import com.aabulhaj.hujiapp.Moed
 import java.io.Serializable
@@ -43,7 +42,6 @@ class Exam : Serializable {
                     Integer.parseInt(dateComps[0]), hour, minute)
             date = Date(calendar.timeInMillis)
 
-            dateString = null
             timeString = null
         }
     }
