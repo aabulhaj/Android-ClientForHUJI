@@ -14,8 +14,8 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:subtitleTextColor="@color/white"
+        app:titleTextColor="@color/white" />
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
         android:id="@+id/calendarView"
