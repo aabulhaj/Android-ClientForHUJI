@@ -25,7 +25,7 @@ class Exam : Serializable {
         }
     }
 
-    fun createDate(context: Context) {
+    fun createDate() {
         if (dateString != null) {
             val dateComps = dateString!!.split("/")
             val calendar = Calendar.getInstance(Locale.getDefault())

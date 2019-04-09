@@ -287,7 +287,7 @@ class CoursesFragment : RefreshListFragment() {
                     }
                     coursesAdapter?.notifyDataSetChanged()
                 }
-                Cache.cacheObject(context, grades, object : TypeToken<ArrayList<Grade>>() {}.type,
+                Cache.cacheObject(activity, grades, object : TypeToken<ArrayList<Grade>>() {}.type,
                         CACHE_FILENAME + currentYear)
                 stopListRefreshing()
             }
@@ -320,7 +320,7 @@ class CoursesFragment : RefreshListFragment() {
             } else {
                 url = getCourseSyllabusURL(grade.course!!.number!!, currentYear!!)
             }
-            startChromeTab(url, context!!)
+            startChromeTab(url, activity!!)
         }
         builder.show()
     }
@@ -401,11 +401,11 @@ class CoursesFragment : RefreshListFragment() {
     }
 
     private fun loadCache() {
-        val data = Cache.loadCachedObject(context, object : TypeToken<ArrayList<Grade>>() {}.type,
+        val data = Cache.loadCachedObject(activity, object : TypeToken<ArrayList<Grade>>() {}.type,
                 CACHE_FILENAME + currentYear) ?: return
 
-        val yData = Cache.loadCachedObject(context, object : TypeToken<ArrayList<String>>() {}.type,
-                YEARS_CACHE_FILENAME) ?: return
+        val yData = Cache.loadCachedObject(activity,
+                object : TypeToken<ArrayList<String>>() {}.type, YEARS_CACHE_FILENAME) ?: return
 
         val grades = data as ArrayList<Grade>
         val yearsData = yData as ArrayList<String>

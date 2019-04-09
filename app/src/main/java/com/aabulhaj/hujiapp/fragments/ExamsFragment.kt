@@ -143,7 +143,7 @@ class ExamsFragment : RefreshListFragment() {
                             }
                             if (iRow > 0) {
                                 exam.course!!.year = courseYear.toInt()
-                                exam.createDate(context!!)
+                                exam.createDate()
                                 exams.add(exam)
                             }
                         }
@@ -155,8 +155,8 @@ class ExamsFragment : RefreshListFragment() {
                         }
                         examsAdapter?.notifyDataSetChanged()
                     }
-                    Cache.cacheObject(context, exams, object : TypeToken<ArrayList<Exam>>() {}.type,
-                            CACHE_FILENAME)
+                    Cache.cacheObject(activity, exams,
+                            object : TypeToken<ArrayList<Exam>>() {}.type, CACHE_FILENAME)
                 }
                 stopListRefreshing()
             }
@@ -168,7 +168,7 @@ class ExamsFragment : RefreshListFragment() {
     }
 
     private fun loadCache() {
-        val data = Cache.loadCachedObject(context, object : TypeToken<ArrayList<Exam>>() {}.type,
+        val data = Cache.loadCachedObject(activity, object : TypeToken<ArrayList<Exam>>() {}.type,
                 CACHE_FILENAME) ?: return
 
         val exams = data as ArrayList<Exam>
