@@ -11,10 +11,11 @@ import de.halfbit.pinnedsection.PinnedSectionListView
 import java.util.*
 
 
+private const val TYPE_ITEM = 0
+private const val TYPE_SEPARATOR = 1
+
 class PinnedSectionsAdapter(context: Context) : BaseAdapter(),
         PinnedSectionListView.PinnedSectionListAdapter {
-    private val TYPE_ITEM = 0
-    private val TYPE_SEPARATOR = 1
 
     private val data = ArrayList<String>()
     private val sectionHeader = TreeSet<Int>()
@@ -82,7 +83,7 @@ class PinnedSectionsAdapter(context: Context) : BaseAdapter(),
         return viewType == TYPE_SEPARATOR
     }
 
-    class ViewHolder {
+    private class ViewHolder {
         var textView: TextView? = null
     }
 }

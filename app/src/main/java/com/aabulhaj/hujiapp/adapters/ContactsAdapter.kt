@@ -11,6 +11,10 @@ import com.aabulhaj.hujiapp.R
 import de.halfbit.pinnedsection.PinnedSectionListView
 
 
+private const val TYPE_ITEM = 0
+private const val TYPE_SEPARATOR = 1
+private const val TYPE_EMAIL = 2
+
 class ContactsAdapter(context: Context,
                       dataSource: ArrayList<HashMap<String, String>>,
                       resource: Int,
@@ -18,15 +22,14 @@ class ContactsAdapter(context: Context,
                       to: IntArray) :
         SimpleAdapter(context, dataSource, resource, from, to),
         PinnedSectionListView.PinnedSectionListAdapter {
-    private val TYPE_ITEM = 0
-    private val TYPE_SEPARATOR = 1
-    private val TYPE_EMAIL = 2
 
     private val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
         val rowType = getItemViewType(position)
+
+        val viewHolder: ViewHolder
 
         if (view == null) {
             when (rowType) {
@@ -41,16 +44,19 @@ class ContactsAdapter(context: Context,
                     view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
                 }
             }
+            viewHolder = ViewHolder(view)
+            view?.tag = viewHolder
+        } else {
+            viewHolder = view.tag as ViewHolder
         }
 
         val title = (getItem(position) as HashMap<String, String>)["title"].toString()
         val sub = (getItem(position) as HashMap<String, String>)["sub"].toString()
 
-        val textView1 = view?.findViewById<TextView>(android.R.id.text1)
-        textView1?.text = title
+        viewHolder.textView1?.text = title
         when (rowType) {
-            TYPE_ITEM -> view?.findViewById<TextView>(android.R.id.text2)?.text = sub
-            TYPE_EMAIL -> textView1?.setTextColor(Color.BLACK)
+            TYPE_ITEM -> viewHolder.textView2?.text = sub
+            TYPE_EMAIL -> viewHolder.textView1?.setTextColor(Color.BLACK)
         }
 
         return view!!
@@ -71,5 +77,10 @@ class ContactsAdapter(context: Context,
 
     override fun isItemViewTypePinned(viewType: Int): Boolean {
         return viewType == TYPE_SEPARATOR
+    }
+
+    private class ViewHolder(view: View?) {
+        val textView1: TextView? = view?.findViewById(android.R.id.text1)
+        val textView2: TextView? = view?.findViewById(android.R.id.text1)
     }
 }
