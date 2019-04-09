@@ -156,4 +156,9 @@
     <string name="add_to_calendar">اضافة الى التقويم</string>
     <string name="room_or_special">هل تريد الحفظ مع غرفة الامتحان الخاصة؟</string>
     <string name="no_exams">لا يوجد امتحانات</string>
+
+    <!-- NoteBooksFragment -->
+    <string name="no_notebooks">لا يوجد دفاتر امتحانات مصورة</string>
+    <string name="download">تم تحميل %1$.01f %2$s</string>
+    <string name="date">تاريخ: </string>
 </resources>

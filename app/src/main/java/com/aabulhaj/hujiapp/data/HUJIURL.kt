@@ -33,3 +33,11 @@ fun getStatisticsUrl(statisticsUrl: String): String {
 fun getExamURL(): String {
     return Session.getSessionUrl("/stu/STU-STULUACHBCHINOT?yearno=2019")
 }
+
+fun getNoteBooksURL(): String {
+    return Session.getSessionUrl("/stu/STU-STUNOTEBOOKSSTART")
+}
+
+fun getNoteBooksURL(url: String): String {
+    return Session.getSessionUrl("/stu/$url")
+}
