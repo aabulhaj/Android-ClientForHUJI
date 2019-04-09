@@ -17,7 +17,6 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class CalendarActivity : AppCompatActivity() {
     private var adapter: AcademicCalendarAdapter? = null
     private val events = ArrayList<Event>()
@@ -180,5 +179,4 @@ class CalendarActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }
