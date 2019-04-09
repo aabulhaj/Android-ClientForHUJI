@@ -17,9 +17,14 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
+
+private const val CAL_KEY = "Cal"
+
 class CalendarActivity : AppCompatActivity() {
     private var adapter: AcademicCalendarAdapter? = null
     private val events = ArrayList<Event>()
+
+    private lateinit var currCalendar: Calendar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,21 +36,26 @@ class CalendarActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
 
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 0f
 
-        val cal = Calendar.getInstance()
+        calendarView.setLocale(TimeZone.getDefault(), Locale.US)
+        calendarView.setFirstDayOfWeek(Calendar.SUNDAY)
 
-        val month = SimpleDateFormat("MMMM", Locale.getDefault()).format(cal.time)
-        val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(cal.time)
+        currCalendar = Calendar.getInstance()
+        val savedCal = savedInstanceState?.getSerializable(CAL_KEY)
+        if (savedCal != null) {
+            currCalendar = savedCal as Calendar
+        }
+
+        val month = SimpleDateFormat("MMMM", Locale.getDefault()).format(currCalendar.time)
+        val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(currCalendar.time)
+
+        calendarView.setCurrentDate(currCalendar.time)
 
         supportActionBar?.title = "$month $year"
 
         adapter = AcademicCalendarAdapter(this)
-
-        calendarView.setLocale(TimeZone.getDefault(), Locale.US)
-        calendarView.setFirstDayOfWeek(Calendar.SUNDAY)
 
         parseEvents()
 
@@ -63,6 +73,11 @@ class CalendarActivity : AppCompatActivity() {
             val yearText = SimpleDateFormat("yyyy", Locale.getDefault()).format(c.time)
             supportActionBar?.title = "$monthText $yearText"
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putSerializable(CAL_KEY, currCalendar)
     }
 
     private fun parseEvents() {
@@ -166,6 +181,8 @@ class CalendarActivity : AppCompatActivity() {
                 val monthName = SimpleDateFormat("MMMM", Locale.getDefault()).format(cal.time)
                 val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(cal.time)
                 supportActionBar?.title = "$monthName $year"
+
+                currCalendar = cal
             }
         })
     }
