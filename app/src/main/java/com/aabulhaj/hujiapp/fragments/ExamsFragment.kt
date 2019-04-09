@@ -2,10 +2,11 @@ package com.aabulhaj.hujiapp.fragments
 
 import Session
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import com.aabulhaj.hujiapp.CourseTypeEnum
-import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.adapters.ExamAdapter
 import com.aabulhaj.hujiapp.callbacks.StringCallback
@@ -24,14 +25,6 @@ class ExamsFragment : RefreshListFragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.exam_menu, menu)
-
-        MenuTint.tint(menu)
-    }
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
