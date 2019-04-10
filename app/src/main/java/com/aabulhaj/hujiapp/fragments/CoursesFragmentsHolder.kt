@@ -1,6 +1,7 @@
 package com.aabulhaj.hujiapp.fragments
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
@@ -31,16 +32,20 @@ class CoursesFragmentsHolder : Fragment(), RefreshableFragment {
         rtlViewPager?.adapter = MyAdapter(childFragmentManager)
         view.tabs.setupWithViewPager(rtlViewPager)
 
-        rtlViewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float,
-                                        positionOffsetPixels: Int) {
+        view.tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.position != null) {
+                    refreshIfNeeded(tab.position)
+                }
             }
 
-            override fun onPageSelected(position: Int) {
-                refreshIfNeeded(position)
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                if (tab?.position != null) {
+                    refreshIfNeeded(tab.position)
+                }
             }
 
-            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
         })
 
         return view
