@@ -162,4 +162,24 @@
     <string name="no_notebooks">No notebooks</string>
     <string name="download">%1$.01f %2$s downloaded</string>
     <string name="date">Date: </string>
+
+    <!-- MapFragment -->
+    <string name="building">Building</string>
+    <string name="computer_lab">Computer Lab</string>
+    <string name="library">Library</string>
+    <string name="resturant">Restaurant</string>
+    <string name="sport_center">Sport Center</string>
+    <string name="cafe">Café</string>
+    <string name="closed">Closed</string>
+    <string name="done">Done</string>
+
+    <string name="places">Places</string>
+    <string name="buildings">Buildings</string>
+    <string name="computer_labs">Computer Labs</string>
+    <string name="libraries">Libraries</string>
+    <string name="resturants">Restaurants</string>
+    <string name="cafes">Cafés</string>
+    <string name="sport_centers">Sport Centers</string>
+
+    <string name="categories">Categories</string>
 </resources>

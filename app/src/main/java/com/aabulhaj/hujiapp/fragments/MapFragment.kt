@@ -1,67 +1,172 @@
 package com.aabulhaj.hujiapp.fragments
 
-import android.content.Context
-import android.net.Uri
+import Session
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
+import android.view.*
+import com.aabulhaj.hujiapp.HUJIPlaceUtil
 import com.aabulhaj.hujiapp.R
+import com.aabulhaj.hujiapp.activities.PLACES_CHECKED_POS_TAGS
+import com.aabulhaj.hujiapp.activities.PlacesDialogActivity
+import com.aabulhaj.hujiapp.data.HUJIPlace
+import com.aabulhaj.hujiapp.util.PreferencesUtil
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import kotlinx.android.synthetic.main.fragment_map.*
+import kotlinx.android.synthetic.main.fragment_map.view.*
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MapFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MapFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MapFragment : Fragment(), RefreshableFragment {
+private const val CATEGORIES_CODE = 545
+private const val TAB_KEY = "tab_map_sel"
 
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
+class MapFragment : BaseMapFragment(), RefreshableFragment {
+    private val allPlaces = ArrayList<HUJIPlace>()
+
+    private var checkedTab: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
-        }
+        setHasOptionsMenu(true)
+
+        val scopus = HUJIPlaceUtil.getPlacesOnCampus(R.raw.scopus, activity!!)
+        val edmond = HUJIPlaceUtil.getPlacesOnCampus(R.raw.edmond, activity!!)
+
+        scopus.sort()
+        edmond.sort()
+
+        allPlaces.addAll(scopus)
+        allPlaces.addAll(edmond)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map, container, false)
+        val v = inflater.inflate(R.layout.fragment_map, container, false)
+        super.setView(v)
+        super.onCreateView(inflater, container, savedInstanceState)
+
+        v.mapTabLayout.addTab(v.mapTabLayout.newTab().setText(getString(R.string.emond_safra)))
+        v.mapTabLayout.addTab(v.mapTabLayout.newTab().setText(getString(R.string.mount_scopus)))
+
+        v.mapTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.position == 0) {
+                    PreferencesUtil.putInt(Session.getCacheKey(TAB_KEY), 0)
+                    checkedTab = 0
+                    handleEdmondSafra(true)
+                } else {
+                    PreferencesUtil.putInt(Session.getCacheKey(TAB_KEY), 1)
+                    checkedTab = 1
+                    handleMountScopus(true)
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                if (tab?.position == 0) {
+                    PreferencesUtil.putInt(Session.getCacheKey(TAB_KEY), 0)
+                    checkedTab = 0
+                    handleEdmondSafra(true)
+                } else {
+                    PreferencesUtil.putInt(Session.getCacheKey(TAB_KEY), 1)
+                    checkedTab = 1
+                    handleMountScopus(true)
+                }
+            }
+        })
+
+        return v
     }
 
-    companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.mapCategories) {
+            startActivityForResult(Intent(activity, PlacesDialogActivity::class.java),
+                    CATEGORIES_CODE)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MapFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): MapFragment {
-            val fragment = MapFragment()
-            val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
-            fragment.arguments = args
-            return fragment
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.map_fragment_menu, menu)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == CATEGORIES_CODE && resultCode == Activity.RESULT_OK) {
+            setOnMap(data)
         }
     }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        super.onMapReady(googleMap)
+
+        setOnMap(null)
+        checkedTab = PreferencesUtil.getInt(Session.getCacheKey(TAB_KEY), 0)
+
+        mapTabLayout?.getTabAt(checkedTab)?.select()
+
+        if (checkedTab == 0) {
+            handleEdmondSafra(false)
+        } else {
+            handleMountScopus(false)
+        }
+    }
+
+    private fun handleMountScopus(animate: Boolean) {
+        if (animate) {
+            googleMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                    LatLng(31.7931538, 35.2436038), 15f))
+        } else {
+            googleMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                    LatLng(31.7931538, 35.2436038), 15f))
+        }
+    }
+
+    private fun handleEdmondSafra(animate: Boolean) {
+        if (animate) {
+            googleMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                    LatLng(31.774346, 35.198012), 15f))
+        } else {
+            googleMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                    LatLng(31.774346, 35.198012), 15f))
+        }
+
+    }
+
+    private fun setOnMap(data: Intent?) {
+        val places: BooleanArray?
+        if (data != null) {
+            places = data.getBooleanArrayExtra(PLACES_CHECKED_POS_TAGS)
+        } else {
+            places = PlacesDialogActivity.getCachedArray(activity!!)
+        }
+
+        googleMap?.clear()
+        if (places != null) {
+            for (place in HUJIPlaceUtil.getPlacesOnCampus(R.raw.huji_places, activity!!)) {
+                if (places[place.type.getValue()]) {
+                    addPlaceToMapWithColor(place, false, false)
+                }
+            }
+        }
+    }
+
+    private fun setHUJIPlaceOnMap(hujiPlace: String) {
+        for (place in HUJIPlaceUtil.getPlacesOnCampus(R.raw.huji_places, activity!!)) {
+            if (place.name!!.trim { it <= ' ' }.toLowerCase()
+                    == hujiPlace.trim { it <= ' ' }.toLowerCase()) {
+                addPlaceToMapWithColor(place, true, true)
+                return
+            }
+        }
+    }
+
 
     override fun refresh() {
 
@@ -70,4 +175,4 @@ class MapFragment : Fragment(), RefreshableFragment {
     override fun getFragment(): Fragment {
         return this
     }
-}// Required empty public constructor
+}

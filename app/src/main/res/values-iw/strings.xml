@@ -161,4 +161,24 @@
     <string name="no_notebooks">אין מחברות סרוקות</string>
     <string name="download">%1$.01f %2$s הורדו</string>
     <string name="date">תאריך: </string>
+
+    <!-- MapFragment -->
+    <string name="building">בניין</string>
+    <string name="computer_lab">מעבדת מחשב</string>
+    <string name="library">ספרייה</string>
+    <string name="resturant">מסעדה</string>
+    <string name="sport_center">מרכז ספורט</string>
+    <string name="cafe">כפה</string>
+    <string name="closed">סגור</string>
+    <string name="done">סיום</string>
+
+    <string name="places">מקומות</string>
+    <string name="buildings">בניינים</string>
+    <string name="computer_labs">מעבדות מחשבים</string>
+    <string name="libraries">ספריות</string>
+    <string name="resturants">מסעדות</string>
+    <string name="cafes">קפה</string>
+    <string name="sport_centers">מרכזי ספורט</string>
+
+    <string name="categories">קטגוריות</string>
 </resources>

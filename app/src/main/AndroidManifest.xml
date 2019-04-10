@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".HUJIApplication"
@@ -13,6 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBarTranslucent">
+
+        <!-- Replace with your own key. -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity android:name=".activities.StreetViewActivity" />
+        <activity
+            android:name=".activities.PlacesDialogActivity"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
         <activity android:name=".activities.CalendarActivity" />
         <activity
             android:name=".activities.ExtraGradesActivity"

@@ -161,4 +161,24 @@
     <string name="no_notebooks">لا يوجد دفاتر امتحانات مصورة</string>
     <string name="download">تم تحميل %1$.01f %2$s</string>
     <string name="date">تاريخ: </string>
+
+    <!-- MapFragment -->
+    <string name="building">بناء</string>
+    <string name="computer_lab">مكتبة</string>
+    <string name="library">Library</string>
+    <string name="resturant">مطعم</string>
+    <string name="sport_center">مركز رياضي</string>
+    <string name="cafe">مقهى</string>
+    <string name="closed">مغلق</string>
+    <string name="done">تم</string>
+
+    <string name="places">اماكن</string>
+    <string name="buildings">بنايات</string>
+    <string name="computer_labs">مختبرات الحاسوب</string>
+    <string name="libraries">مكاتب</string>
+    <string name="resturants">مطاعم</string>
+    <string name="cafes">مقاهي</string>
+    <string name="sport_centers">مراكز رياضة</string>
+
+    <string name="categories">فئات</string>
 </resources>
