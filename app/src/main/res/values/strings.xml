@@ -182,4 +182,10 @@
     <string name="sport_centers">Sport Centers</string>
 
     <string name="categories">Categories</string>
+
+    <!-- SearchPlacesActivity -->
+    <string name="search">Search</string>
+    <string name="meters">m</string>
+    <string name="kilo_meters">km</string>
+    <string name="opentwentyfour">Open 24/7</string>
 </resources>

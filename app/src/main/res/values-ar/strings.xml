@@ -181,4 +181,10 @@
     <string name="sport_centers">مراكز رياضة</string>
 
     <string name="categories">فئات</string>
+
+    <!-- SearchPlacesActivity -->
+    <string name="search">بحث</string>
+    <string name="meters">م</string>
+    <string name="kilo_meters">كم</string>
+    <string name="opentwentyfour">مفتوح 24/7</string>
 </resources>

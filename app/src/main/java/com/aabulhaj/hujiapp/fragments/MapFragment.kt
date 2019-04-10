@@ -11,6 +11,7 @@ import com.aabulhaj.hujiapp.HUJIPlaceUtil
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.activities.PLACES_CHECKED_POS_TAGS
 import com.aabulhaj.hujiapp.activities.PlacesDialogActivity
+import com.aabulhaj.hujiapp.activities.SearchPlacesActivity
 import com.aabulhaj.hujiapp.data.HUJIPlace
 import com.aabulhaj.hujiapp.util.PreferencesUtil
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -85,6 +86,9 @@ class MapFragment : BaseMapFragment(), RefreshableFragment {
         if (item?.itemId == R.id.mapCategories) {
             startActivityForResult(Intent(activity, PlacesDialogActivity::class.java),
                     CATEGORIES_CODE)
+            return true
+        } else if (item?.itemId == R.id.mapPlacesMenuButton) {
+            startActivity(Intent(activity, SearchPlacesActivity::class.java))
             return true
         }
         return super.onOptionsItemSelected(item)

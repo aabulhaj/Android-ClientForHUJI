@@ -181,4 +181,10 @@
     <string name="sport_centers">מרכזי ספורט</string>
 
     <string name="categories">קטגוריות</string>
+
+    <!-- SearchPlacesActivity -->
+    <string name="search">חפש</string>
+    <string name="meters">מטר</string>
+    <string name="kilo_meters">ק"מ</string>
+    <string name="opentwentyfour">פתוח 24/7</string>
 </resources>

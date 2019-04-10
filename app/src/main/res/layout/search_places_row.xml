@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/placeNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/linearLayout"
+        android:text="Building Name"
+        android:textColor="#000000" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/numberOfKm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="125"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/distanceUnitTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="km"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/openClosed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/placeNameTextView"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/hoursTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/placeNameTextView"
+        android:layout_alignTop="@+id/openClosed"
+        android:layout_toEndOf="@+id/openClosed"
+        android:text="24/7" />
+
+    <TextView
+        android:id="@+id/dotSeparatorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/placeNameTextView"
+        android:layout_alignBottom="@+id/hoursTextView"
+        android:layout_toEndOf="@+id/hoursTextView"
+        android:text="." />
+
+    <TextView
+        android:id="@+id/buildingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/placeNameTextView"
+        android:layout_alignBottom="@+id/dotSeparatorTextView"
+        android:layout_toEndOf="@+id/dotSeparatorTextView" />
+
+    <TextView
+        android:id="@+id/buildingTypeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/placeNameTextView"
+        android:layout_alignBottom="@+id/buildingTextView"
+        android:layout_toEndOf="@+id/buildingTextView"
+        android:text="building" />
+
+</RelativeLayout>
