@@ -1,18 +1,20 @@
 package com.aabulhaj.hujiapp.fragments
 
+import Session
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.aabulhaj.hujiapp.R
+import com.aabulhaj.hujiapp.util.PreferencesUtil
 import com.booking.rtlviewpager.RtlViewPager
 import kotlinx.android.synthetic.main.fragment_courses_fragments_holder.view.*
 
+private const val LAST_SELECTED_TAB_KEY = "last_selected_Tab_key"
 
 class CoursesFragmentsHolder : Fragment(), RefreshableFragment {
     private var coursesFragment: CoursesFragment? = null
@@ -32,9 +34,13 @@ class CoursesFragmentsHolder : Fragment(), RefreshableFragment {
         rtlViewPager?.adapter = MyAdapter(childFragmentManager)
         view.tabs.setupWithViewPager(rtlViewPager)
 
-        view.tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+        val lastSelectedTab = PreferencesUtil.getInt(Session.getCacheKey(LAST_SELECTED_TAB_KEY), 0)
+        view.tabs.getTabAt(lastSelectedTab)?.select()
+
+        view.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab?.position != null) {
+                    PreferencesUtil.putInt(Session.getCacheKey(LAST_SELECTED_TAB_KEY), tab.position)
                     refreshIfNeeded(tab.position)
                 }
             }
