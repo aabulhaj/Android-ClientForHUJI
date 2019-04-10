@@ -202,83 +202,107 @@ class CoursesFragment : RefreshListFragment() {
                 var sum = 0f
                 var sumOfCredits = 0f
                 val grades = ArrayList<Grade>()
-                val table = doc.getElementsByAttributeValue("cellpadding", "2").first()
-                        .select("tbody").first().select("tr").drop(2)
+                val tables = doc.getElementsByAttributeValue("cellpadding", "2")
 
-                val indexOfStatistics = 0
-                val indexOfExtraGrade = 1
-                val indexOfTypeOfGrade = 2
-                val indexOfGrade = 3
-                val indexOfCreditPoints = 4
-                val indexOfCourseName = 5
-                val indexOfCourseNubmer = 6
+                for (table in tables) {
+                    if (table.attr("cellspacing") != "1") {
+                        continue
+                    }
 
-                for (row in table) {
-                    val rowCols = row.select("td")
-                    val grade = Grade()
-                    grade.course = Course()
+                    var indexOfStatistics = 0
+                    var indexOfExtraGrade = 0
+                    var indexOfTypeOfGrade = 0
+                    var indexOfGrade = 0
+                    var indexOfCreditPoints = 0
+                    var indexOfCourseName = 0
+                    var indexOfCourseNubmer = 0
 
-                    for (i in 0 until rowCols.size) {
-                        val col = rowCols[i]
-                        val colText = col.text()
+                    for ((iRow, row) in table.getElementsByTag("tr").withIndex()) {
+                        val rowCols = row.select("td")
+                        val grade = Grade()
+                        grade.course = Course()
 
-                        when (i) {
-                            indexOfStatistics -> {
-                                val element = col.getElementsByTag("a").first()
-                                grade.statisticsURL = element?.attr("href")
-                            }
-                            indexOfExtraGrade -> {
-                                val element = col.children().first()
-                                if (element?.attr("href") == null) {
-                                    grade.extraGradesURL = null
-                                } else {
-                                    grade.extraGradesURL = Session.getHujiSessionUrl("/stu/") +
-                                            element.attr("href")
+                        for ((iCol, col) in rowCols.withIndex()) {
+                            val colText = col.text()
+
+                            if (iRow == 0) {
+                                if (colText == "סטטיסטיקות") {
+                                    indexOfStatistics = iCol
+                                } else if (colText == "ציונים נוספים") {
+                                    indexOfExtraGrade = iCol
+                                } else if (colText == "סוג ציון") {
+                                    indexOfTypeOfGrade = iCol
+                                } else if (colText == "ציון") {
+                                    indexOfGrade = iCol
+                                } else if (colText == "נקודות זכות") {
+                                    indexOfCreditPoints = iCol
+                                } else if (colText == "קורס") {
+                                    indexOfCourseName = iCol
+                                } else if (colText == "סמל קורס") {
+                                    indexOfCourseNubmer = iCol
                                 }
+                                continue
                             }
-                            indexOfTypeOfGrade -> {
-                                grade.gradeType = CourseTypeEnum.getCourseTypeEnum(colText)
-                            }
-                            indexOfGrade -> {
-                                if (colText != null && colText.isNotEmpty()) {
-                                    if (colText == "עבר") {
-                                        grade.grade = Grade.PASS
-                                    } else if (colText == "נכשל") {
-                                        grade.grade = Grade.FAIL
-                                    } else if (colText == "פטור") {
-                                        grade.grade = Grade.EXEMPT
+
+                            when (iCol) {
+                                indexOfStatistics -> {
+                                    val element = col.getElementsByTag("a").first()
+                                    grade.statisticsURL = element?.attr("href")
+                                }
+                                indexOfExtraGrade -> {
+                                    val element = col.children().first()
+                                    if (element?.attr("href") == null) {
+                                        grade.extraGradesURL = null
                                     } else {
-                                        try {
-                                            grade.grade = if (colText.isNotEmpty())
-                                                Integer.parseInt(colText)
-                                            else -1
-                                        } catch (e: Exception) {
+                                        grade.extraGradesURL = Session.getHujiSessionUrl("/stu/") +
+                                                element.attr("href")
+                                    }
+                                }
+                                indexOfTypeOfGrade -> {
+                                    grade.gradeType = CourseTypeEnum.getCourseTypeEnum(colText)
+                                }
+                                indexOfGrade -> {
+                                    if (colText != null && colText.isNotEmpty()) {
+                                        if (colText == "עבר") {
+                                            grade.grade = Grade.PASS
+                                        } else if (colText == "נכשל") {
+                                            grade.grade = Grade.FAIL
+                                        } else if (colText == "פטור") {
+                                            grade.grade = Grade.EXEMPT
+                                        } else {
+                                            try {
+                                                grade.grade = if (colText.isNotEmpty())
+                                                    Integer.parseInt(colText)
+                                                else -1
+                                            } catch (e: Exception) {
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            indexOfCreditPoints -> {
-                                if (colText == null || colText == ".00") {
-                                    grade.course?.creditPoints = "0.00"
-                                } else {
-                                    grade.course?.creditPoints = colText
+                                indexOfCreditPoints -> {
+                                    if (colText == null || colText == ".00") {
+                                        grade.course?.creditPoints = "0.00"
+                                    } else {
+                                        grade.course?.creditPoints = colText
+                                    }
+                                }
+                                indexOfCourseName -> grade.course?.name = colText
+                                indexOfCourseNubmer -> {
+                                    grade.course?.number = col.children().first().text()
                                 }
                             }
-                            indexOfCourseName -> grade.course?.name = colText
-                            indexOfCourseNubmer -> {
-                                grade.course?.number = col.children().first().text()
-                            }
+                        }
+                        if (grade.grade > 0 && grade.course!!.creditPoints!!.toFloat() > 0
+                                && (grade.gradeType == CourseTypeEnum.FINAL
+                                        || grade.gradeType == CourseTypeEnum.CALCULATED)) {
+                            sum += grade.grade * grade.course?.creditPoints!!.toFloat()
+                            sumOfCredits += grade.course?.creditPoints!!.toFloat()
+                        }
+                        if (iRow > 0) {
+                            grades.add(grade)
                         }
                     }
-                    if (grade.grade > 0 && grade.course!!.creditPoints!!.toFloat() > 0
-                            && (grade.gradeType == CourseTypeEnum.FINAL
-                                    || grade.gradeType == CourseTypeEnum.CALCULATED)) {
-                        sum += grade.grade * grade.course?.creditPoints!!.toFloat()
-                        sumOfCredits += grade.course?.creditPoints!!.toFloat()
-                    }
-                    grades.add(grade)
                 }
-
                 activity?.runOnUiThread {
                     yearButton?.title = currentYear
                     coursesAdapter?.clear()
