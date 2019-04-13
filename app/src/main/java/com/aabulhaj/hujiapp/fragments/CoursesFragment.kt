@@ -211,7 +211,7 @@ class CoursesFragment : RefreshListFragment() {
 
                 Cache.cacheObject(context, allYears,
                         object : TypeToken<ArrayList<String>>() {}.type,
-                        YEARS_CACHE_FILENAME)
+                        Session.getCacheKey(YEARS_CACHE_FILENAME))
 
                 // Get courses.
                 var sum = 0f
@@ -336,11 +336,11 @@ class CoursesFragment : RefreshListFragment() {
                     totalAvgFooterTextView?.text = getString(R.string.cum_grade_average, totalAvg)
                 }
                 Cache.cacheObject(activity, grades, object : TypeToken<ArrayList<Grade>>() {}.type,
-                        CACHE_FILENAME + currentYear)
+                        Session.getCacheKey(CACHE_FILENAME + currentYear))
                 Cache.cacheObject(activity, avg, object : TypeToken<Float>() {}.type,
-                        AVG_CACHE + currentYear)
+                        Session.getCacheKey(AVG_CACHE + currentYear))
                 Cache.cacheObject(activity, totalAvg, object : TypeToken<Float>() {}.type,
-                        TOTAL_AVG_CACHE + currentYear)
+                        Session.getCacheKey(TOTAL_AVG_CACHE + currentYear))
                 stopListRefreshing()
             }
 
@@ -454,16 +454,17 @@ class CoursesFragment : RefreshListFragment() {
 
     private fun loadCache() {
         val data = Cache.loadCachedObject(activity, object : TypeToken<ArrayList<Grade>>() {}.type,
-                CACHE_FILENAME + currentYear) ?: return
+                Session.getCacheKey(CACHE_FILENAME + currentYear)) ?: return
 
         val yData = Cache.loadCachedObject(activity,
-                object : TypeToken<ArrayList<String>>() {}.type, YEARS_CACHE_FILENAME) ?: return
+                object : TypeToken<ArrayList<String>>() {}.type,
+                Session.getCacheKey(YEARS_CACHE_FILENAME)) ?: return
 
         val avg = Cache.loadCachedObject(activity, object : TypeToken<Float>() {}.type,
-                AVG_CACHE + currentYear) ?: return
+                Session.getCacheKey(AVG_CACHE + currentYear)) ?: return
 
         val totalAvg = Cache.loadCachedObject(activity, object : TypeToken<Float>() {}.type,
-                TOTAL_AVG_CACHE + currentYear) ?: return
+                Session.getCacheKey(TOTAL_AVG_CACHE + currentYear)) ?: return
 
         val grades = data as ArrayList<Grade>
         val yearsData = yData as ArrayList<String>

@@ -260,7 +260,7 @@ class TableFragment : Fragment(), RefreshableFragment {
 
                 Cache.cacheObject(activity, timeTableDays,
                         object : TypeToken<ArrayList<TimeTableDay>>() {}.type,
-                        CACHE_FILENAME + currentSemester.toString())
+                        Session.getCacheKey(CACHE_FILENAME + currentSemester.toString()))
             }
 
             override fun onFailure(call: Call<ResponseBody>?, e: Exception) {}
@@ -281,7 +281,7 @@ class TableFragment : Fragment(), RefreshableFragment {
     private fun loadCache(weekView: WeekView) {
         val data = Cache.loadCachedObject(activity,
                 object : TypeToken<ArrayList<TimeTableDay>>() {}.type,
-                CACHE_FILENAME + currentSemester.toString()) ?: return
+                Session.getCacheKey(CACHE_FILENAME + currentSemester.toString())) ?: return
 
 
         val days = data as ArrayList<TimeTableDay>

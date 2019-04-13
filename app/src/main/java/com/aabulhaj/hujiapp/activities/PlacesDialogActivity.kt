@@ -46,7 +46,7 @@ class PlacesDialogActivity : Activity() {
         placesDoneButton.setOnClickListener {
             val checkedPos = placesDialogAdapter!!.getCheckedItemPositions()
             Cache.cacheObject(this, checkedPos, object : TypeToken<BooleanArray>() {}.type,
-                    PLACES_CACHE)
+                    Session.getCacheKey(PLACES_CACHE))
 
             val data = Intent()
             data.putExtra(PLACES_CHECKED_POS_TAGS, checkedPos)
@@ -58,7 +58,7 @@ class PlacesDialogActivity : Activity() {
     companion object {
         fun getCachedArray(context: Context): BooleanArray? {
             val data = Cache.loadCachedObject(context, object : TypeToken<BooleanArray>() {}.type,
-                    PLACES_CACHE) ?: return null
+                    Session.getCacheKey(PLACES_CACHE)) ?: return null
             return data as BooleanArray
         }
     }

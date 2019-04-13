@@ -156,7 +156,8 @@ class ExamsFragment : RefreshListFragment() {
                         examsAdapter?.notifyDataSetChanged()
                     }
                     Cache.cacheObject(activity, exams,
-                            object : TypeToken<ArrayList<Exam>>() {}.type, CACHE_FILENAME)
+                            object : TypeToken<ArrayList<Exam>>() {}.type,
+                            Session.getCacheKey(CACHE_FILENAME))
                 }
                 stopListRefreshing()
             }
@@ -169,7 +170,7 @@ class ExamsFragment : RefreshListFragment() {
 
     private fun loadCache() {
         val data = Cache.loadCachedObject(activity, object : TypeToken<ArrayList<Exam>>() {}.type,
-                CACHE_FILENAME) ?: return
+                Session.getCacheKey(CACHE_FILENAME)) ?: return
 
         val exams = data as ArrayList<Exam>
 
