@@ -1,69 +1,116 @@
 package com.aabulhaj.hujiapp.fragments
 
+import Session
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
+import com.aabulhaj.hujiapp.callbacks.StringCallback
+import com.aabulhaj.hujiapp.data.getAboutMeURL
+import kotlinx.android.synthetic.main.fragment_about_me.*
+import kotlinx.android.synthetic.main.fragment_about_me.view.*
+import okhttp3.ResponseBody
+import org.jsoup.Jsoup
+import retrofit2.Call
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [AboutMeFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [AboutMeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AboutMeFragment : Fragment(), RefreshableFragment {
-
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
-
+class AboutMeFragment : Fragment(), RefreshableFragment, View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
-        }
+        setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_me, container, false)
-    }
+        val v = inflater.inflate(R.layout.fragment_about_me, container, false)
 
-    companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
-
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AboutMeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): AboutMeFragment {
-            val fragment = AboutMeFragment()
-            val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
-            fragment.arguments = args
-            return fragment
+        if (resources.getBoolean(R.bool.is_rtl)) {
+            v.aboutMeEmail.gravity = Gravity.END
+            v.aboutMeAddress.gravity = Gravity.START
+        } else {
+            v.aboutMeAddress.gravity = Gravity.LEFT
         }
+
+        onRefresh()
+
+        return v
     }
 
-    override fun refresh() {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_about_me, menu)
+        MenuTint.tint(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.logout) {
+            Session.logout(activity!!)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onClick(p0: View?) {
+
+    }
+
+    private fun onRefresh() {
+        Session.callRequest(fun() = Session.hujiApiClient.getResponseBody(getAboutMeURL()),
+                activity!!, object : StringCallback {
+            override fun onResponse(call: Call<ResponseBody>?, responseBody: String) {
+                val doc = Jsoup.parse(responseBody)
+
+                val elements = doc.getElementsByAttributeValue("border", "0")[8].allElements
+
+                val name = doc.getElementsByClass("gen_title20W").first().text().split(":").last()
+                val email = elements[3].text()
+                val address = elements[10].text()
+                val mobileNumParts = elements[16].text().split("-")
+
+                var mobileNum = ""
+                if (mobileNumParts.size == 2) {
+                    mobileNum = (mobileNumParts[1] + mobileNumParts[0]).trim()
+                } else if (mobileNumParts.size == 1) {
+                    mobileNum = mobileNumParts[0].trim()
+                }
+
+                val hasPhoneNum = !elements[17].text().trim().isEmpty()
+                var phoneNum = ""
+                if (hasPhoneNum) {
+                    val phoneNumParts = elements[17].text().split("-")
+
+                    if (phoneNumParts.size == 2) {
+                        phoneNum = (phoneNumParts[1] + phoneNumParts[0]).trim()
+                    } else if (phoneNumParts.size == 1) {
+                        phoneNum = phoneNumParts[0].trim()
+                    }
+                }
+
+                activity?.runOnUiThread {
+                    aboutMeName.text = name
+                    aboutMeAddress.text = address
+                    aboutMeEmail.text = email
+                    aboutMeMobileNumber.text = mobileNum
+
+                    if (hasPhoneNum) {
+                        aboutMePhoneNum.text = phoneNum
+                        aboutMePhoneNum.visibility = View.VISIBLE
+                        aboutMePhoneLabel.visibility = View.VISIBLE
+                    } else {
+                        aboutMePhoneNum.visibility = View.INVISIBLE
+                        aboutMePhoneLabel.visibility = View.INVISIBLE
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>?, e: Exception) {}
+        })
     }
 
     override fun getFragment(): Fragment {
         return this
     }
-}// Required empty public constructor
+
+    override fun refresh() {
+    }
+}

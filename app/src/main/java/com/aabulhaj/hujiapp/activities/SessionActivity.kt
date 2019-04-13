@@ -93,10 +93,6 @@ class SessionActivity : ToolbarActivity() {
                 if (tableFragment == null) tableFragment = TableFragment()
                 return tableFragment
             }
-            R.id.action_about_me -> {
-                if (aboutMeFragment == null) aboutMeFragment = AboutMeFragment()
-                return aboutMeFragment
-            }
             R.id.action_map -> {
                 if (mapFragment == null) mapFragment = MapFragment()
                 return mapFragment
@@ -105,8 +101,11 @@ class SessionActivity : ToolbarActivity() {
                 if (moreFragment == null) moreFragment = MoreFragment()
                 return moreFragment
             }
+            else -> {
+                if (aboutMeFragment == null) aboutMeFragment = AboutMeFragment()
+                return aboutMeFragment
+            }
         }
-        return null
     }
 
     override fun onDestroy() {

@@ -189,4 +189,9 @@
     <string name="meters">m</string>
     <string name="kilo_meters">km</string>
     <string name="opentwentyfour">Open 24/7</string>
+
+    <!-- AboutMeFragment -->
+    <string name="address">Address</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="phone_number">Phone number</string>
 </resources>

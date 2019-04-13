@@ -188,4 +188,9 @@
     <string name="meters">מטר</string>
     <string name="kilo_meters">ק"מ</string>
     <string name="opentwentyfour">פתוח 24/7</string>
+
+    <!-- AboutMeFragment -->
+    <string name="address">כתובת</string>
+    <string name="mobile_number">מספר טלפון נייד</string>
+    <string name="phone_number">מספר טלפון</string>
 </resources>

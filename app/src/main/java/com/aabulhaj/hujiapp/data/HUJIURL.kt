@@ -44,3 +44,7 @@ fun getNoteBooksURL(): String {
 fun getNoteBooksURL(url: String): String {
     return Session.getSessionUrl("/stu/$url")
 }
+
+fun getAboutMeURL(): String {
+    return Session.getSessionUrl("/stu/STU-UPDATEMOREFORM")
+}
