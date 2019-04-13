@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
@@ -26,6 +27,7 @@ import com.aabulhaj.hujiapp.callbacks.StringCallback
 import com.aabulhaj.hujiapp.data.*
 import com.aabulhaj.hujiapp.util.PreferencesUtil
 import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.averages_footer.view.*
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Call
@@ -35,12 +37,17 @@ class CoursesFragment : RefreshListFragment() {
     companion object {
         const val CACHE_FILENAME = "courses"
         const val YEARS_CACHE_FILENAME = "years"
+        const val AVG_CACHE = "avg"
+        const val TOTAL_AVG_CACHE = "total_avg"
     }
 
     private var currentYear: String? = null
     private var yearButton: MenuItem? = null
     private var coursesAdapter: CourseAdapter? = null
     private val allYears = ArrayList<String>()
+
+    private var avgFooterTextView: TextView? = null
+    private var totalAvgFooterTextView: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +61,16 @@ class CoursesFragment : RefreshListFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
+
+        val listView = view?.findViewById<ListView>(android.R.id.list)
+
+        val footerView = inflater.inflate(R.layout.averages_footer, null)
+        avgFooterTextView = footerView.avgTextView
+        totalAvgFooterTextView = footerView.totalAvgTextView
+        avgFooterTextView?.setTextColor(Color.LTGRAY)
+        totalAvgFooterTextView?.setTextColor(Color.LTGRAY)
+
+        listView?.addFooterView(footerView, null, false)
 
         if (coursesAdapter == null) {
             coursesAdapter = CourseAdapter(context!!)
@@ -303,6 +320,12 @@ class CoursesFragment : RefreshListFragment() {
                         }
                     }
                 }
+                val texts = doc.getElementsByClass("text")
+                val avg = texts.filter { it.text().contains("ממוצע כללי שנתי :") }
+                        .last().text().split(" ").last().toFloat()
+                val totalAvg = texts.filter { it.text().contains("ממוצע כללי רב שנתי :") }
+                        .last().text().split(" ").last().toFloat()
+
                 activity?.runOnUiThread {
                     yearButton?.title = currentYear
                     coursesAdapter?.clear()
@@ -310,9 +333,16 @@ class CoursesFragment : RefreshListFragment() {
                         coursesAdapter?.addAll(grades)
                     }
                     coursesAdapter?.notifyDataSetChanged()
+
+                    avgFooterTextView?.text = getString(R.string.grade_average, avg)
+                    totalAvgFooterTextView?.text = getString(R.string.cum_grade_average, totalAvg)
                 }
                 Cache.cacheObject(activity, grades, object : TypeToken<ArrayList<Grade>>() {}.type,
                         CACHE_FILENAME + currentYear)
+                Cache.cacheObject(activity, avg, object : TypeToken<Float>() {}.type,
+                        AVG_CACHE + currentYear)
+                Cache.cacheObject(activity, totalAvg, object : TypeToken<Float>() {}.type,
+                        TOTAL_AVG_CACHE + currentYear)
                 stopListRefreshing()
             }
 
@@ -431,8 +461,16 @@ class CoursesFragment : RefreshListFragment() {
         val yData = Cache.loadCachedObject(activity,
                 object : TypeToken<ArrayList<String>>() {}.type, YEARS_CACHE_FILENAME) ?: return
 
+        val avg = Cache.loadCachedObject(activity, object : TypeToken<Float>() {}.type,
+                AVG_CACHE + currentYear) ?: return
+
+        val totalAvg = Cache.loadCachedObject(activity, object : TypeToken<Float>() {}.type,
+                TOTAL_AVG_CACHE + currentYear) ?: return
+
         val grades = data as ArrayList<Grade>
         val yearsData = yData as ArrayList<String>
+        val average = avg as Float
+        val totalAverage = totalAvg as Float
 
         activity?.runOnUiThread {
             coursesAdapter?.clear()
@@ -441,6 +479,9 @@ class CoursesFragment : RefreshListFragment() {
 
             allYears.clear()
             allYears.addAll(yearsData)
+
+            avgFooterTextView?.text = getString(R.string.grade_average, average)
+            totalAvgFooterTextView?.text = getString(R.string.cum_grade_average, totalAverage)
         }
     }
 }

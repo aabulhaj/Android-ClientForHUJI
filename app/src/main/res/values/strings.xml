@@ -137,7 +137,8 @@
 
     <!-- GPACalculatorActivity -->
     <string name="enter_grade">Enter Grade</string>
-    <string name="grade_average">Grade average: %1$.2f</string>
+    <string name="grade_average">Total grade average: %1$.2f</string>
+    <string name="cum_grade_average">Cumulative total GPA: %1$.2f</string>
 
     <!-- TableFragment -->
     <string name="first_semester">First semester</string>

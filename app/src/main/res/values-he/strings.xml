@@ -137,6 +137,7 @@
     <!-- GPACalculatorActivity -->
     <string name="enter_grade">הכנס ציון</string>
     <string name="grade_average">ממוצע : %1$.2f</string>
+    <string name="cum_grade_average">ממוצע כללי: %1$.2f</string>
 
     <!-- TableFragment -->
     <string name="first_semester">סמסטר ראשון</string>
