@@ -4,15 +4,20 @@ import Session
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
+import com.aabulhaj.hujiapp.Cache
 import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.callbacks.StringCallback
+import com.aabulhaj.hujiapp.data.UserDetails
 import com.aabulhaj.hujiapp.data.getAboutMeURL
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_about_me.*
 import kotlinx.android.synthetic.main.fragment_about_me.view.*
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Call
+
+private const val ABOUT_ME_CACHE_FILENAME = "about_me"
 
 class AboutMeFragment : Fragment(), RefreshableFragment, View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +37,7 @@ class AboutMeFragment : Fragment(), RefreshableFragment, View.OnClickListener {
             v.aboutMeAddress.gravity = Gravity.LEFT
         }
 
+        loadCache(v)
         onRefresh()
 
         return v
@@ -75,7 +81,7 @@ class AboutMeFragment : Fragment(), RefreshableFragment, View.OnClickListener {
                 }
 
                 val hasPhoneNum = !elements[17].text().trim().isEmpty()
-                var phoneNum = ""
+                var phoneNum: String? = null
                 if (hasPhoneNum) {
                     val phoneNumParts = elements[17].text().split("-")
 
@@ -101,10 +107,42 @@ class AboutMeFragment : Fragment(), RefreshableFragment, View.OnClickListener {
                         aboutMePhoneLabel.visibility = View.INVISIBLE
                     }
                 }
+
+                val userDetails = UserDetails()
+                userDetails.name = name
+                userDetails.address = address
+                userDetails.email = email
+                userDetails.mobile = mobileNum
+                userDetails.phone = phoneNum
+
+                Cache.cacheObject(context, userDetails, object : TypeToken<UserDetails>() {}.type,
+                        Session.getCacheKey(ABOUT_ME_CACHE_FILENAME))
             }
 
             override fun onFailure(call: Call<ResponseBody>?, e: Exception) {}
         })
+    }
+
+    private fun loadCache(v: View) {
+        val userDetailsObj = Cache.loadCachedObject(activity,
+                object : TypeToken<UserDetails>() {}.type,
+                Session.getCacheKey(ABOUT_ME_CACHE_FILENAME)) ?: return
+
+        val userDetails = userDetailsObj as UserDetails
+
+        v.aboutMeName.text = userDetails.name
+        v.aboutMeAddress.text = userDetails.address
+        v.aboutMeEmail.text = userDetails.email
+        v.aboutMeMobileNumber.text = userDetails.mobile
+
+        if (userDetails.phone != null) {
+            v.aboutMePhoneNum.text = userDetails.phone
+            v.aboutMePhoneNum.visibility = View.VISIBLE
+            v.aboutMePhoneLabel.visibility = View.VISIBLE
+        } else {
+            v.aboutMePhoneNum.visibility = View.INVISIBLE
+            v.aboutMePhoneLabel.visibility = View.INVISIBLE
+        }
     }
 
     override fun getFragment(): Fragment {
