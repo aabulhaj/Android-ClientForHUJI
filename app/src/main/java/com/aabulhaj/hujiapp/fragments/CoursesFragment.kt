@@ -33,14 +33,12 @@ import org.jsoup.Jsoup
 import retrofit2.Call
 
 
-class CoursesFragment : RefreshListFragment() {
-    companion object {
-        const val CACHE_FILENAME = "courses"
-        const val YEARS_CACHE_FILENAME = "years"
-        const val AVG_CACHE = "avg"
-        const val TOTAL_AVG_CACHE = "total_avg"
-    }
+private const val CACHE_FILENAME = "courses"
+private const val YEARS_CACHE_FILENAME = "years"
+private const val AVG_CACHE = "avg"
+private const val TOTAL_AVG_CACHE = "total_avg"
 
+class CoursesFragment : RefreshListFragment() {
     private var currentYear: String? = null
     private var yearButton: MenuItem? = null
     private var coursesAdapter: CourseAdapter? = null
