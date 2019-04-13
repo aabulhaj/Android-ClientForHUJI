@@ -18,11 +18,14 @@ fun coursesUrl(year: String?): String {
 }
 
 fun getCourseShnatonURL(courseNumber: String, year: String): String {
-    return "http://shnaton.huji.ac.il/index.php?peula=Simple&course=$courseNumber&year=$year"
+    return String.format(Locale.ENGLISH,
+            "http://shnaton.huji.ac.il/index.php?peula=Simple&course=%s&year=%s",
+            courseNumber,
+            year)
 }
 
 fun getCourseSyllabusURL(courseNumber: String, year: String): String {
-    return String.format(Locale.getDefault(), "http://shnaton.huji.ac.il/index.php/NewSyl/%s/1/%s/",
+    return String.format(Locale.ENGLISH, "http://shnaton.huji.ac.il/index.php/NewSyl/%s/1/%s/",
             courseNumber, year)
 }
 
