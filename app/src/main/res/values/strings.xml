@@ -194,4 +194,10 @@
     <string name="address">Address</string>
     <string name="mobile_number">Mobile number</string>
     <string name="phone_number">Phone number</string>
+
+    <!-- ExamsDetailsActivity -->
+    <string name="exam_room">Exam room : </string>
+    <string name="special_exam_room">Special exam room : </string>
+    <string name="view_more_rooms">View more rooms</string>
+    <string name="location_not_available">Location not available</string>
 </resources>

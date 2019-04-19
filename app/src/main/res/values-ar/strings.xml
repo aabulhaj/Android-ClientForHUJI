@@ -193,4 +193,10 @@
     <string name="address">العنوان</string>
     <string name="mobile_number">رقم المحمول</string>
     <string name="phone_number">رقم هاتف البيت</string>
+
+    <!-- ExamsDetailsActivity -->
+    <string name="exam_room">غرفة الامتحان: </string>
+    <string name="special_exam_room">غرفة امتحان خاصة: </string>
+    <string name="view_more_rooms">اظهار غرف اخرى</string>
+    <string name="location_not_available">المكان غير محدد</string>
 </resources>

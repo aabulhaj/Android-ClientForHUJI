@@ -193,4 +193,10 @@
     <string name="address">כתובת</string>
     <string name="mobile_number">מספר טלפון נייד</string>
     <string name="phone_number">מספר טלפון</string>
+
+    <!-- ExamsDetailsActivity -->
+    <string name="exam_room">חדר בחינה : </string>
+    <string name="special_exam_room">חדר בחינה מיוחד : </string>
+    <string name="view_more_rooms">עוד חדרי בחינה</string>
+    <string name="location_not_available">המקום אינו זמין</string>
 </resources>

@@ -15,8 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBarTranslucent">
-        <activity android:name=".activities.SearchPlacesActivity"></activity>
-        <!-- Replace with your own key. -->
+        <activity android:name=".activities.ExamsDetailsActivity"></activity>
+        <activity android:name=".activities.SearchPlacesActivity" /> <!-- Replace with your own key. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

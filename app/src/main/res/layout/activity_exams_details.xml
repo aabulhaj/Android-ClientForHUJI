@@ -1,0 +1,96 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:context=".activities.ExamsDetailsActivity">
+
+        <include layout="@layout/toolbar" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/roomTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="31dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/exam_room" />
+
+            <TextView
+                android:id="@+id/specialRoomTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/roomTitle"
+                android:layout_alignStart="@+id/roomTitle"
+                android:layout_marginTop="5dp"
+                android:text="@string/special_exam_room" />
+
+            <Switch
+                android:id="@+id/roomsSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/specialRoomTitle"
+                android:layout_alignStart="@+id/specialRoomTitle"
+                android:layout_marginTop="5dp"
+                android:checked="false" />
+
+            <TextView
+                android:id="@+id/room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/roomTitle"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/roomTitle" />
+
+            <TextView
+                android:id="@+id/specialRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/roomsSwitch"
+                android:layout_toEndOf="@+id/specialRoomTitle" />
+
+            <Button
+                android:id="@+id/viewRoomsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/roomsSwitch"
+                android:layout_centerHorizontal="true"
+                android:text="@string/view_more_rooms" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/blurredMapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/not_available_location"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/locationNotAvTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/location_not_available"
+        android:textSize="24sp"
+        android:visibility="gone" />
+</RelativeLayout>

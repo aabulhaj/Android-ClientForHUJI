@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import android.widget.TextView
 import com.aabulhaj.hujiapp.Cache
 import com.aabulhaj.hujiapp.CourseTypeEnum
@@ -18,6 +19,8 @@ import com.google.gson.reflect.TypeToken
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Call
+import android.content.Intent
+import com.aabulhaj.hujiapp.activities.ExamsDetailsActivity
 
 
 private const val CACHE_FILENAME = "exams"
@@ -51,6 +54,13 @@ class ExamsFragment : RefreshListFragment() {
 
     private fun stopListRefreshing() {
         activity?.runOnUiThread { stopRefreshing() }
+    }
+
+    override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
+        super.onListItemClick(l, v, position, id)
+        val details = Intent(context, ExamsDetailsActivity::class.java)
+        details.putExtra("exam", examsAdapter?.getItem(position))
+        activity?.startActivity(details)
     }
 
     override fun onRefresh() {
