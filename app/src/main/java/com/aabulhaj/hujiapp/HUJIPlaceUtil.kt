@@ -27,7 +27,6 @@ object HUJIPlaceUtil {
             val reader = BufferedReader(InputStreamReader(csvStream))
 
             var hebrewShortNameIndex = 0
-            var englishNameIndex = 0
 
             var line = reader.readLine()
             val firstLineData = line.split(",").toTypedArray()
@@ -41,7 +40,6 @@ object HUJIPlaceUtil {
                     "heading" -> headingIndex = i
                     "pitch" -> pitchIndex = i
                     "type" -> typeIndex = i
-                    "en-name" -> englishNameIndex = i
                 }
             }
             val placeSplit = place.split(" ").toTypedArray()
@@ -101,13 +99,10 @@ object HUJIPlaceUtil {
         try {
             val reader = BufferedReader(InputStreamReader(csvStream))
 
-            var hebrewShortNameIndex = 0
-
             var line = reader.readLine()
             val firstLineData = line.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             for (i in firstLineData.indices) {
                 when (firstLineData[i]) {
-                    "he-short" -> hebrewShortNameIndex = i
                     "lat" -> latIndex = i
                     "lon" -> lngIndex = i
                     "svlat" -> svlatIndex = i
@@ -147,18 +142,6 @@ object HUJIPlaceUtil {
             PlaceType.RESTAURANT -> "\uD83C\uDF74"
             HUJIPlace.PlaceType.CAFE -> "\u2615"
             HUJIPlace.PlaceType.SPORT -> "\uD83D\uDCAA"
-        }
-    }
-
-    fun getHUJIPlaceOpeningHours(hujiPlace: HUJIPlace, context: Context): String {
-        val hours = hujiPlace.openingHours
-        return if (hours == null || hours.trim { it <= ' ' } == ""
-                || hours.trim { it <= ' ' } == "-1") {
-            ""
-        } else if (hours.trim { it <= ' ' } == "24/7") {
-            "24/7"
-        } else {
-            getTodayHours(hours, context)
         }
     }
 

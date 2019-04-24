@@ -126,21 +126,4 @@ open class BaseMapActivity : ToolbarActivity(), OnMapReadyCallback,
     protected fun moveCameraToPlace(hujiPlace: HUJIPlace) {
         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(hujiPlace.coordinate, 17f))
     }
-
-    protected fun addPlaceToMap(place: HUJIPlace) {
-        val m = googleMap?.addMarker(MarkerOptions().position(place.coordinate).title(place.name))
-        if (m != null) {
-            markerPlaces[m] = place
-        }
-    }
-
-    protected fun addPlaceToMapWithColor(place: HUJIPlace, moveCamera: Boolean, animate: Boolean) {
-        val hsv = FloatArray(3)
-        Color.colorToHSV(colors[place.type.getValue()], hsv)
-        val m = googleMap?.addMarker(MarkerOptions().position(place.coordinate).title(place.name)
-                .icon(BitmapDescriptorFactory.defaultMarker(hsv[0])))
-        if (m != null) {
-            markerPlaces[m] = place
-        }
-    }
 }
