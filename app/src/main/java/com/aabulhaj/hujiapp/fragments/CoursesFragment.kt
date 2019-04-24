@@ -72,9 +72,9 @@ class CoursesFragment : RefreshListFragment() {
 
         if (coursesAdapter == null) {
             coursesAdapter = CourseAdapter(context!!)
+            listAdapter = coursesAdapter
             loadCache()
             onRefresh()
-            listAdapter = coursesAdapter
         }
 
         return view
