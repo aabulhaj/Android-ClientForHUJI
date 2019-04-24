@@ -1,5 +1,6 @@
 package com.aabulhaj.hujiapp.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -48,6 +49,12 @@ class ExamsDetailsActivity : BaseMapActivity() {
             roomsSwitch.visibility = View.GONE
         } else {
             specialRoomTitle.text = exam.room
+        }
+
+        viewRoomsButton.setOnClickListener {
+            val intent = Intent(this, ExtraRoomsActivity::class.java)
+            intent.putExtra("exam", exam)
+            startActivity(intent)
         }
     }
 

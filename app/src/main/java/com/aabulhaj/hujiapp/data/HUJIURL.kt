@@ -48,3 +48,9 @@ fun getNoteBooksURL(url: String): String {
 fun getAboutMeURL(): String {
     return Session.getSessionUrl("/stu/STU-UPDATEMOREFORM")
 }
+
+fun getShnatonExamLinkForCourse(number: String, year: Int): String {
+    return String.format(Locale.ENGLISH,
+            "http://shnaton.huji.ac.il/index.php?peula=CourseD&course=%s&detail=examDates&year=%d",
+            number, year)
+}
