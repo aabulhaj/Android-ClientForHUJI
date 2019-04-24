@@ -3,16 +3,13 @@ package com.aabulhaj.hujiapp.fragments
 import Session
 import android.app.ProgressDialog
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.StrictMode
 import android.support.v4.content.FileProvider
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.TextView
-import com.aabulhaj.hujiapp.BuildConfig
 import com.aabulhaj.hujiapp.CourseTypeEnum
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.adapters.NoteBooksAdapter
@@ -151,26 +148,19 @@ class NoteBooksFragment : RefreshListFragment() {
             override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
                 if (activity == null || response == null) return
 
-                val downloadedFile = File(activity?.filesDir, "ScannedNoteBook.pdf")
+                val downloadedFile = File(activity?.cacheDir, "ScannedNoteBook.pdf")
                 writeResponseBodyToDisk(response.body()!!, downloadedFile)
 
                 response.body()?.close()
 
-                var uri: Uri
-                try {
-                    uri = FileProvider.getUriForFile(activity!!,
-                            BuildConfig.APPLICATION_ID + ".provider",
-                            downloadedFile)
-                } catch (e: IllegalArgumentException) {
-                    val builder = StrictMode.VmPolicy.Builder()
-                    StrictMode.setVmPolicy(builder.build())
-                    uri = Uri.fromFile(downloadedFile)
-                }
+                val uri = FileProvider.getUriForFile(activity!!,
+                        "com.aabulhaj.hujiapp.fileprovider", downloadedFile)
+
 
                 val target = Intent(Intent.ACTION_VIEW)
-                target.setDataAndType(uri, "application/pdf")
-                target.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                target.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                target.setDataAndType(uri, "application/pdf")
                 startActivity(target)
             }
 
