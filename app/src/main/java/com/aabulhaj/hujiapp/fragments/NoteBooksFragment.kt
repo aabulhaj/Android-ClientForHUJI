@@ -1,7 +1,6 @@
 package com.aabulhaj.hujiapp.fragments
 
 import Session
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.FileProvider
@@ -26,13 +25,11 @@ import java.io.*
 
 class NoteBooksFragment : RefreshListFragment() {
     private var noteBooksAdapter: NoteBooksAdapter? = null
-    private var progressDialog: ProgressDialog? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
 
-        progressDialog = ProgressDialog(context)
         if (noteBooksAdapter == null) {
             noteBooksAdapter = NoteBooksAdapter(context!!)
             listAdapter = noteBooksAdapter
@@ -169,16 +166,12 @@ class NoteBooksFragment : RefreshListFragment() {
     }
 
     private fun writeResponseBodyToDisk(responseBody: ResponseBody, file: File) {
-        changeProgressDialogProgress(0.0f, "KB")
-        setProgressDialogVisibility(true)
         try {
             var inputStream: InputStream? = null
             var outputStream: OutputStream? = null
 
             try {
                 val fileReader = ByteArray(2048)
-
-                var fileSizeDownloaded: Long = 0
 
                 inputStream = responseBody.byteStream()
                 outputStream = FileOutputStream(file)
@@ -191,17 +184,6 @@ class NoteBooksFragment : RefreshListFragment() {
                     }
 
                     outputStream.write(fileReader, 0, read)
-
-                    fileSizeDownloaded += read.toLong()
-
-                    val total = fileSizeDownloaded.toFloat() / 1024
-                    changeProgressDialogProgress(
-                            if (total < 1000)
-                                total
-                            else total / 1024,
-                            if (total < 1000)
-                                "KB"
-                            else "MB")
                 }
 
                 outputStream.flush()
@@ -211,29 +193,6 @@ class NoteBooksFragment : RefreshListFragment() {
                 outputStream?.close()
             }
         } catch (e: IOException) {
-        }
-
-        setProgressDialogVisibility(false)
-    }
-
-    private fun setProgressDialogVisibility(visible: Boolean) {
-        activity?.runOnUiThread {
-
-            if (isAdded) {
-                if (visible) {
-                    progressDialog?.show()
-                } else {
-                    progressDialog?.cancel()
-                }
-            }
-        }
-    }
-
-    private fun changeProgressDialogProgress(amount: Float, unit: String) {
-        activity?.runOnUiThread {
-            if (isAdded) {
-                progressDialog?.setMessage(getString(R.string.download, amount, unit))
-            }
         }
     }
 
