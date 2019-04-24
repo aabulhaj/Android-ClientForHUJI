@@ -81,6 +81,6 @@ class ContactsAdapter(context: Context,
 
     private class ViewHolder(view: View?) {
         val textView1: TextView? = view?.findViewById(android.R.id.text1)
-        val textView2: TextView? = view?.findViewById(android.R.id.text1)
+        val textView2: TextView? = view?.findViewById(android.R.id.text2)
     }
 }
