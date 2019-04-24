@@ -69,6 +69,7 @@ class CoursesFragment : RefreshListFragment() {
         totalAvgFooterTextView?.setTextColor(Color.LTGRAY)
 
         listView?.addFooterView(footerView, null, false)
+        loadAverages()
 
         if (coursesAdapter == null) {
             coursesAdapter = CourseAdapter(context!!)
@@ -452,6 +453,22 @@ class CoursesFragment : RefreshListFragment() {
         }
     }
 
+    private fun loadAverages() {
+        val avg = Cache.loadCachedObject(activity, object : TypeToken<Float>() {}.type,
+                Session.getCacheKey(AVG_CACHE + currentYear)) ?: return
+
+        val totalAvg = Cache.loadCachedObject(activity, object : TypeToken<Float>() {}.type,
+                Session.getCacheKey(TOTAL_AVG_CACHE + currentYear)) ?: return
+
+        val average = avg as Float
+        val totalAverage = totalAvg as Float
+
+        activity?.runOnUiThread {
+            avgFooterTextView?.text = getString(R.string.grade_average, average)
+            totalAvgFooterTextView?.text = getString(R.string.cum_grade_average, totalAverage)
+        }
+    }
+
     private fun loadCache() {
         val data = Cache.loadCachedObject(activity, object : TypeToken<ArrayList<Grade>>() {}.type,
                 Session.getCacheKey(CACHE_FILENAME + currentYear)) ?: return
@@ -460,16 +477,9 @@ class CoursesFragment : RefreshListFragment() {
                 object : TypeToken<ArrayList<String>>() {}.type,
                 Session.getCacheKey(YEARS_CACHE_FILENAME)) ?: return
 
-        val avg = Cache.loadCachedObject(activity, object : TypeToken<Float>() {}.type,
-                Session.getCacheKey(AVG_CACHE + currentYear)) ?: return
-
-        val totalAvg = Cache.loadCachedObject(activity, object : TypeToken<Float>() {}.type,
-                Session.getCacheKey(TOTAL_AVG_CACHE + currentYear)) ?: return
-
         val grades = data as ArrayList<Grade>
         val yearsData = yData as ArrayList<String>
-        val average = avg as Float
-        val totalAverage = totalAvg as Float
+
 
         activity?.runOnUiThread {
             coursesAdapter?.clear()
@@ -478,9 +488,6 @@ class CoursesFragment : RefreshListFragment() {
 
             allYears.clear()
             allYears.addAll(yearsData)
-
-            avgFooterTextView?.text = getString(R.string.grade_average, average)
-            totalAvgFooterTextView?.text = getString(R.string.cum_grade_average, totalAverage)
         }
     }
 }
