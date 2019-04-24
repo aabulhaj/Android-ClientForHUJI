@@ -8,7 +8,6 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.widget.ImageView
 import com.aabulhaj.hujiapp.R
 import java.io.IOException
 
@@ -16,7 +15,7 @@ import java.io.IOException
 class RoundedImageView @JvmOverloads constructor(context: Context,
                                                  attrs: AttributeSet? = null,
                                                  defStyleRes: Int = 0)
-    : ImageView(context, attrs, defStyleRes) {
+    : android.support.v7.widget.AppCompatImageView(context, attrs, defStyleRes) {
     private var paint: Paint
     private var bitmapPaint: Paint
     private var rectF: RectF? = null
@@ -32,7 +31,7 @@ class RoundedImageView @JvmOverloads constructor(context: Context,
         bitmapPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     }
 
-    override fun setImageURI(uri: Uri) {
+    override fun setImageURI(uri: Uri?) {
         super.setImageURI(uri)
 
         try {
