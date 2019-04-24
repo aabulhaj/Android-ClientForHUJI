@@ -4,6 +4,7 @@ import Session
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.MenuItem
 import android.view.View
 import com.aabulhaj.hujiapp.R
@@ -53,7 +54,7 @@ class ChartActivity : ToolbarActivity() {
         chart.setPinchZoom(false)
         chart.setDoubleTapToZoomEnabled(false)
         chart.setNoDataText(getString(R.string.loading_data))
-        chart.getPaint(BarChart.PAINT_INFO).color = resources.getColor(R.color.colorAccent)
+        chart.getPaint(BarChart.PAINT_INFO).color = ContextCompat.getColor(this, R.color.colorAccent)
         chart.legend.isEnabled = false
         chart.xAxis.textSize = 9f
         chart.axisRight.isEnabled = false

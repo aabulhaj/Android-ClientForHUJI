@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.MediaStore
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.TypedValue
 import com.aabulhaj.hujiapp.R
@@ -25,7 +26,7 @@ class RoundedImageView @JvmOverloads constructor(context: Context,
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
         paint.strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 2f, resources.displayMetrics)
-        paint.color = resources.getColor(R.color.colorAccent)
+        paint.color = ContextCompat.getColor(context, R.color.colorAccent)
         paint.style = Paint.Style.STROKE
 
         bitmapPaint = Paint(Paint.ANTI_ALIAS_FLAG)
