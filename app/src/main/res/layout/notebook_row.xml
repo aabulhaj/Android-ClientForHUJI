@@ -32,7 +32,7 @@
         android:gravity="start"
         android:text="Very long course name"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/list_view_detail" />
+        android:textColor="?android:attr/textColor" />
 
     <TextView
         android:id="@+id/textView1"
@@ -56,7 +56,7 @@
         android:paddingTop="5dp"
         android:text="15/07/2016"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/list_view_detail" />
+        android:textColor="?android:attr/textColor" />
 
     <TextView
         android:id="@+id/textView"
@@ -78,6 +78,6 @@
         android:layout_toEndOf="@+id/textView"
         android:text="Final"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/list_view_detail" />
+        android:textColor="?android:attr/textColor" />
 
 </RelativeLayout>

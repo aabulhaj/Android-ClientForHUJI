@@ -56,7 +56,6 @@ class ContactsAdapter(context: Context,
         viewHolder.textView1?.text = title
         when (rowType) {
             TYPE_ITEM -> viewHolder.textView2?.text = sub
-            TYPE_EMAIL -> viewHolder.textView1?.setTextColor(Color.BLACK)
         }
 
         return view!!

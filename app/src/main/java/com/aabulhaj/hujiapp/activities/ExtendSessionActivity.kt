@@ -5,6 +5,7 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatDelegate
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.ContextThemeWrapper
@@ -25,6 +26,12 @@ class ExtendSessionActivity : Activity(), View.OnClickListener, TextWatcher,
         CaptchaCallback, LoginCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(android.R.style.Theme_DeviceDefault_Dialog)
+        } else {
+            setTheme(android.R.style.Theme_DeviceDefault_Light_Dialog)
+        }
+
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_extend_session)

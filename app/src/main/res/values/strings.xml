@@ -200,4 +200,8 @@
     <string name="special_exam_room">Special exam room : </string>
     <string name="view_more_rooms">View more rooms</string>
     <string name="location_not_available">Location not available</string>
+
+    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode_enabled">Dark mode enabled</string>
+    <string name="dark_mode_disabled">Dark mode disabled</string>
 </resources>

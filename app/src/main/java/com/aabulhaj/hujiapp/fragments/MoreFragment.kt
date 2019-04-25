@@ -2,8 +2,10 @@ package com.aabulhaj.hujiapp.fragments
 
 import Session
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatDelegate
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.view.Menu
@@ -16,6 +18,7 @@ import com.aabulhaj.hujiapp.activities.CalendarActivity
 import com.aabulhaj.hujiapp.activities.CampusShuttleTimesActivity
 import com.aabulhaj.hujiapp.activities.ContactsActivity
 import com.aabulhaj.hujiapp.activities.LicensesActivity
+import com.aabulhaj.hujiapp.util.PreferencesUtil
 
 
 class MoreFragment : PreferenceFragmentCompat(), RefreshableFragment {
@@ -31,6 +34,7 @@ class MoreFragment : PreferenceFragmentCompat(), RefreshableFragment {
         keyToMethodMap["academic_calendar"] = start(CalendarActivity::class.java)
         keyToMethodMap["contacts"] = start(ContactsActivity::class.java)
         keyToMethodMap["campus_shuttle_times"] = start(CampusShuttleTimesActivity::class.java)
+        keyToMethodMap["enable_dark_mode"] = this::handleDarkMode
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -70,6 +74,23 @@ class MoreFragment : PreferenceFragmentCompat(), RefreshableFragment {
                     Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun handleDarkMode() {
+        val toastText: String?
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            toastText = getString(R.string.dark_mode_disabled)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            toastText = getString(R.string.dark_mode_enabled)
+        }
+
+        Toast.makeText(activity, toastText, Toast.LENGTH_SHORT).show()
+
+        PreferencesUtil.putInt("dark_theme", AppCompatDelegate.getDefaultNightMode())
+
+        activity?.recreate()
     }
 
     private fun <T> start(target: Class<T>) = fun() = startActivity(Intent(context, target))

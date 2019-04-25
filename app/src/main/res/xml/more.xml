@@ -21,6 +21,10 @@
             android:summary="@string/licenses_summary"
             android:title="@string/licenses" />
 
+        <Preference
+            android:key="enable_dark_mode"
+            android:title="@string/dark_mode" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/useful_info">

@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import android.view.inputmethod.EditorInfo
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.callbacks.CaptchaCallback
@@ -20,6 +21,12 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), CaptchaCallback, LoginCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme_NoActionBarTranslucent)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

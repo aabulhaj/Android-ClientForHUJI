@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
@@ -12,15 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="?attr/actionBarItemBackground"
+        android:elevation="0dp"
+        android:stateListAnimator="@null">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fafafa"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="#646464" />
+            android:layout_height="wrap_content" />
 
     </android.support.design.widget.AppBarLayout>
 

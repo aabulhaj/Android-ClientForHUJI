@@ -2,6 +2,7 @@ package com.aabulhaj.hujiapp.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v7.app.AppCompatDelegate
 import android.text.InputType
 import android.util.TypedValue
 import android.view.Gravity
@@ -50,7 +51,14 @@ class GPACalculatorActivity : ToolbarActivity() {
     }
 
     private fun changeGradeDialog(position: Int) {
-        val builder = android.app.AlertDialog.Builder(this)
+        val theme: Int
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            theme = android.R.style.Theme_DeviceDefault_Dialog
+        } else {
+            theme = android.R.style.Theme_DeviceDefault_Light_Dialog
+        }
+
+        val builder = android.app.AlertDialog.Builder(this, theme)
         builder.setMessage(R.string.enter_grade)
 
         val padding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16f,

@@ -3,8 +3,10 @@
     android:id="@+id/toolbarFrame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FAFAFA"
-    android:fitsSystemWindows="true">
+    android:background="?attr/actionBarItemBackground"
+    android:elevation="0dp"
+    android:fitsSystemWindows="true"
+    android:stateListAnimator="@null">
 
     <com.aabulhaj.hujiapp.Toolbar
         android:id="@+id/toolbar"

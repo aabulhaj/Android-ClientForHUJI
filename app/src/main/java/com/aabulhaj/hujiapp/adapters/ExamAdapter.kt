@@ -1,7 +1,6 @@
 package com.aabulhaj.hujiapp.adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import com.aabulhaj.hujiapp.CourseTypeEnum
 import com.aabulhaj.hujiapp.Moed
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.data.Exam
-import kotlinx.android.synthetic.main.course_layout.view.*
 import kotlinx.android.synthetic.main.exam_layout.view.*
 
 class ExamAdapter(context: Context) : AdvancedArrayAdapter<Exam>(context) {
@@ -47,18 +45,14 @@ class ExamAdapter(context: Context) : AdvancedArrayAdapter<Exam>(context) {
 
         if (exam.room != null && exam.room?.trim() != "") {
             view.examRoom.text = exam.room
-            view.examRoom.setTextColor(Color.BLACK)
         } else {
             view.examRoom.text = "N/A"
-            view.examRoom.setTextColor(Color.GRAY)
         }
 
         if (exam.roomsSpecial != null && exam.roomsSpecial?.trim() != "") {
             view.examSpecialRoom.text = exam.roomsSpecial
-            view.examSpecialRoom.setTextColor(Color.BLACK)
         } else {
             view.examSpecialRoom.text = "N/A"
-            view.examSpecialRoom.setTextColor(Color.GRAY)
         }
 
         view.examMoed.text = Moed.getMoedString(exam.moed, getContext())

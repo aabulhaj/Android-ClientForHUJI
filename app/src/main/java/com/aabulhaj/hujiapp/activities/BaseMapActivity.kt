@@ -6,13 +6,14 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.support.v7.app.AppCompatDelegate
 import com.aabulhaj.hujiapp.*
 import com.aabulhaj.hujiapp.data.HUJIPlace
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -73,6 +74,12 @@ open class BaseMapActivity : ToolbarActivity(), OnMapReadyCallback,
 
         verifyPermissionAndShowUserLocation()
         this.googleMap?.setOnInfoWindowClickListener(this)
+
+        var style: MapStyleOptions? = null
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            style = MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night)
+        }
+        this.googleMap?.setMapStyle(style)
     }
 
     private fun verifyPermissionAndShowUserLocation() {

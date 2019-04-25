@@ -16,15 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="?attr/actionBarItemBackground"
+        android:elevation="0dp"
+        android:stateListAnimator="@null" >
 
         <android.support.design.widget.TabLayout
             android:id="@+id/mapTabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fafafa"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="#646464" />
+            android:layout_height="wrap_content" />
 
     </android.support.design.widget.AppBarLayout>
 

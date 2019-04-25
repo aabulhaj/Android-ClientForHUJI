@@ -51,15 +51,6 @@ class SessionActivity : ToolbarActivity() {
         bottomNavView.selectedItemId = lastFragId
         getFragment(lastFragId)?.refresh()
 
-        // The AppBarLayout uses a StateListAnimator that defines the elevation depending on it's
-        // state, so setting elevation directly now will have no effect, thus the following code
-        // is needed.
-        val elevation = if (lastFragId == R.id.action_courses) 0f else 8f
-        val stateListAnimator = StateListAnimator()
-        stateListAnimator.addState(IntArray(0),
-                ObjectAnimator.ofFloat(getAppBarLayout(), "elevation", elevation))
-        getAppBarLayout()?.stateListAnimator = stateListAnimator
-
         bottomNavView.setOnNavigationItemSelectedListener { item ->
             replaceWithFragment(item.itemId)
 
@@ -79,8 +70,6 @@ class SessionActivity : ToolbarActivity() {
         val transaction = this.supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment?.getFragment())
         transaction.commit()
-
-        getAppBarLayout()?.elevation = if (itemId == R.id.action_courses) 0f else 8f
     }
 
     private fun getFragment(itemId: Int): RefreshableFragment? {

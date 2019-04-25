@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatDelegate
 import com.aabulhaj.hujiapp.Cache
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.adapters.PlacesDialogAdapter
@@ -29,6 +30,12 @@ class PlacesDialogActivity : Activity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(android.R.style.Theme_Holo_Dialog)
+        } else {
+            setTheme(android.R.style.Theme_Holo_Light_Dialog)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_places_dialog)
 

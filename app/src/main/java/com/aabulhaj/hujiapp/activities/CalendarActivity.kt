@@ -3,6 +3,7 @@ package com.aabulhaj.hujiapp.activities
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import android.view.MenuItem
 import android.view.WindowManager
 import com.aabulhaj.hujiapp.R
@@ -27,6 +28,12 @@ class CalendarActivity : AppCompatActivity() {
     private lateinit var currDate: Date
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme_NoActionBarTranslucent)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 

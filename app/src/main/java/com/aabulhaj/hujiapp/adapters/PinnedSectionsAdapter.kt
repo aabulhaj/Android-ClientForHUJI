@@ -62,7 +62,6 @@ class PinnedSectionsAdapter(context: Context) : BaseAdapter(),
                 TYPE_ITEM -> {
                     view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
                     holder.textView = view?.findViewById(android.R.id.text1)
-                    holder.textView?.setTextColor(Color.BLACK)
                 }
                 TYPE_SEPARATOR -> {
                     view = inflater.inflate(com.aabulhaj.hujiapp.R.layout.header_row, parent, false)

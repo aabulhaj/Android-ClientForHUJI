@@ -6,8 +6,10 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.support.v7.app.AppCompatDelegate
 import android.text.InputType
 import android.util.TypedValue
 import android.view.*
@@ -97,7 +99,14 @@ class CoursesFragment : RefreshListFragment() {
                 showYears()
             }
         } else if (item?.itemId == R.id.shnatonButton) {
-            val builder = AlertDialog.Builder(activity)
+            val theme: Int
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                theme = android.R.style.Theme_DeviceDefault_Dialog
+            } else {
+                theme = android.R.style.Theme_DeviceDefault_Light_Dialog
+            }
+
+            val builder = AlertDialog.Builder(activity, theme)
             builder.setTitle(R.string.enter_course_number)
             builder.setMessage(R.string.tip_shnaton)
 
@@ -166,7 +175,14 @@ class CoursesFragment : RefreshListFragment() {
     }
 
     private fun showYears() {
-        val builder = AlertDialog.Builder(context)
+        val theme: Int
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            theme = android.R.style.Theme_DeviceDefault_Dialog
+        } else {
+            theme = android.R.style.Theme_DeviceDefault_Light_Dialog
+        }
+
+        val builder = AlertDialog.Builder(context, theme)
         builder.setTitle(getString(R.string.where_to_get_course))
         builder.setItems(allYears.toTypedArray()) { _, which ->
             currentYear = allYears[which]
@@ -363,7 +379,14 @@ class CoursesFragment : RefreshListFragment() {
     }
 
     private fun shnatonOrSyllabusDialog(grade: Grade) {
-        val builder = AlertDialog.Builder(context)
+        val theme: Int
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            theme = android.R.style.Theme_DeviceDefault_Dialog
+        } else {
+            theme = android.R.style.Theme_DeviceDefault_Light_Dialog
+        }
+
+        val builder = AlertDialog.Builder(context, theme)
         builder.setTitle(null)
         builder.setItems(arrayOf(resources.getString(R.string.shnaton),
                 resources.getString(R.string.syllabus))) { _, which ->
@@ -417,7 +440,15 @@ class CoursesFragment : RefreshListFragment() {
         if (options.isEmpty()) {
             return
         }
-        val builder = AlertDialog.Builder(context)
+
+        val theme: Int
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            theme = android.R.style.Theme_DeviceDefault_Dialog
+        } else {
+            theme = android.R.style.Theme_DeviceDefault_Light_Dialog
+        }
+
+        val builder = AlertDialog.Builder(context, theme)
         builder.setTitle(null)
         builder.setItems(options) { _, which ->
             if (which == 0) {

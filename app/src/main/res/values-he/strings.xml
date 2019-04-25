@@ -199,4 +199,8 @@
     <string name="special_exam_room">חדר בחינה מיוחד : </string>
     <string name="view_more_rooms">עוד חדרי בחינה</string>
     <string name="location_not_available">המקום אינו זמין</string>
+
+    <string name="dark_mode">מצב לילה</string>
+    <string name="dark_mode_enabled">נדלק מצב לילה</string>
+    <string name="dark_mode_disabled">נכבה מצב לילה</string>
 </resources>

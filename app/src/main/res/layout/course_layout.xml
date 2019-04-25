@@ -36,7 +36,7 @@
         android:paddingEnd="5dp"
         android:text="Very long course name"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/list_view_detail" />
+        android:textColor="?android:attr/textColor" />
 
     <TextView
         android:id="@+id/textView8"
@@ -59,7 +59,7 @@
         android:layout_toEndOf="@+id/textView8"
         android:text="0.00"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/list_view_detail" />
+        android:textColor="?android:attr/textColor" />
 
     <RelativeLayout
         android:id="@+id/grade_layout"
@@ -123,6 +123,6 @@
         android:maxLines="1"
         android:text="Final"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/list_view_detail" />
+        android:textColor="?android:attr/textColor" />
 
 </RelativeLayout>
