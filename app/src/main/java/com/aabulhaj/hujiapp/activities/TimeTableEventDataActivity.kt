@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.aabulhaj.hujiapp.MenuTint
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.data.TimeTableClass
 import com.aabulhaj.hujiapp.data.getCourseShnatonURLWithoutYear
@@ -51,10 +53,20 @@ class TimeTableEventDataActivity : BaseMapActivity(), View.OnClickListener {
         return formatter.format(calendar.time)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.time_table_extra_menu, menu)
+        MenuTint.tint(menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {
             finish()
             return true
+        } else if (item?.itemId == R.id.changeColor) {
+            val intent = Intent(this, ChangeColorActivity::class.java)
+            intent.putExtra("course", timeTableClass.course)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }

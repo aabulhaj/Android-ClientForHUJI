@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBarTranslucent">
-        <activity android:name=".activities.TimeTableEventDataActivity"></activity>
+        <activity android:name=".activities.ChangeColorActivity"></activity>
+        <activity android:name=".activities.TimeTableEventDataActivity" />
         <activity
             android:name=".activities.ExtraRoomsActivity"
             android:configChanges="orientation|screenSize" />

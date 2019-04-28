@@ -143,6 +143,7 @@
     <!-- TableFragment -->
     <string name="first_semester">First semester</string>
     <string name="second_semester">Second semester</string>
+    <string name="change_color">Change Color</string>
 
     <!-- ExtraGradesActivity -->
     <string name="moed">Moed: </string>

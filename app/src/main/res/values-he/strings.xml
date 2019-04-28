@@ -142,6 +142,7 @@
     <!-- TableFragment -->
     <string name="first_semester">סמסטר ראשון</string>
     <string name="second_semester">סמסטר שני</string>
+    <string name="change_color">שינוי צבע</string>
 
     <!-- ExtraGradesActivity -->
     <string name="moed">מועד: </string>

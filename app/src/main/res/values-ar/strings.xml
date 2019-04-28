@@ -142,6 +142,7 @@
     <!-- TableFragment -->
     <string name="first_semester">الفصل الاول</string>
     <string name="second_semester">الفصل الثاني</string>
+    <string name="change_color">تغيير اللون</string>
 
     <!-- ExtraGradesActivity -->
     <string name="moed">موعد: </string>
