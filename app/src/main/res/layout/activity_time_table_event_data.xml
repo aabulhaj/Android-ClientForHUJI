@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".activities.TimeTableEventDataActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+
+        <TextView
+            android:id="@+id/tableEventCourseNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="25119"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tableEventCourseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tableEventCourseNumber"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="courseName" />
+
+        <TextView
+            android:id="@+id/tableEventTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tableEventCourseName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="6:00 - 9:00" />
+    </RelativeLayout>
+
+</LinearLayout>

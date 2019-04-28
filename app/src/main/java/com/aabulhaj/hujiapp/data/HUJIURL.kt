@@ -54,3 +54,7 @@ fun getShnatonExamLinkForCourse(number: String, year: Int): String {
             "http://shnaton.huji.ac.il/index.php?peula=CourseD&course=%s&detail=examDates&year=%d",
             number, year)
 }
+
+fun getCourseShnatonURLWithoutYear(courseNumber: String): String {
+    return "http://shnaton.huji.ac.il/index.php?peula=Simple&course=$courseNumber"
+}

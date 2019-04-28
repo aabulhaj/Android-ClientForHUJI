@@ -3,6 +3,7 @@ package com.aabulhaj.hujiapp.fragments
 import Session
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +11,7 @@ import android.text.format.DateFormat
 import android.view.*
 import com.aabulhaj.hujiapp.Cache
 import com.aabulhaj.hujiapp.R
+import com.aabulhaj.hujiapp.activities.TimeTableEventDataActivity
 import com.aabulhaj.hujiapp.adapters.TimetableAdapter
 import com.aabulhaj.hujiapp.callbacks.StringCallback
 import com.aabulhaj.hujiapp.data.Course
@@ -139,6 +141,12 @@ class TableFragment : Fragment(), RefreshableFragment {
         val dpWidth = displayMetrics.widthPixels / displayMetrics.density
 
         weekView.numberOfVisibleDays = Math.round(dpWidth / 180)
+
+        weekView.setOnEventClickListener(WeekView.EventClickListener { event, _ ->
+            val myIntent = Intent(activity, TimeTableEventDataActivity::class.java)
+            myIntent.putExtra("time_Table_class", event as TimeTableClass)
+            startActivity(myIntent)
+        })
 
         return view
     }
