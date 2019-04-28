@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment
 import android.text.format.DateFormat
 import android.view.*
 import com.aabulhaj.hujiapp.Cache
+import com.aabulhaj.hujiapp.CourseToColorMapper
 import com.aabulhaj.hujiapp.R
 import com.aabulhaj.hujiapp.activities.TimeTableEventDataActivity
 import com.aabulhaj.hujiapp.adapters.TimetableAdapter
@@ -46,6 +47,7 @@ class TableFragment : Fragment(), RefreshableFragment {
         super.onCreate(savedInstanceState)
         currentSemester = PreferencesUtil.getInt(Session.getCacheKey(SEM_PREF), 1)
         setHasOptionsMenu(true)
+        CourseToColorMapper.loadCachedMap(context!!)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -228,6 +230,9 @@ class TableFragment : Fragment(), RefreshableFragment {
 
                         val timeTableClass = TimeTableClass(course)
 
+                        // Initialize a color.
+                        timeTableClass.color
+
                         if (courseTypeAndLoc.isEmpty()) {
                             timeTableClass.classLocation = ""
                             classesInRow.add(timeTableClass)
@@ -269,6 +274,8 @@ class TableFragment : Fragment(), RefreshableFragment {
                 Cache.cacheObject(activity, timeTableDays,
                         object : TypeToken<ArrayList<TimeTableDay>>() {}.type,
                         Session.getCacheKey(CACHE_FILENAME + currentSemester.toString()))
+
+                CourseToColorMapper.cacheMap(context)
             }
 
             override fun onFailure(call: Call<ResponseBody>?, e: Exception) {}
