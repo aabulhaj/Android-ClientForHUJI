@@ -33,7 +33,7 @@ import java.util.regex.Pattern
 class TableFragment : Fragment(), RefreshableFragment {
     companion object {
         const val SEM_PREF = "table_semester"
-        const val CACHE_FILENAME = "timetable"
+        const val CACHE_FILENAME = "timetable_serializable"
     }
 
     private var adapter: TimetableAdapter? = null

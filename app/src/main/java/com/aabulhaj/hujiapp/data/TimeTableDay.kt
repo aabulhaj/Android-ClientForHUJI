@@ -2,10 +2,11 @@ package com.aabulhaj.hujiapp.data
 
 import android.content.Context
 import com.aabulhaj.hujiapp.R
+import java.io.Serializable
 import java.util.*
 
 
-class TimeTableDay {
+class TimeTableDay : Serializable {
     private val timeTableClasses: ArrayList<TimeTableClass> = ArrayList()
     private var day: Int
 

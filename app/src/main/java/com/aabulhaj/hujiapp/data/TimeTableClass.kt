@@ -4,10 +4,10 @@ import android.graphics.Color
 import com.alamkanak.weekview.WeekViewEvent
 import java.util.*
 import com.aabulhaj.hujiapp.CourseToColorMapper
+import java.io.Serializable
 
 
-
-class TimeTableClass : WeekViewEvent {
+class TimeTableClass : WeekViewEvent, Serializable {
     var course: Course
     var startDate: Date? = null
     var endDate: Date? = null
