@@ -2,9 +2,12 @@ package com.aabulhaj.hujiapp.activities
 
 import Session
 import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.support.annotation.AttrRes
 import android.support.v4.content.ContextCompat
+import android.util.TypedValue
 import android.view.MenuItem
 import android.view.View
 import com.aabulhaj.hujiapp.R
@@ -55,6 +58,9 @@ class ChartActivity : ToolbarActivity() {
         chart.setDoubleTapToZoomEnabled(false)
         chart.setNoDataText(getString(R.string.loading_data))
         chart.getPaint(BarChart.PAINT_INFO).color = ContextCompat.getColor(this, R.color.colorAccent)
+        chart.axisLeft.textColor = getColorFromAttr(android.R.attr.textColor)
+        chart.xAxis.textColor = getColorFromAttr(android.R.attr.textColor)
+        chart.legend.textColor = getColorFromAttr(android.R.attr.textColor)
         chart.legend.isEnabled = false
         chart.xAxis.textSize = 9f
         chart.axisRight.isEnabled = false
@@ -119,6 +125,7 @@ class ChartActivity : ToolbarActivity() {
                     }
                 }
                 dataSet.setColors(colors)
+                dataSet.valueTextColor = getColorFromAttr(android.R.attr.textColor)
 
                 runOnUiThread {
                     val data = BarData(xVals, dataSet)
@@ -144,6 +151,15 @@ class ChartActivity : ToolbarActivity() {
             }
             builder.show()
         }
+    }
+
+    private fun Context.getColorFromAttr(
+            @AttrRes attrColor: Int,
+            typedValue: TypedValue = TypedValue(),
+            resolveRefs: Boolean = true
+    ): Int {
+        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+        return typedValue.data
     }
 
     private inner class DataPoint(var lowBound: Int,
